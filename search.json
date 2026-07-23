@@ -1,31 +1,10 @@
 [
   {
-    "objectID": "modules/04-calibration-and-wear.html#from-vectors-to-a-signal-metric",
-    "href": "modules/04-calibration-and-wear.html#from-vectors-to-a-signal-metric",
-    "title": "Module 4: Signal Metrics",
-    "section": "From Vectors to a Signal Metric",
-    "text": "From Vectors to a Signal Metric\nLet the calibrated acceleration vector at a sample be (x, y, z), measured in g, with vector magnitude VM = sqrt(x^2 + y^2 + z^2). A metric turns a stream of vectors into an epoch-level quantity. Metric selection is a scientific and compatibility decision, not a purely technical one.\n\n\n\n\n\n\n\n\nMetric\nDefinition\nInterpretation\n\n\n\n\nENMO\nmean(max(VM - 1 g, 0)) within an epoch\nDynamic acceleration above gravity, commonly expressed in mg\n\n\nMAD\nmean(abs(VM - mean(VM))) within an epoch\nWithin-epoch variation in vector magnitude\n\n\nMIMS\nA monitor-independent movement summary after filtering and integration\nDesigned to be interpretable across monitor settings\n\n\nActivity counts\nDevice-algorithm output after proprietary-style filtering, thresholding, and integration\nLegacy outcome used in many surveillance and cohort protocols"
-  },
-  {
-    "objectID": "modules/04-calibration-and-wear.html#activity-counts-still-matter",
-    "href": "modules/04-calibration-and-wear.html#activity-counts-still-matter",
-    "title": "Module 4: Signal Metrics",
-    "section": "Activity Counts Still Matter",
-    "text": "Activity Counts Still Matter\nActivity counts are not raw acceleration. They depend on a specific transformation and therefore cannot be recreated perfectly from arbitrary raw data without knowing the count algorithm and device configuration. Yet counts remain central to historic protocols, published thresholds, and some non-wear algorithms.\nMIMS was developed as a monitor-independent summary and has shown close correspondence with ActiGraph activity counts in validation work. That association makes MIMS useful when bridging count-based literature and raw-signal workflows, but it does not make the two metrics interchangeable. Compare them at the same epoch length, placement, preprocessing configuration, and target population."
-  },
-  {
-    "objectID": "modules/04-calibration-and-wear.html#compare-metrics-on-one-segment",
-    "href": "modules/04-calibration-and-wear.html#compare-metrics-on-one-segment",
-    "title": "Module 4: Signal Metrics",
-    "section": "Compare Metrics on One Segment",
-    "text": "Compare Metrics on One Segment\nUse one calibrated segment and a fixed epoch length. Plot each metric on its own scale, inspect rank ordering and transition periods, and report the processing steps that produced it."
-  },
-  {
-    "objectID": "modules/04-calibration-and-wear.html#learning-check",
-    "href": "modules/04-calibration-and-wear.html#learning-check",
-    "title": "Module 4: Signal Metrics",
-    "section": "Learning Check",
-    "text": "Learning Check\nFor every metric, can you state its input units, epoch length, calibration status, filtering rules, and whether it is intended to reproduce a legacy count-based outcome? Those choices belong in the method, not only in code."
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "wearabler",
+    "section": "",
+    "text": "Wearabler Course Outline\nThis site is set up as a Quarto-based short course on accelerometry and wearable data analysis.\nThe module structure follows the shared course-planning chat and is organized around the activerse packages:\n\nactibase\nactiread\nactimetrics\nasleep\nwalking\nstepcount\n\nStart with the module index."
   },
   {
     "objectID": "modules/03-signal-metrics.html#why-calibrate",
@@ -56,25 +35,74 @@
     "text": "Decisions to Record\n\ndevice model, firmware, placement, dynamic range, and sampling frequency;\ncalibration method, parameters, and before/after error diagnostics;\nfiles excluded or flagged because calibration was not credible;\nwhether later metrics use calibrated, resampled, or filtered data.\n\nThe following module derives signal metrics from these explicitly defined inputs."
   },
   {
-    "objectID": "modules/09-reproducibility-and-qc.html#a-pipeline-that-can-be-audited",
-    "href": "modules/09-reproducibility-and-qc.html#a-pipeline-that-can-be-audited",
-    "title": "Module 9: Reproducibility, QC, and Other Methods",
-    "section": "A Pipeline That Can Be Audited",
-    "text": "A Pipeline That Can Be Audited\nAn auditable project separates immutable raw files, standardized raw tables, calibration diagnostics, minute-level metrics, wear flags, day-level summaries, participant outcomes, and model outputs. Every derived object should retain identifiers, time zone, processing version, and the parameters that created it.\nThe minimum QC record includes import diagnostics, sampling frequency, calibration status, time gaps, non-wear intervals, valid-day counts, and participant exclusions. Seven-day wear-shaded plots are particularly effective for checking that these rules match the data."
+    "objectID": "modules/index.html",
+    "href": "modules/index.html",
+    "title": "Modules",
+    "section": "",
+    "text": "This course follows the nine-module slide-deck structure below.\n\n\n\n\n\nModule\nMain question\nTeaching dataset\n\n\n\n\n1. Devices and signals\nWhat does an accelerometer measure?\n5-minute raw segment\n\n\n2. Import and structure\nHow are time and axes represented?\nRaw segment\n\n\n3. Calibration\nHow do we establish usable, comparable raw acceleration?\nRaw segment\n\n\n4. Signal metrics\nHow do ENMO, MAD, MIMS, and counts differ?\nRaw segment\n\n\n5. Wear and visualization\nWhen was the device worn, and what does a complete week look like?\n10,080 minute profile\n\n\n6. Valid days\nWhich participant-days are eligible?\nSeven-day data\n\n\n7. Daily and participant summaries\nHow does raw data become one value per person?\nMulti-participant data\n\n\n8. Downstream and functional analysis\nHow are summaries and profiles modeled?\nParticipant summaries and profiles\n\n\n9. Reproducibility, QC, and other methods\nHow do we audit and extend the pipeline?\nFull example project"
   },
   {
-    "objectID": "modules/09-reproducibility-and-qc.html#reproducibility-checklist",
-    "href": "modules/09-reproducibility-and-qc.html#reproducibility-checklist",
-    "title": "Module 9: Reproducibility, QC, and Other Methods",
-    "section": "Reproducibility Checklist",
-    "text": "Reproducibility Checklist\n\nretain the original .gt3x and .cwa files without modification;\nkeep reader, calibration, metric, epoch, and non-wear settings in code and output metadata;\nrecord R and Python package versions plus the Python environment used by reticulate;\nproduce an inclusion table from raw files to analytic participants;\nrerun the full pipeline from a clean project environment."
+    "objectID": "modules/index.html#slide-decks",
+    "href": "modules/index.html#slide-decks",
+    "title": "Modules",
+    "section": "",
+    "text": "Module\nMain question\nTeaching dataset\n\n\n\n\n1. Devices and signals\nWhat does an accelerometer measure?\n5-minute raw segment\n\n\n2. Import and structure\nHow are time and axes represented?\nRaw segment\n\n\n3. Calibration\nHow do we establish usable, comparable raw acceleration?\nRaw segment\n\n\n4. Signal metrics\nHow do ENMO, MAD, MIMS, and counts differ?\nRaw segment\n\n\n5. Wear and visualization\nWhen was the device worn, and what does a complete week look like?\n10,080 minute profile\n\n\n6. Valid days\nWhich participant-days are eligible?\nSeven-day data\n\n\n7. Daily and participant summaries\nHow does raw data become one value per person?\nMulti-participant data\n\n\n8. Downstream and functional analysis\nHow are summaries and profiles modeled?\nParticipant summaries and profiles\n\n\n9. Reproducibility, QC, and other methods\nHow do we audit and extend the pipeline?\nFull example project"
   },
   {
-    "objectID": "modules/09-reproducibility-and-qc.html#other-methods-through-reticulate",
-    "href": "modules/09-reproducibility-and-qc.html#other-methods-through-reticulate",
-    "title": "Module 9: Reproducibility, QC, and Other Methods",
-    "section": "Other Methods Through reticulate",
-    "text": "Other Methods Through reticulate\nSome specialized accelerometry methods are implemented in Python. reticulate allows an R/Quarto course project to call them while preserving a single documented workflow.\n\n\n\n\n\n\n\nPackage\nTypical role\n\n\n\n\nstepcount\nStep detection and step-based summaries from raw acceleration\n\n\nactinet\nActivity-pattern or behavior-oriented processing workflows\n\n\nasleep\nSleep inference and sleep-related outputs\n\n\n\nThe R/Python boundary is itself a QC boundary. Record package versions, the interpreter selected by reticulate, input units, sampling frequency, and the exact conversion from R data frames to Python objects. Specialized outputs should enter the same wear, valid-day, and participant-summary framework used for the core acceleration metrics."
+    "objectID": "modules/08-downstream-analysis.html#analysis-of-participant-summaries",
+    "href": "modules/08-downstream-analysis.html#analysis-of-participant-summaries",
+    "title": "Module 8: Downstream and Functional Analysis",
+    "section": "Analysis of Participant Summaries",
+    "text": "Analysis of Participant Summaries\nWith one outcome per participant, conventional regression can relate average daily activity, sleep, steps, or another summary to exposures and covariates. The model should name the estimand and account for factors that shaped the outcome: device, placement, season, valid-day rule, and the number of usable days.\nParticipant summaries are compact and interpretable, but they discard timing. Two participants can have the same average daily ENMO while one moves in short morning bouts and the other is active for a long afternoon period."
+  },
+  {
+    "objectID": "modules/08-downstream-analysis.html#functional-analysis",
+    "href": "modules/08-downstream-analysis.html#functional-analysis",
+    "title": "Module 8: Downstream and Functional Analysis",
+    "section": "Functional Analysis",
+    "text": "Functional Analysis\nFunctional approaches preserve the shape of an activity profile. Align each participant’s minute-level series to a common clock, smooth or otherwise represent the curve, and model functions, functional principal components, or time-varying associations.\nThe essential design choices are day alignment, treatment of non-wear, weekday/weekend handling, smoothing basis, and the estimand. Functional analysis does not remove the need for wear QC; it makes inconsistent time alignment more consequential."
+  },
+  {
+    "objectID": "modules/08-downstream-analysis.html#match-the-analysis-to-the-data-product",
+    "href": "modules/08-downstream-analysis.html#match-the-analysis-to-the-data-product",
+    "title": "Module 8: Downstream and Functional Analysis",
+    "section": "Match the Analysis to the Data Product",
+    "text": "Match the Analysis to the Data Product\n\n\n\n\n\n\n\nData product\nExample analysis\n\n\n\n\nValid participant-days\nMixed model or within-person comparison\n\n\nParticipant average across valid days\nCross-sectional regression\n\n\n24-hour profile\nFunctional regression or functional PCA\n\n\nSeven-day profile\nRepeated functional or multilevel time-series analysis\n\n\n\nThe processing pipeline determines what can reasonably be interpreted in each model. Keep the link from a model outcome back to the minute-level definition and QC rules."
+  },
+  {
+    "objectID": "modules/01-devices-and-signals.html#learning-goals",
+    "href": "modules/01-devices-and-signals.html#learning-goals",
+    "title": "Module 1: Devices and Signals",
+    "section": "Learning Goals",
+    "text": "Learning Goals\n\ndistinguish commercial wearables from research-grade accelerometers;\ndescribe the signals produced by a tri-axial accelerometer;\nrecognize why device, placement, and sampling configuration matter;\nidentify the device families used by major cohort studies."
+  },
+  {
+    "objectID": "modules/01-devices-and-signals.html#slide-the-device-landscape",
+    "href": "modules/01-devices-and-signals.html#slide-the-device-landscape",
+    "title": "Module 1: Devices and Signals",
+    "section": "Slide: The Device Landscape",
+    "text": "Slide: The Device Landscape\nCommercial wearables, such as watches and fitness trackers, are designed around a consumer experience. They often expose proprietary step, sleep, or activity scores, while the raw signal and processing rules may be unavailable or change over time.\nResearch-grade accelerometers are configured for a study protocol. They retain high-frequency raw acceleration and device metadata, making calibration, quality control, and alternative processing choices possible. The trade-off is that the analyst, rather than a vendor, must make and document the processing decisions.\n\n\n\n\n\n\n\n\n\nDevice class\nTypical output\nStrength\nLimitation\n\n\n\n\nCommercial wearable\nProprietary summaries, sometimes raw data\nLow participant burden\nVendor algorithms can be opaque\n\n\nResearch-grade accelerometer\nRaw time, x, y, z, and metadata\nTransparent, reproducible processing\nRequires a full analysis pipeline"
+  },
+  {
+    "objectID": "modules/01-devices-and-signals.html#devices-in-large-studies",
+    "href": "modules/01-devices-and-signals.html#devices-in-large-studies",
+    "title": "Module 1: Devices and Signals",
+    "section": "Devices in Large Studies",
+    "text": "Devices in Large Studies\nActiGraph GT3X and GT9X devices are commonly used in United States cohort studies, including NHATS, NHANES, and ARIC. They are tri-axial accelerometers and are often encountered as .gt3x archives.\nAxivity AX3 devices are compact, research-grade accelerometers that store data in .cwa files. The UK Biobank accelerometry study used AX3 devices at the wrist. The device is not the study: placement, wear protocol, sampling frequency, dynamic range, and processing rules jointly define the measurement."
+  },
+  {
+    "objectID": "modules/01-devices-and-signals.html#what-is-measured",
+    "href": "modules/01-devices-and-signals.html#what-is-measured",
+    "title": "Module 1: Devices and Signals",
+    "section": "What Is Measured?",
+    "text": "What Is Measured?\nAt each sample, a tri-axial accelerometer records acceleration along three device-fixed axes. The observed vector combines gravity, movement, orientation, sensor noise, and any remaining calibration error. It does not directly observe steps, sleep, sedentary behavior, or intensity.\nThe raw signal is often expressed in gravitational units (g), where stationary data should have vector magnitude close to 1 g after calibration. Device axes rotate with the device, so a change in x, y, or z alone need not indicate a change in behavior."
+  },
+  {
+    "objectID": "modules/01-devices-and-signals.html#preparation-for-the-next-module",
+    "href": "modules/01-devices-and-signals.html#preparation-for-the-next-module",
+    "title": "Module 1: Devices and Signals",
+    "section": "Preparation for the Next Module",
+    "text": "Preparation for the Next Module\nThe course data directory contains one file from each device family:\n\ndata/TAS1H30182791 (2026-04-29).gt3x: an ActiGraph GT3X archive;\ndata/114890_0000000000.cwa: an Axivity AX3 file.\n\nThe next module turns these device files into the common raw-data representation: a timestamp and three acceleration columns."
   },
   {
     "objectID": "modules/07-valid-days-and-participants.html#daily-summaries",
@@ -112,39 +140,74 @@
     "text": "Plot a Participant’s Full Week\nRepresent the week as 10,080 consecutive one-minute observations. A useful plot shows the chosen activity metric over time, adds day boundaries, and shades non-wear intervals. This makes data loss, device removal, and implausible patterns visible before a validity rule hides them in a summary.\nThe plot is a QC artifact: retain it or a comparable diagnostic for each participant or batch, alongside the exact wear algorithm and parameter values."
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "This tutorial covers wrist-worn accelerometers and was created by the John Muschelli with support from the Johns Hopkins Wearable and Implantable Technology Group (WIT). The code is located at https://github.com/jhuwit/wearabler."
+    "objectID": "modules/04-calibration-and-wear.html#from-vectors-to-a-signal-metric",
+    "href": "modules/04-calibration-and-wear.html#from-vectors-to-a-signal-metric",
+    "title": "Module 4: Signal Metrics",
+    "section": "From Vectors to a Signal Metric",
+    "text": "From Vectors to a Signal Metric\nLet the calibrated acceleration vector at a sample be (x, y, z), measured in g, with vector magnitude VM = sqrt(x^2 + y^2 + z^2). A metric turns a stream of vectors into an epoch-level quantity. Metric selection is a scientific and compatibility decision, not a purely technical one.\n\n\n\n\n\n\n\n\nMetric\nDefinition\nInterpretation\n\n\n\n\nENMO\nmean(max(VM - 1 g, 0)) within an epoch\nDynamic acceleration above gravity, commonly expressed in mg\n\n\nMAD\nmean(abs(VM - mean(VM))) within an epoch\nWithin-epoch variation in vector magnitude\n\n\nMIMS\nA monitor-independent movement summary after filtering and integration\nDesigned to be interpretable across monitor settings\n\n\nActivity counts\nDevice-algorithm output after proprietary-style filtering, thresholding, and integration\nLegacy outcome used in many surveillance and cohort protocols"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "wearabler",
-    "section": "",
-    "text": "Wearabler Course Outline\nThis site is set up as a Quarto-based short course on accelerometry and wearable data analysis.\nThe module structure follows the shared course-planning chat and is organized around the activerse packages:\n\nactibase\nactiread\nactimetrics\nasleep\nwalking\nstepcount\n\nStart with the module index."
+    "objectID": "modules/04-calibration-and-wear.html#activity-counts-still-matter",
+    "href": "modules/04-calibration-and-wear.html#activity-counts-still-matter",
+    "title": "Module 4: Signal Metrics",
+    "section": "Activity Counts Still Matter",
+    "text": "Activity Counts Still Matter\nActivity counts are not raw acceleration. They depend on a specific transformation and therefore cannot be recreated perfectly from arbitrary raw data without knowing the count algorithm and device configuration. Yet counts remain central to historic protocols, published thresholds, and some non-wear algorithms.\nMIMS was developed as a monitor-independent summary and has shown close correspondence with ActiGraph activity counts in validation work. That association makes MIMS useful when bridging count-based literature and raw-signal workflows, but it does not make the two metrics interchangeable. Compare them at the same epoch length, placement, preprocessing configuration, and target population."
   },
   {
-    "objectID": "modules/08-downstream-analysis.html#analysis-of-participant-summaries",
-    "href": "modules/08-downstream-analysis.html#analysis-of-participant-summaries",
-    "title": "Module 8: Downstream and Functional Analysis",
-    "section": "Analysis of Participant Summaries",
-    "text": "Analysis of Participant Summaries\nWith one outcome per participant, conventional regression can relate average daily activity, sleep, steps, or another summary to exposures and covariates. The model should name the estimand and account for factors that shaped the outcome: device, placement, season, valid-day rule, and the number of usable days.\nParticipant summaries are compact and interpretable, but they discard timing. Two participants can have the same average daily ENMO while one moves in short morning bouts and the other is active for a long afternoon period."
+    "objectID": "modules/04-calibration-and-wear.html#compare-metrics-on-one-segment",
+    "href": "modules/04-calibration-and-wear.html#compare-metrics-on-one-segment",
+    "title": "Module 4: Signal Metrics",
+    "section": "Compare Metrics on One Segment",
+    "text": "Compare Metrics on One Segment\nUse one calibrated segment and a fixed epoch length. Plot each metric on its own scale, inspect rank ordering and transition periods, and report the processing steps that produced it."
   },
   {
-    "objectID": "modules/08-downstream-analysis.html#functional-analysis",
-    "href": "modules/08-downstream-analysis.html#functional-analysis",
-    "title": "Module 8: Downstream and Functional Analysis",
-    "section": "Functional Analysis",
-    "text": "Functional Analysis\nFunctional approaches preserve the shape of an activity profile. Align each participant’s minute-level series to a common clock, smooth or otherwise represent the curve, and model functions, functional principal components, or time-varying associations.\nThe essential design choices are day alignment, treatment of non-wear, weekday/weekend handling, smoothing basis, and the estimand. Functional analysis does not remove the need for wear QC; it makes inconsistent time alignment more consequential."
+    "objectID": "modules/04-calibration-and-wear.html#learning-check",
+    "href": "modules/04-calibration-and-wear.html#learning-check",
+    "title": "Module 4: Signal Metrics",
+    "section": "Learning Check",
+    "text": "Learning Check\nFor every metric, can you state its input units, epoch length, calibration status, filtering rules, and whether it is intended to reproduce a legacy count-based outcome? Those choices belong in the method, not only in code."
   },
   {
-    "objectID": "modules/08-downstream-analysis.html#match-the-analysis-to-the-data-product",
-    "href": "modules/08-downstream-analysis.html#match-the-analysis-to-the-data-product",
-    "title": "Module 8: Downstream and Functional Analysis",
-    "section": "Match the Analysis to the Data Product",
-    "text": "Match the Analysis to the Data Product\n\n\n\n\n\n\n\nData product\nExample analysis\n\n\n\n\nValid participant-days\nMixed model or within-person comparison\n\n\nParticipant average across valid days\nCross-sectional regression\n\n\n24-hour profile\nFunctional regression or functional PCA\n\n\nSeven-day profile\nRepeated functional or multilevel time-series analysis\n\n\n\nThe processing pipeline determines what can reasonably be interpreted in each model. Keep the link from a model outcome back to the minute-level definition and QC rules."
+    "objectID": "modules/06-sleep-and-physical-activity.html#from-minutes-to-valid-days",
+    "href": "modules/06-sleep-and-physical-activity.html#from-minutes-to-valid-days",
+    "title": "Module 6: Valid Days",
+    "section": "From Minutes to Valid Days",
+    "text": "From Minutes to Valid Days\nFirst classify each minute as wear or non-wear. Then calculate daily wear time and apply a prespecified threshold, such as at least 10 hours of waking wear time. A valid-day indicator is an analytic eligibility flag, not a claim that the day is complete or representative."
+  },
+  {
+    "objectID": "modules/06-sleep-and-physical-activity.html#counts-are-common-not-required",
+    "href": "modules/06-sleep-and-physical-activity.html#counts-are-common-not-required",
+    "title": "Module 6: Valid Days",
+    "section": "Counts Are Common, Not Required",
+    "text": "Counts Are Common, Not Required\nChoi and Troiano procedures require activity counts and thus fit naturally in count-based studies. Raw-signal methods can determine non-wear without counts, for example using acceleration variability, temperature, or a model-based detector. The inclusion rule should describe the signal used to infer wear, not simply label an interval as “valid.”\nMany established protocols still use counts at least for non-wear detection even when the primary outcome is ENMO, MIMS, or another raw-derived measure. That hybrid design is defensible when it is intentional and documented; it should not happen by accident because a default function was used."
+  },
+  {
+    "objectID": "modules/06-sleep-and-physical-activity.html#report-the-attrition",
+    "href": "modules/06-sleep-and-physical-activity.html#report-the-attrition",
+    "title": "Module 6: Valid Days",
+    "section": "Report the Attrition",
+    "text": "Report the Attrition\nAt minimum, report days observed, days with sufficient wear, days excluded for non-wear, and the participant-level rule that follows. Stratify these quantities when missingness could be related to the population or outcome of interest."
+  },
+  {
+    "objectID": "modules/09-reproducibility-and-qc.html#a-pipeline-that-can-be-audited",
+    "href": "modules/09-reproducibility-and-qc.html#a-pipeline-that-can-be-audited",
+    "title": "Module 9: Reproducibility, QC, and Other Methods",
+    "section": "A Pipeline That Can Be Audited",
+    "text": "A Pipeline That Can Be Audited\nAn auditable project separates immutable raw files, standardized raw tables, calibration diagnostics, minute-level metrics, wear flags, day-level summaries, participant outcomes, and model outputs. Every derived object should retain identifiers, time zone, processing version, and the parameters that created it.\nThe minimum QC record includes import diagnostics, sampling frequency, calibration status, time gaps, non-wear intervals, valid-day counts, and participant exclusions. Seven-day wear-shaded plots are particularly effective for checking that these rules match the data."
+  },
+  {
+    "objectID": "modules/09-reproducibility-and-qc.html#reproducibility-checklist",
+    "href": "modules/09-reproducibility-and-qc.html#reproducibility-checklist",
+    "title": "Module 9: Reproducibility, QC, and Other Methods",
+    "section": "Reproducibility Checklist",
+    "text": "Reproducibility Checklist\n\nretain the original .gt3x and .cwa files without modification;\nkeep reader, calibration, metric, epoch, and non-wear settings in code and output metadata;\nrecord R and Python package versions plus the Python environment used by reticulate;\nproduce an inclusion table from raw files to analytic participants;\nrerun the full pipeline from a clean project environment."
+  },
+  {
+    "objectID": "modules/09-reproducibility-and-qc.html#other-methods-through-reticulate",
+    "href": "modules/09-reproducibility-and-qc.html#other-methods-through-reticulate",
+    "title": "Module 9: Reproducibility, QC, and Other Methods",
+    "section": "Other Methods Through reticulate",
+    "text": "Other Methods Through reticulate\nSome specialized accelerometry methods are implemented in Python. reticulate allows an R/Quarto course project to call them while preserving a single documented workflow.\n\n\n\n\n\n\n\nPackage\nTypical role\n\n\n\n\nstepcount\nStep detection and step-based summaries from raw acceleration\n\n\nactinet\nActivity-pattern or behavior-oriented processing workflows\n\n\nasleep\nSleep inference and sleep-related outputs\n\n\n\nThe R/Python boundary is itself a QC boundary. Record package versions, the interpreter selected by reticulate, input units, sampling frequency, and the exact conversion from R data frames to Python objects. Specialized outputs should enter the same wear, valid-day, and participant-summary framework used for the core acceleration metrics."
   },
   {
     "objectID": "modules/02-import-and-structure.html#core-representation",
@@ -182,73 +245,10 @@
     "text": "Learning Check\nCan you state the sampling frequency and timezone for each imported file, and can you create a four-column table named time, x, y, and z without changing the raw values? If not, the import step is not complete."
   },
   {
-    "objectID": "modules/index.html",
-    "href": "modules/index.html",
-    "title": "Modules",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "This course follows the nine-module slide-deck structure below.\n\n\n\n\n\nModule\nMain question\nTeaching dataset\n\n\n\n\n1. Devices and signals\nWhat does an accelerometer measure?\n5-minute raw segment\n\n\n2. Import and structure\nHow are time and axes represented?\nRaw segment\n\n\n3. Calibration\nHow do we establish usable, comparable raw acceleration?\nRaw segment\n\n\n4. Signal metrics\nHow do ENMO, MAD, MIMS, and counts differ?\nRaw segment\n\n\n5. Wear and visualization\nWhen was the device worn, and what does a complete week look like?\n10,080 minute profile\n\n\n6. Valid days\nWhich participant-days are eligible?\nSeven-day data\n\n\n7. Daily and participant summaries\nHow does raw data become one value per person?\nMulti-participant data\n\n\n8. Downstream and functional analysis\nHow are summaries and profiles modeled?\nParticipant summaries and profiles\n\n\n9. Reproducibility, QC, and other methods\nHow do we audit and extend the pipeline?\nFull example project"
-  },
-  {
-    "objectID": "modules/index.html#slide-decks",
-    "href": "modules/index.html#slide-decks",
-    "title": "Modules",
-    "section": "",
-    "text": "Module\nMain question\nTeaching dataset\n\n\n\n\n1. Devices and signals\nWhat does an accelerometer measure?\n5-minute raw segment\n\n\n2. Import and structure\nHow are time and axes represented?\nRaw segment\n\n\n3. Calibration\nHow do we establish usable, comparable raw acceleration?\nRaw segment\n\n\n4. Signal metrics\nHow do ENMO, MAD, MIMS, and counts differ?\nRaw segment\n\n\n5. Wear and visualization\nWhen was the device worn, and what does a complete week look like?\n10,080 minute profile\n\n\n6. Valid days\nWhich participant-days are eligible?\nSeven-day data\n\n\n7. Daily and participant summaries\nHow does raw data become one value per person?\nMulti-participant data\n\n\n8. Downstream and functional analysis\nHow are summaries and profiles modeled?\nParticipant summaries and profiles\n\n\n9. Reproducibility, QC, and other methods\nHow do we audit and extend the pipeline?\nFull example project"
-  },
-  {
-    "objectID": "modules/06-sleep-and-physical-activity.html#from-minutes-to-valid-days",
-    "href": "modules/06-sleep-and-physical-activity.html#from-minutes-to-valid-days",
-    "title": "Module 6: Valid Days",
-    "section": "From Minutes to Valid Days",
-    "text": "From Minutes to Valid Days\nFirst classify each minute as wear or non-wear. Then calculate daily wear time and apply a prespecified threshold, such as at least 10 hours of waking wear time. A valid-day indicator is an analytic eligibility flag, not a claim that the day is complete or representative."
-  },
-  {
-    "objectID": "modules/06-sleep-and-physical-activity.html#counts-are-common-not-required",
-    "href": "modules/06-sleep-and-physical-activity.html#counts-are-common-not-required",
-    "title": "Module 6: Valid Days",
-    "section": "Counts Are Common, Not Required",
-    "text": "Counts Are Common, Not Required\nChoi and Troiano procedures require activity counts and thus fit naturally in count-based studies. Raw-signal methods can determine non-wear without counts, for example using acceleration variability, temperature, or a model-based detector. The inclusion rule should describe the signal used to infer wear, not simply label an interval as “valid.”\nMany established protocols still use counts at least for non-wear detection even when the primary outcome is ENMO, MIMS, or another raw-derived measure. That hybrid design is defensible when it is intentional and documented; it should not happen by accident because a default function was used."
-  },
-  {
-    "objectID": "modules/06-sleep-and-physical-activity.html#report-the-attrition",
-    "href": "modules/06-sleep-and-physical-activity.html#report-the-attrition",
-    "title": "Module 6: Valid Days",
-    "section": "Report the Attrition",
-    "text": "Report the Attrition\nAt minimum, report days observed, days with sufficient wear, days excluded for non-wear, and the participant-level rule that follows. Stratify these quantities when missingness could be related to the population or outcome of interest."
-  },
-  {
-    "objectID": "modules/01-devices-and-signals.html#learning-goals",
-    "href": "modules/01-devices-and-signals.html#learning-goals",
-    "title": "Module 1: Devices and Signals",
-    "section": "Learning Goals",
-    "text": "Learning Goals\n\ndistinguish commercial wearables from research-grade accelerometers;\ndescribe the signals produced by a tri-axial accelerometer;\nrecognize why device, placement, and sampling configuration matter;\nidentify the device families used by major cohort studies."
-  },
-  {
-    "objectID": "modules/01-devices-and-signals.html#slide-the-device-landscape",
-    "href": "modules/01-devices-and-signals.html#slide-the-device-landscape",
-    "title": "Module 1: Devices and Signals",
-    "section": "Slide: The Device Landscape",
-    "text": "Slide: The Device Landscape\nCommercial wearables, such as watches and fitness trackers, are designed around a consumer experience. They often expose proprietary step, sleep, or activity scores, while the raw signal and processing rules may be unavailable or change over time.\nResearch-grade accelerometers are configured for a study protocol. They retain high-frequency raw acceleration and device metadata, making calibration, quality control, and alternative processing choices possible. The trade-off is that the analyst, rather than a vendor, must make and document the processing decisions.\n\n\n\n\n\n\n\n\n\nDevice class\nTypical output\nStrength\nLimitation\n\n\n\n\nCommercial wearable\nProprietary summaries, sometimes raw data\nLow participant burden\nVendor algorithms can be opaque\n\n\nResearch-grade accelerometer\nRaw time, x, y, z, and metadata\nTransparent, reproducible processing\nRequires a full analysis pipeline"
-  },
-  {
-    "objectID": "modules/01-devices-and-signals.html#devices-in-large-studies",
-    "href": "modules/01-devices-and-signals.html#devices-in-large-studies",
-    "title": "Module 1: Devices and Signals",
-    "section": "Devices in Large Studies",
-    "text": "Devices in Large Studies\nActiGraph GT3X and GT9X devices are commonly used in United States cohort studies, including NHATS, NHANES, and ARIC. They are tri-axial accelerometers and are often encountered as .gt3x archives.\nAxivity AX3 devices are compact, research-grade accelerometers that store data in .cwa files. The UK Biobank accelerometry study used AX3 devices at the wrist. The device is not the study: placement, wear protocol, sampling frequency, dynamic range, and processing rules jointly define the measurement."
-  },
-  {
-    "objectID": "modules/01-devices-and-signals.html#what-is-measured",
-    "href": "modules/01-devices-and-signals.html#what-is-measured",
-    "title": "Module 1: Devices and Signals",
-    "section": "What Is Measured?",
-    "text": "What Is Measured?\nAt each sample, a tri-axial accelerometer records acceleration along three device-fixed axes. The observed vector combines gravity, movement, orientation, sensor noise, and any remaining calibration error. It does not directly observe steps, sleep, sedentary behavior, or intensity.\nThe raw signal is often expressed in gravitational units (g), where stationary data should have vector magnitude close to 1 g after calibration. Device axes rotate with the device, so a change in x, y, or z alone need not indicate a change in behavior."
-  },
-  {
-    "objectID": "modules/01-devices-and-signals.html#preparation-for-the-next-module",
-    "href": "modules/01-devices-and-signals.html#preparation-for-the-next-module",
-    "title": "Module 1: Devices and Signals",
-    "section": "Preparation for the Next Module",
-    "text": "Preparation for the Next Module\nThe course data directory contains one file from each device family:\n\ndata/TAS1H30182791 (2026-04-29).gt3x: an ActiGraph GT3X archive;\ndata/114890_0000000000.cwa: an Axivity AX3 file.\n\nThe next module turns these device files into the common raw-data representation: a timestamp and three acceleration columns."
+    "text": "This tutorial covers wrist-worn accelerometers and was created by the John Muschelli with support from the Johns Hopkins Wearable and Implantable Technology Group (WIT). The code is located at https://github.com/jhuwit/wearabler."
   }
 ]
