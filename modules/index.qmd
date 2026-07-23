@@ -1,0 +1,21 @@
+---
+title: "Modules"
+---
+
+# Course Structure
+
+This course follows the nine-module slide-deck structure below.
+
+## Slide Decks
+
+| Module | Main question | Teaching dataset |
+|---|---|---|
+| [1. Devices and signals](01-devices-and-signals.qmd) | What does an accelerometer measure? | 5-minute raw segment |
+| [2. Import and structure](02-import-and-structure.qmd) | How are time and axes represented? | Raw segment |
+| [3. Calibration](03-signal-metrics.qmd) | How do we establish usable, comparable raw acceleration? | Raw segment |
+| [4. Signal metrics](04-calibration-and-wear.qmd) | How do ENMO, MAD, MIMS, and counts differ? | Raw segment |
+| [5. Wear and visualization](05-epochs-and-behavior.qmd) | When was the device worn, and what does a complete week look like? | 10,080 minute profile |
+| [6. Valid days](06-sleep-and-physical-activity.qmd) | Which participant-days are eligible? | Seven-day data |
+| [7. Daily and participant summaries](07-valid-days-and-participants.qmd) | How does raw data become one value per person? | Multi-participant data |
+| [8. Downstream and functional analysis](08-downstream-analysis.qmd) | How are summaries and profiles modeled? | Participant summaries and profiles |
+| [9. Reproducibility, QC, and other methods](09-reproducibility-and-qc.qmd) | How do we audit and extend the pipeline? | Full example project |

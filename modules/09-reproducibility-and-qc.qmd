@@ -1,0 +1,55 @@
+---
+title: "Module 9: Reproducibility, QC, and Other Methods"
+format:
+  revealjs:
+    theme: simple
+    transition: fade
+    slide-number: true
+    navigation-mode: vertical
+    footer: "wearabler"
+slide-level: 2
+---
+
+# Main Question
+
+How do we audit the pipeline and extend it to specialized behaviors?
+
+# Teaching Dataset
+
+The full local example project, from device files through participant summaries.
+
+## A Pipeline That Can Be Audited
+
+An auditable project separates immutable raw files, standardized raw tables, calibration diagnostics, minute-level metrics, wear flags, day-level summaries, participant outcomes, and model outputs. Every derived object should retain identifiers, time zone, processing version, and the parameters that created it.
+
+The minimum QC record includes import diagnostics, sampling frequency, calibration status, time gaps, non-wear intervals, valid-day counts, and participant exclusions. Seven-day wear-shaded plots are particularly effective for checking that these rules match the data.
+
+## Reproducibility Checklist
+
+- retain the original `.gt3x` and `.cwa` files without modification;
+- keep reader, calibration, metric, epoch, and non-wear settings in code and output metadata;
+- record R and Python package versions plus the Python environment used by `reticulate`;
+- produce an inclusion table from raw files to analytic participants;
+- rerun the full pipeline from a clean project environment.
+
+## Other Methods Through `reticulate`
+
+Some specialized accelerometry methods are implemented in Python. `reticulate` allows an R/Quarto course project to call them while preserving a single documented workflow.
+
+| Package | Typical role |
+|---|---|
+| `stepcount` | Step detection and step-based summaries from raw acceleration |
+| `actinet` | Activity-pattern or behavior-oriented processing workflows |
+| `asleep` | Sleep inference and sleep-related outputs |
+
+```{r}
+#| eval: false
+library(reticulate)
+
+# Use a project-pinned Python environment, then import the needed method.
+stepcount <- import("stepcount")
+actinet <- import("actinet")
+asleep <- import("asleep")
+```
+
+The R/Python boundary is itself a QC boundary. Record package versions, the interpreter selected by `reticulate`, input units, sampling frequency, and the exact conversion from R data frames to Python objects. Specialized outputs should enter the same wear, valid-day, and participant-summary framework used for the core acceleration metrics.

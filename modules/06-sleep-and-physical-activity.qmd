@@ -1,0 +1,45 @@
+---
+title: "Module 6: Valid Days"
+format:
+  revealjs:
+    theme: simple
+    transition: fade
+    slide-number: true
+    navigation-mode: vertical
+    footer: "wearabler"
+slide-level: 2
+---
+
+# Main Question
+
+Which participant-days are eligible for a daily analysis?
+
+# Teaching Dataset
+
+Seven-day, minute-level data with an inferred wear indicator.
+
+## From Minutes to Valid Days
+
+First classify each minute as wear or non-wear. Then calculate daily wear time and apply a prespecified threshold, such as at least 10 hours of waking wear time. A valid-day indicator is an analytic eligibility flag, not a claim that the day is complete or representative.
+
+```{r}
+#| eval: false
+day_qc <- minute_data |>
+  dplyr::mutate(date = as.Date(time)) |>
+  dplyr::group_by(participant_id, date) |>
+  dplyr::summarise(
+    wear_minutes = sum(wear),
+    valid_day = wear_minutes >= 10 * 60,
+    .groups = "drop"
+  )
+```
+
+## Counts Are Common, Not Required
+
+Choi and Troiano procedures require activity counts and thus fit naturally in count-based studies. Raw-signal methods can determine non-wear without counts, for example using acceleration variability, temperature, or a model-based detector. The inclusion rule should describe the signal used to infer wear, not simply label an interval as "valid."
+
+Many established protocols still use counts at least for non-wear detection even when the primary outcome is ENMO, MIMS, or another raw-derived measure. That hybrid design is defensible when it is intentional and documented; it should not happen by accident because a default function was used.
+
+## Report the Attrition
+
+At minimum, report days observed, days with sufficient wear, days excluded for non-wear, and the participant-level rule that follows. Stratify these quantities when missingness could be related to the population or outcome of interest.

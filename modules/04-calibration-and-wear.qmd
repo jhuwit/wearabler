@@ -1,0 +1,54 @@
+---
+title: "Module 4: Signal Metrics"
+format:
+  revealjs:
+    theme: simple
+    transition: fade
+    slide-number: true
+    navigation-mode: vertical
+    footer: "wearabler"
+slide-level: 2
+---
+
+# Main Question
+
+How do ENMO, MAD, MIMS, and activity counts differ?
+
+# Teaching Dataset
+
+A calibrated raw segment, summarized to a common epoch length.
+
+## From Vectors to a Signal Metric
+
+Let the calibrated acceleration vector at a sample be `(x, y, z)`, measured in `g`, with vector magnitude `VM = sqrt(x^2 + y^2 + z^2)`. A metric turns a stream of vectors into an epoch-level quantity. Metric selection is a scientific and compatibility decision, not a purely technical one.
+
+| Metric | Definition | Interpretation |
+|---|---|---|
+| ENMO | `mean(max(VM - 1 g, 0))` within an epoch | Dynamic acceleration above gravity, commonly expressed in `mg` |
+| MAD | `mean(abs(VM - mean(VM)))` within an epoch | Within-epoch variation in vector magnitude |
+| MIMS | A monitor-independent movement summary after filtering and integration | Designed to be interpretable across monitor settings |
+| Activity counts | Device-algorithm output after proprietary-style filtering, thresholding, and integration | Legacy outcome used in many surveillance and cohort protocols |
+
+## Activity Counts Still Matter
+
+Activity counts are not raw acceleration. They depend on a specific transformation and therefore cannot be recreated perfectly from arbitrary raw data without knowing the count algorithm and device configuration. Yet counts remain central to historic protocols, published thresholds, and some non-wear algorithms.
+
+MIMS was developed as a monitor-independent summary and has shown close correspondence with ActiGraph activity counts in validation work. That association makes MIMS useful when bridging count-based literature and raw-signal workflows, but it does not make the two metrics interchangeable. Compare them at the same epoch length, placement, preprocessing configuration, and target population.
+
+## Compare Metrics on One Segment
+
+Use one calibrated segment and a fixed epoch length. Plot each metric on its own scale, inspect rank ordering and transition periods, and report the processing steps that produced it.
+
+```{r}
+#| eval: false
+# Pseudocode: use the same standardized, calibrated raw table for every metric.
+# metrics_5s <- raw |>
+#   group_by(epoch = floor_date(time, "5 seconds")) |>
+#   summarise(enmo_mg = ..., mad_mg = ..., mims = ..., counts = ...)
+#
+# plot(metrics_5s$epoch, metrics_5s$enmo_mg, type = "l")
+```
+
+## Learning Check
+
+For every metric, can you state its input units, epoch length, calibration status, filtering rules, and whether it is intended to reproduce a legacy count-based outcome? Those choices belong in the method, not only in code.

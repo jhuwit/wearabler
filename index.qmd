@@ -1,0 +1,18 @@
+---
+title: "wearabler"
+---
+
+# Wearabler Course Outline
+
+This site is set up as a Quarto-based short course on accelerometry and wearable data analysis.
+
+The module structure follows the shared course-planning chat and is organized around the `activerse` packages:
+
+- `actibase`
+- `actiread`
+- `actimetrics`
+- `asleep`
+- `walking`
+- `stepcount`
+
+Start with the [module index](modules/index.qmd).

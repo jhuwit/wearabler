@@ -1,0 +1,98 @@
+---
+title: "Module 2: Import and Structure"
+format:
+  revealjs:
+    theme: simple
+    transition: fade
+    slide-number: true
+    navigation-mode: vertical
+    footer: "wearabler"
+slide-level: 2
+---
+
+# Main Question
+
+How are time and axes represented?
+
+# Teaching Dataset
+
+The raw `.gt3x` and `.cwa` files in `data/`.
+
+## Core Representation
+
+Raw accelerometry is, at its core, a time series with four essential columns:
+
+| Column | Meaning |
+|---|---|
+| `time` | A datetime timestamp identifying when the sample was recorded |
+| `x` | Acceleration along the device x axis |
+| `y` | Acceleration along the device y axis |
+| `z` | Acceleration along the device z axis |
+
+The timestamp is not merely a row number. Its timezone, precision, regularity, and gaps determine day boundaries, sleep windows, wear-time intervals, and the validity of all downstream summaries. The x, y, and z columns are the core of raw accelerometry; device headers and processing history are essential accompanying metadata.
+
+## Read the Local Files with `actiread`
+
+`actiread` provides a common R-facing import layer for the two file types used in this course. Import first, inspect second, and standardize before calculating a metric.
+
+```{r}
+#| eval: false
+library(actibase)
+library(actiread)
+
+gt3x_file <- "data/TAS1H30182791 (2026-04-29).gt3x"
+cwa_file <- "data/114890_0000000000.cwa"
+
+gt3x_raw <- acti_read_gt3x(gt3x_file, verbose = FALSE)
+cwa_raw <- acti_read_cwa(cwa_file, verbose = FALSE)
+
+gt3x <- acti_standardize_data(gt3x_raw)
+cwa <- acti_standardize_data(cwa_raw)
+
+head(gt3x[, c("time", "x", "y", "z")])
+attributes(gt3x)
+```
+
+Before proceeding, verify the timezone, sampling frequency, acceleration units, start and end times, duplicate timestamps, and gaps. Preserve the original file and keep import metadata with the derived table.
+
+## Read the Axivity File with `GGIRread`
+
+`GGIRread` is a useful independent reader for Axivity `.cwa` data. Its output needs to be converted to the course's common `time`, `x`, `y`, `z` convention before it can be compared with another reader.
+
+```{r}
+#| eval: false
+ax3 <- GGIRread::readAxivity(
+  filename = "data/114890_0000000000.cwa",
+  desiredtz = "America/New_York"
+)
+
+str(ax3)
+# Extract the time and x/y/z components, then rename them to the common schema.
+```
+
+## Read the Axivity File with Python `actipy`
+
+`reticulate` lets an R analysis call Python's `actipy` without leaving the project. This is especially helpful for comparing reader and preprocessing implementations. Set processing options explicitly; do not silently accept defaults as a study protocol.
+
+```{r}
+#| eval: false
+library(reticulate)
+
+actipy <- import("actipy")
+result <- actipy$read_device(
+  "data/114890_0000000000.cwa",
+  lowpass_hz = 20,
+  calibrate_gravity = TRUE,
+  detect_nonwear = FALSE,
+  resample_hz = 50
+)
+
+ax3_py <- py_to_r(result[[1]])
+ax3_info <- py_to_r(result[[2]])
+head(ax3_py)
+ax3_info[c("SampleRate", "CalibErrorBefore(mg)", "CalibErrorAfter(mg)")]
+```
+
+## Learning Check
+
+Can you state the sampling frequency and timezone for each imported file, and can you create a four-column table named `time`, `x`, `y`, and `z` without changing the raw values? If not, the import step is not complete.

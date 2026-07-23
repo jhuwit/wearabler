@@ -1,0 +1,65 @@
+---
+title: "Module 3: Calibration"
+format:
+  revealjs:
+    theme: simple
+    transition: fade
+    slide-number: true
+    navigation-mode: vertical
+    footer: "wearabler"
+slide-level: 2
+---
+
+# Main Question
+
+How do we establish that raw acceleration is physically comparable and usable?
+
+# Teaching Dataset
+
+Raw segments from the local ActiGraph and Axivity files.
+
+## Why Calibrate?
+
+An ideal stationary device has a vector magnitude of 1 `g`, regardless of orientation. Real sensors have axis-specific offset, scale, and temperature-related error. Calibration estimates a transformation so the recorded signal is closer to this physical reference.
+
+Calibration is not an optional cosmetic cleanup. A small offset can change low-intensity metrics, sedentary thresholds, and non-wear decisions, especially when comparing devices or participants.
+
+## Calibration Philosophy
+
+The aim is not to force every recording to look alike. The aim is to correct identifiable sensor error while preserving genuine movement. A good workflow retains the uncalibrated data, records the estimated correction and diagnostics, applies the same rule across the study, and flags files whose calibration cannot be supported by the observed data.
+
+Calibration should be evaluated before and after correction. If the data never include sufficiently varied stationary orientations, an autocalibration routine may be poorly identified; that uncertainty belongs in the QC record rather than being hidden.
+
+## Common Approaches
+
+| Approach | Idea | Main consideration |
+|---|---|---|
+| Factory calibration | Use manufacturer sensor settings | May not address drift or deployment-specific error |
+| Static reference check | Compare a stationary device to 1 `g` | Requires a controlled reference period |
+| Autocalibration | Estimate offset and scale from repeated stationary orientations in free-living data | Needs enough orientation diversity and a QC threshold |
+| Cross-device harmonization | Relate outputs from different devices or pipelines | Does not replace sensor-level calibration |
+
+`actipy` exposes gravity calibration while it reads a file; its diagnostics report calibration error before and after processing. The same principle applies regardless of software: inspect the diagnostic, record the choice, and do not treat a failed calibration as silently corrected.
+
+```{r}
+#| eval: false
+library(reticulate)
+actipy <- import("actipy")
+
+result <- actipy$read_device(
+  "data/114890_0000000000.cwa",
+  calibrate_gravity = TRUE,
+  detect_nonwear = FALSE
+)
+info <- py_to_r(result[[2]])
+info[c("CalibErrorBefore(mg)", "CalibErrorAfter(mg)", "CalibOK")]
+```
+
+## Decisions to Record
+
+- device model, firmware, placement, dynamic range, and sampling frequency;
+- calibration method, parameters, and before/after error diagnostics;
+- files excluded or flagged because calibration was not credible;
+- whether later metrics use calibrated, resampled, or filtered data.
+
+The following module derives signal metrics from these explicitly defined inputs.

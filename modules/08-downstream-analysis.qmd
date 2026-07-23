@@ -1,0 +1,49 @@
+---
+title: "Module 8: Downstream and Functional Analysis"
+format:
+  revealjs:
+    theme: simple
+    transition: fade
+    slide-number: true
+    navigation-mode: vertical
+    footer: "wearabler"
+slide-level: 2
+---
+
+# Main Question
+
+How are accelerometry outcomes modeled without losing the question they represent?
+
+# Teaching Dataset
+
+Participant summaries and aligned 24-hour or seven-day activity profiles.
+
+## Analysis of Participant Summaries
+
+With one outcome per participant, conventional regression can relate average daily activity, sleep, steps, or another summary to exposures and covariates. The model should name the estimand and account for factors that shaped the outcome: device, placement, season, valid-day rule, and the number of usable days.
+
+```{r}
+#| eval: false
+fit <- lm(mean_daily_enmo_mg ~ age + sex + season + device_model,
+          data = participant)
+summary(fit)
+```
+
+Participant summaries are compact and interpretable, but they discard timing. Two participants can have the same average daily ENMO while one moves in short morning bouts and the other is active for a long afternoon period.
+
+## Functional Analysis
+
+Functional approaches preserve the shape of an activity profile. Align each participant's minute-level series to a common clock, smooth or otherwise represent the curve, and model functions, functional principal components, or time-varying associations.
+
+The essential design choices are day alignment, treatment of non-wear, weekday/weekend handling, smoothing basis, and the estimand. Functional analysis does not remove the need for wear QC; it makes inconsistent time alignment more consequential.
+
+## Match the Analysis to the Data Product
+
+| Data product | Example analysis |
+|---|---|
+| Valid participant-days | Mixed model or within-person comparison |
+| Participant average across valid days | Cross-sectional regression |
+| 24-hour profile | Functional regression or functional PCA |
+| Seven-day profile | Repeated functional or multilevel time-series analysis |
+
+The processing pipeline determines what can reasonably be interpreted in each model. Keep the link from a model outcome back to the minute-level definition and QC rules.
