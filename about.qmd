@@ -2,8 +2,4 @@
 title: "About"
 ---
 
-About this site
-
-```{r}
-1 + 1
-```
+This tutorial covers wrist-worn accelerometers and was created by the [John Muschelli](https://johnmuschelli.com/) with support from the Johns Hopkins Wearable and Implantable Technology Group (WIT).  The code is located at https://github.com/jhuwit/wearabler.
