@@ -5,7 +5,7 @@ format:
     theme: simple
     transition: fade
     slide-number: true
-    footer: "Wearable-R"
+    footer: "Wearable-R: https://github.com/jhuwit/wearabler"
     logo: ../assets/jhu.png
     css: ../assets/logo.css
 bibliography: ../assets/references.bib    
@@ -21,6 +21,12 @@ library(lubridate)
 library(dplyr)
 knitr::opts_chunk$set(echo = FALSE)
 ```
+
+# Materials
+
+Materials are at: https://github.com/jhuwit/wearabler
+
+Can use `git clone` or download via: https://github.com/jhuwit/wearabler/archive/refs/heads/main.zip
 
 # Why Measure Activity?
 

@@ -1,75 +1,122 @@
 ---
-title: "Module 3: Calibration"
+title: "Module 3: Alternative Metrics"
 format:
   revealjs:
     theme: simple
     transition: fade
     slide-number: true
-    navigation-mode: vertical
-    footer: "wearabler"
+    footer: "Wearable-R: https://github.com/jhuwit/wearabler"
+    logo: ../assets/jhu.png
+    css: ../assets/logo.css
+bibliography: ../assets/references.bib    
 slide-level: 2
 ---
 
-# Main Question
 
-How do we establish that raw acceleration is physically comparable and usable?
-
-# Teaching Dataset
-
-Raw segments from the local ActiGraph and Axivity files.
-
-## Why Calibrate?
-
-An ideal stationary device has a vector magnitude of 1 `g`, regardless of orientation. Real sensors have axis-specific offset, scale, and temperature-related error. Calibration estimates a transformation so the recorded signal is closer to this physical reference.
-
-Calibration is not an optional cosmetic cleanup. A small offset can change low-intensity metrics, sedentary thresholds, and non-wear decisions, especially when comparing devices or participants.
-
-## Calibration Philosophy
-
-The aim is not to force every recording to look alike. The aim is to correct identifiable sensor error while preserving genuine movement. A good workflow retains the uncalibrated data, records the estimated correction and diagnostics, applies the same rule across the study, and flags files whose calibration cannot be supported by the observed data.
-
-Calibration should be evaluated before and after correction. If the data never include sufficiently varied stationary orientations, an autocalibration routine may be poorly identified; that uncertainty belongs in the QC record rather than being hidden.
-
-## Raw-Signal Quality Checks Come First
-
-Calibration cannot repair every problem. Inspect the raw signal for duplicate or irregular times, long gaps, all-zero runs, clipped values at the device's acceleration limit, isolated extreme spikes, and implausibly constant axes. A recorded value near the configured limit can be real, but repeated saturation should be flagged because it limits what a metric can recover.
-
-Do this assessment before calibration. In particular, a zero-filled idle-sleep segment does not represent a stationary device on the unit sphere and can bias an autocalibration fit. Preserve an event flag and decide explicitly whether each affected segment is excluded, repaired, or retained.
-
-## Common Approaches
-
-| Approach | Idea | Main consideration |
-|---|---|---|
-| Factory calibration | Use manufacturer sensor settings | May not address drift or deployment-specific error |
-| Static reference check | Compare a stationary device to 1 `g` | Requires a controlled reference period |
-| Autocalibration | Estimate offset and scale from repeated stationary orientations in free-living data | Needs enough orientation diversity and a QC threshold |
-| Cross-device harmonization | Relate outputs from different devices or pipelines | Does not replace sensor-level calibration |
-
-`actipy` exposes gravity calibration while it reads a file; its diagnostics report calibration error before and after processing. The same principle applies regardless of software: inspect the diagnostic, record the choice, and do not treat a failed calibration as silently corrected.
-
-```{r}
-#| eval: false
-library(reticulate)
-actipy <- import("actipy")
-
-result <- actipy$read_device(
-  "data/114890_0000000000.cwa",
-  calibrate_gravity = TRUE,
-  detect_nonwear = FALSE
-)
-info <- py_to_r(result[[2]])
-info[c("CalibErrorBefore(mg)", "CalibErrorAfter(mg)", "CalibOK")]
+```{r setup, include = FALSE}
+library(knitr)
+library(tidyverse)
+library(targets)
+library(activerse)
+options(digits.secs = 3)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## Decisions to Record
+```{r}
+tar_load(data_gt3x)
+```
 
-- device model, firmware, placement, dynamic range, and sampling frequency;
-- calibration method, parameters, and before/after error diagnostics;
-- files excluded or flagged because calibration was not credible;
-- whether later metrics use calibrated, resampled, or filtered data.
 
-## Calibration Is Not Harmonization
+```{r}
+#| eval: true
+#| echo: false
+#| results: hide
+#| cache: true
+measures = acti_calculate_measures(data_gt3x, flag_data = FALSE)
+```
 
-Correcting sensor offset and scale does not make wrist and hip data equivalent, nor does it make two different metric definitions interchangeable. If a study changes device, sampling rate, placement, or processing software, evaluate comparability with a planned bridge or sensitivity analysis. Retain the uncalibrated signal so that a revised calibration rule can be applied later.
 
-The following module derives signal metrics from these explicitly defined inputs.
+# Alternative Metrics: AI
+
+@bai2016activity introduced the Activity Index (AI), an open-source metric that operates on raw data, has units in SI units ($g$ or milli-$g$) and has more sensitive ROC curves for moderate and vigorous physical activities compared to AC and was shown to be more sensitive to sedentary and light activities than ENMO.
+
+For a given window $H$, AI is calculated for a given participant is calculated using $AI_{0}$ (no baseline variance estimated as in paper):
+
+$$
+\text{AI}(t; H)_0 = \sqrt{ \frac{1}{3} \sum\limits_{m=1}^3 \sigma_{m}^2(t; H)  }
+$$
+
+
+which is the square root of the average variance of the 3 axes, and provides an average standard deviation. 
+
+@bai2016activity indicated that the window to calculate AI was 1 second and "any aggregated AI was obtained by summing up all the adjacent 1-second AIs within that period".  Thus, to calculate AI at a minute level, we would calculate it at a second level and then add the 60 $\text{AI}_0$ values together.
+
+# Alternative Metrics: AI
+
+```{r}
+#| echo: false
+measures |> 
+  ggplot(aes(x = time, y = AI)) + geom_step()
+```
+
+
+
+# Alternative Metrics: Mean Amplitude Deviation (MAD)
+
+@mad recommended the Mean Amplitude Deviation (MAD) as a measure that was an open-source, in SI units, and had good discriminating power for separating activity levels from each other.  The MAD is calculated as the mean of the absolute difference between the acceleration and the mean acceleration for a given epoch.
+
+For a given epoch of length $m$, and where $\text{VM}$ represents the vector magnitude of the signal, the calculation of MAD is:
+$$
+\text{MAD} = \frac{1}{m} \sum_{i=1}^{m} \left|\text{VM}_i- \overline{\text{VM}}_m \right|
+$$
+For a given epoch, @mad recommended taking the mean value of MAD for summarization and recommended 5-second epochs.
+
+# Alternative Metrics: MAD
+
+```{r}
+#| echo: false
+measures |> 
+  ggplot(aes(x = time, y = MAD)) + geom_step()
+```
+
+# Alternative Metrics: Monitor-Independent Movement Summary (MIMS) Units
+
+@mims introduced the Monitor-Independent Movement Summary (MIMS) unit that was to be an "open-source, universal acceleration summary metric that accounts for discrepancies in raw data among research and consumer devices". 
+
+* raw data interpolated of the signal to 100H 
+* extrapolates signal for regions that have hit the maximum/minimum acceleration units 
+* band-pass filters from 0.2 to 5Hz,
+* absolute value of the area under the curve (AUC) using a trapezoidal rule
+* truncates low signal values to $0$.
+
+@karas2022comparison found a correlation of $\geq 0.97$ between AC and MIMS units.  
+
+```{r}
+#| echo: false
+measures |> 
+  ggplot(aes(x = time, y = MIMS)) + geom_step()
+```
+
+# Alternative Metrics: ENMO
+
+* Euclidean Norm Minus One (ENMO)
+* At raw level $\sqrt(X^2+Y^2+Z^2) - 1$.  Usually truncated at 0.
+* Mean values (not sums) are calculated for different windows
+
+```{r}
+#| echo: false
+measures |> 
+  ggplot(aes(x = time, y = ENMO_t)) + geom_step()
+```
+
+
+# Calculate Them All
+
+* The `acti_calculate_measures` will run AC, AI, MIMS, and MAD
+```{r}
+#| eval: false
+#| cache: true
+measures = acti_calculate_measures(data_gt3x)
+```
+
+
