@@ -29,6 +29,8 @@ Let the calibrated acceleration vector at a sample be `(x, y, z)`, measured in `
 | MIMS | A monitor-independent movement summary after filtering and integration | Designed to be interpretable across monitor settings |
 | Activity counts | Device-algorithm output after proprietary-style filtering, thresholding, and integration | Legacy outcome used in many surveillance and cohort protocols |
 
+Other useful summaries include the activity index (variation relative to a resting-noise reference), area under the acceleration curve (AUC), and step counts. They answer different questions and carry their own assumptions; none is a universal definition of physical activity.
+
 ## Activity Counts Still Matter
 
 Activity counts are not raw acceleration. They depend on a specific transformation and therefore cannot be recreated perfectly from arbitrary raw data without knowing the count algorithm and device configuration. Yet counts remain central to historic protocols, published thresholds, and some non-wear algorithms.
@@ -52,3 +54,9 @@ Use one calibrated segment and a fixed epoch length. Plot each metric on its own
 ## Learning Check
 
 For every metric, can you state its input units, epoch length, calibration status, filtering rules, and whether it is intended to reproduce a legacy count-based outcome? Those choices belong in the method, not only in code.
+
+## Resampling and Filtering Are Decisions, Not Defaults
+
+Most metrics do not require resampling merely because a device has a different native rate. Resample only when an algorithm requires a particular rate, when rates differ within the analysis, or when a justified signal-processing objective requires it. Interpolation changes the data and should be marked in provenance.
+
+Filtering can remove sensor noise or isolate a frequency range, but it can also alter peaks, transitions, and count-like metrics. Record filter type, cutoff frequencies, order, implementation, and whether filtering occurred before or after calibration. Choose the processing path for the target metric rather than applying one generic preprocessing recipe.

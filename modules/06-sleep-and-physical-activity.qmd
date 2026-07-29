@@ -22,6 +22,8 @@ Seven-day, minute-level data with an inferred wear indicator.
 
 First classify each minute as wear or non-wear. Then calculate daily wear time and apply a prespecified threshold, such as at least 10 hours of waking wear time. A valid-day indicator is an analytic eligibility flag, not a claim that the day is complete or representative.
 
+The calendar day must be constructed in the declared analysis timezone. Daylight-saving transitions are not always 1,440 minutes long, and a midnight boundary may not be appropriate for a sleep-centered outcome. Define the day window before calculating wear time.
+
 ```{r}
 #| eval: false
 day_qc <- minute_data |>
@@ -43,3 +45,7 @@ Many established protocols still use counts at least for non-wear detection even
 ## Report the Attrition
 
 At minimum, report days observed, days with sufficient wear, days excluded for non-wear, and the participant-level rule that follows. Stratify these quantities when missingness could be related to the population or outcome of interest.
+
+## Missing Data Are Not Automatically Imputable
+
+Do not fill non-wear or missing minutes with a participant's average activity simply to create a complete day. Such imputation changes the estimand and can hide informative missingness. First report the observed-data estimand; then use a separate, justified imputation or sensitivity analysis if the scientific question requires a complete profile.

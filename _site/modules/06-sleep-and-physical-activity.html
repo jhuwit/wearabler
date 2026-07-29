@@ -148,6 +148,7 @@
 <section id="from-minutes-to-valid-days" class="slide level2">
 <h2>From Minutes to Valid Days</h2>
 <p>First classify each minute as wear or non-wear. Then calculate daily wear time and apply a prespecified threshold, such as at least 10 hours of waking wear time. A valid-day indicator is an analytic eligibility flag, not a claim that the day is complete or representative.</p>
+<p>The calendar day must be constructed in the declared analysis timezone. Daylight-saving transitions are not always 1,440 minutes long, and a midnight boundary may not be appropriate for a sleep-centered outcome. Define the day window before calculating wear time.</p>
 </section>
 <section id="counts-are-common-not-required" class="slide level2">
 <h2>Counts Are Common, Not Required</h2>
@@ -157,6 +158,10 @@
 <section id="report-the-attrition" class="slide level2">
 <h2>Report the Attrition</h2>
 <p>At minimum, report days observed, days with sufficient wear, days excluded for non-wear, and the participant-level rule that follows. Stratify these quantities when missingness could be related to the population or outcome of interest.</p>
+</section>
+<section id="missing-data-are-not-automatically-imputable" class="slide level2">
+<h2>Missing Data Are Not Automatically Imputable</h2>
+<p>Do not fill non-wear or missing minutes with a participant’s average activity simply to create a complete day. Such imputation changes the estimand and can hide informative missingness. First report the observed-data estimand; then use a separate, justified imputation or sensitivity analysis if the scientific question requires a complete profile.</p>
 
 
 </section></section>

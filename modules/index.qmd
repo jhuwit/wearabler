@@ -4,7 +4,7 @@ title: "Modules"
 
 # Course Structure
 
-This course follows the nine-module slide-deck structure below.
+This course follows a nine-module processing pipeline for wrist-worn accelerometry. It moves from a documented measurement protocol and raw time/x/y/z data through raw-signal QC, calibration, metric derivation, wear inference, valid-day rules, summary construction, and analysis. Throughout, the course distinguishes observed data from inserted, filtered, resampled, or inferred values.
 
 ## Slide Decks
 

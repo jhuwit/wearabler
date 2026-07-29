@@ -30,6 +30,72 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-0427d8d92a431aa6a6430e53ec02a470.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -155,6 +221,11 @@
 <p>The aim is not to force every recording to look alike. The aim is to correct identifiable sensor error while preserving genuine movement. A good workflow retains the uncalibrated data, records the estimated correction and diagnostics, applies the same rule across the study, and flags files whose calibration cannot be supported by the observed data.</p>
 <p>Calibration should be evaluated before and after correction. If the data never include sufficiently varied stationary orientations, an autocalibration routine may be poorly identified; that uncertainty belongs in the QC record rather than being hidden.</p>
 </section>
+<section id="raw-signal-quality-checks-come-first" class="slide level2">
+<h2>Raw-Signal Quality Checks Come First</h2>
+<p>Calibration cannot repair every problem. Inspect the raw signal for duplicate or irregular times, long gaps, all-zero runs, clipped values at the device’s acceleration limit, isolated extreme spikes, and implausibly constant axes. A recorded value near the configured limit can be real, but repeated saturation should be flagged because it limits what a metric can recover.</p>
+<p>Do this assessment before calibration. In particular, a zero-filled idle-sleep segment does not represent a stationary device on the unit sphere and can bias an autocalibration fit. Preserve an event flag and decide explicitly whether each affected segment is excluded, repaired, or retained.</p>
+</section>
 <section id="common-approaches" class="slide level2">
 <h2>Common Approaches</h2>
 <table class="caption-top">
@@ -194,6 +265,18 @@
 </tbody>
 </table>
 <p><code>actipy</code> exposes gravity calibration while it reads a file; its diagnostics report calibration error before and after processing. The same principle applies regardless of software: inspect the diagnostic, record the choice, and do not treat a failed calibration as silently corrected.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="fu">library</span>(reticulate)</span>
+<span id="cb1-2"><a></a>actipy <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"actipy"</span>)</span>
+<span id="cb1-3"><a></a></span>
+<span id="cb1-4"><a></a>result <span class="ot">&lt;-</span> actipy<span class="sc">$</span><span class="fu">read_device</span>(</span>
+<span id="cb1-5"><a></a>  <span class="st">"data/114890_0000000000.cwa"</span>,</span>
+<span id="cb1-6"><a></a>  <span class="at">calibrate_gravity =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-7"><a></a>  <span class="at">detect_nonwear =</span> <span class="cn">FALSE</span></span>
+<span id="cb1-8"><a></a>)</span>
+<span id="cb1-9"><a></a>info <span class="ot">&lt;-</span> <span class="fu">py_to_r</span>(result[[<span class="dv">2</span>]])</span>
+<span id="cb1-10"><a></a>info[<span class="fu">c</span>(<span class="st">"CalibErrorBefore(mg)"</span>, <span class="st">"CalibErrorAfter(mg)"</span>, <span class="st">"CalibOK"</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </section>
 <section id="decisions-to-record" class="slide level2">
 <h2>Decisions to Record</h2>
@@ -203,6 +286,10 @@
 <li>files excluded or flagged because calibration was not credible;</li>
 <li>whether later metrics use calibrated, resampled, or filtered data.</li>
 </ul>
+</section>
+<section id="calibration-is-not-harmonization" class="slide level2">
+<h2>Calibration Is Not Harmonization</h2>
+<p>Correcting sensor offset and scale does not make wrist and hip data equivalent, nor does it make two different metric definitions interchangeable. If a study changes device, sampling rate, placement, or processing software, evaluate comparability with a planned bridge or sensitivity analysis. Retain the uncalibrated signal so that a revised calibration rule can be applied later.</p>
 <p>The following module derives signal metrics from these explicitly defined inputs.</p>
 
 
@@ -422,44 +509,6 @@
         ]
       });
     </script>
-    
-    <script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script>
-
     <script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")

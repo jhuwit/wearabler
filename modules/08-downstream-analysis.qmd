@@ -31,11 +31,15 @@ summary(fit)
 
 Participant summaries are compact and interpretable, but they discard timing. Two participants can have the same average daily ENMO while one moves in short morning bouts and the other is active for a long afternoon period.
 
+Processing uncertainty is part of the analysis. Repeat key models under credible alternatives for calibration, non-wear detection, valid-day thresholds, epoch length, or metric definition when conclusions could depend on them. Do not pool outcomes across device placements or metric definitions without establishing what the pooled value represents.
+
 ## Functional Analysis
 
 Functional approaches preserve the shape of an activity profile. Align each participant's minute-level series to a common clock, smooth or otherwise represent the curve, and model functions, functional principal components, or time-varying associations.
 
 The essential design choices are day alignment, treatment of non-wear, weekday/weekend handling, smoothing basis, and the estimand. Functional analysis does not remove the need for wear QC; it makes inconsistent time alignment more consequential.
+
+Functional profiles also require an explicit missing-data strategy. Mark unobserved clock times, avoid interpreting imputed segments as measured behavior, and distinguish a curve estimated from repeated observed days from a literal complete-day trace. The appropriate method depends on whether timing, total volume, or both are the scientific target.
 
 ## Match the Analysis to the Data Product
 

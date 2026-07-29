@@ -22,6 +22,8 @@ Valid participant-days from a multi-participant study.
 
 For each valid day, summarize the selected metric over eligible wear minutes. Examples include mean ENMO, total minutes above a threshold, MIMS per day, count-based activity volume, sleep duration, and step count. A day-level summary must retain its denominator: number of eligible minutes or hours of wear.
 
+Aggregation itself can change an outcome. A mean of raw samples, a mean of seconds, and a mean of minutes give different weight to intervals when sampling is irregular or records are incomplete. Specify the base epoch, whether values are summed or averaged, handling of partial epochs, and every threshold used for intensity categories.
+
 ```{r}
 #| eval: false
 daily <- minute_data |>
@@ -51,6 +53,10 @@ participant <- daily |>
 ```
 
 This estimand intentionally does **not** account for the number of valid days in the mean itself. The number of days remains an important precision and QC variable and should be reported, used in sensitivity analyses, or incorporated into a different estimand when warranted.
+
+## Build an Analysis-Ready Denominator
+
+Carry `wear_minutes`, available days, valid days, weekend/weekday status, and season with the participant outcome. A single activity value without these variables cannot reveal whether a low value reflects behavior, limited observation, or a protocol decision. For a 24-hour profile, retain the minute-level denominator rather than forcing every profile to be complete.
 
 ## Learning Check
 

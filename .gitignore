@@ -6,3 +6,7 @@
 
 /.quarto/
 **/*.quarto_ipynb
+modules/*_cache/
+JASA-template.*
+pipeline.*
+tutorial.*

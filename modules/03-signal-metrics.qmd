@@ -30,6 +30,12 @@ The aim is not to force every recording to look alike. The aim is to correct ide
 
 Calibration should be evaluated before and after correction. If the data never include sufficiently varied stationary orientations, an autocalibration routine may be poorly identified; that uncertainty belongs in the QC record rather than being hidden.
 
+## Raw-Signal Quality Checks Come First
+
+Calibration cannot repair every problem. Inspect the raw signal for duplicate or irregular times, long gaps, all-zero runs, clipped values at the device's acceleration limit, isolated extreme spikes, and implausibly constant axes. A recorded value near the configured limit can be real, but repeated saturation should be flagged because it limits what a metric can recover.
+
+Do this assessment before calibration. In particular, a zero-filled idle-sleep segment does not represent a stationary device on the unit sphere and can bias an autocalibration fit. Preserve an event flag and decide explicitly whether each affected segment is excluded, repaired, or retained.
+
 ## Common Approaches
 
 | Approach | Idea | Main consideration |
@@ -61,5 +67,9 @@ info[c("CalibErrorBefore(mg)", "CalibErrorAfter(mg)", "CalibOK")]
 - calibration method, parameters, and before/after error diagnostics;
 - files excluded or flagged because calibration was not credible;
 - whether later metrics use calibrated, resampled, or filtered data.
+
+## Calibration Is Not Harmonization
+
+Correcting sensor offset and scale does not make wrist and hip data equivalent, nor does it make two different metric definitions interchangeable. If a study changes device, sampling rate, placement, or processing software, evaluate comparability with a planned bridge or sensitivity analysis. Retain the uncalibrated signal so that a revised calibration rule can be applied later.
 
 The following module derives signal metrics from these explicitly defined inputs.

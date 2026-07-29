@@ -30,8 +30,94 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-  </style>
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+    /* CSS for citations */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+    }
+    .hanging-indent div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }  </style>
   <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto-0427d8d92a431aa6a6430e53ec02a470.css">
+  <link rel="stylesheet" href="../assets/logo.css">
   <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -135,85 +221,188 @@
 </div>
 
 </section>
+<section id="why-measure-activity" class="title-slide slide level1 center">
+<h1>Why Measure Activity?</h1>
+<ul>
+<li><p>Physical activity important component of health and contributes to assessing and predicting mortality risk <span class="citation" data-cites="pa_benefits">(<a href="#/references" role="doc-biblioref" onclick="">Schoenborn and Stommel 2011</a>)</span></p></li>
+<li><p>Objective assessment in free-living settings - more accurate than self-report <span class="citation" data-cites="Prince2008">(<a href="#/references" role="doc-biblioref" onclick="">Prince et al. 2008</a>)</span>.</p></li>
+<li><p>Shown as strongest predictor of mortality <span class="citation" data-cites="tabacu2020quantifying">(<a href="#/references" role="doc-biblioref" onclick="">Tabacu et al. 2020</a>)</span></p></li>
+</ul>
+</section>
+
+<section id="goals" class="title-slide slide level1 center">
+<h1>Goals</h1>
+<p>Go from this</p>
+
+<img data-src="../assets/gt3x_file.png" width="235" class="r-stretch"><p>to this day level counts and labeled</p>
+</section>
+
+<section id="goal" class="title-slide slide level1 center">
+<h1>Goal</h1>
+<p>Go from this</p>
+
+<img data-src="../assets/gt3x_file.png" width="235" class="r-stretch"><p>to this</p>
+</section>
+
 <section id="main-question" class="title-slide slide level1 center">
 <h1>Main Question</h1>
 <p>What does an accelerometer measure?</p>
-</section>
-
-<section>
-<section id="teaching-dataset" class="title-slide slide level1 center">
-<h1>Teaching Dataset</h1>
-<p>5-minute raw segment from an ActiGraph GT3X/GT9X or Axivity AX3 device.</p>
-</section>
-<section id="learning-goals" class="slide level2">
-<h2>Learning Goals</h2>
 <ul>
-<li>distinguish commercial wearables from research-grade accelerometers;</li>
-<li>describe the signals produced by a tri-axial accelerometer;</li>
-<li>recognize why device, placement, and sampling configuration matter;</li>
-<li>identify the device families used by major cohort studies.</li>
+<li class="fragment">Piezoelectric sensor - material generates an electric charge from mechanical stress/movement</li>
+<li class="fragment">Capacitive micro-electro-mechanical system (MEMS) - mobile spring suspended mass with multiple capacitance plates</li>
 </ul>
 </section>
-<section id="slide-the-device-landscape" class="slide level2">
-<h2>Slide: The Device Landscape</h2>
-<p>Commercial wearables, such as watches and fitness trackers, are designed around a consumer experience. They often expose proprietary step, sleep, or activity scores, while the raw signal and processing rules may be unavailable or change over time.</p>
-<p>Research-grade accelerometers are configured for a study protocol. They retain high-frequency raw acceleration and device metadata, making calibration, quality control, and alternative processing choices possible. The trade-off is that the analyst, rather than a vendor, must make and document the processing decisions.</p>
+
+<section id="the-device-landscape" class="title-slide slide level1 center">
+<h1>The Device Landscape</h1>
+<p><strong>Commercial</strong> wearables (watches and fitness trackers) - designed for consumer experience.</p>
+<ul>
+<li>Proprietary step, sleep, or activity scores</li>
+<li>Raw signal and processing rules may be unavailable or change over time.</li>
+</ul>
+<p><strong>Research grade</strong> - for studies</p>
+<ul>
+<li>High-frequency raw acceleration and device metadata</li>
+<li>Trade off - decide on calibration, QC, and alternative processing</li>
+</ul>
+</section>
+
+<section id="example-studies" class="title-slide slide level1 center">
+<h1>Example Studies</h1>
+<ul>
+<li><strong>NHANES Accelerometry (CDC)</strong> (2003-2006, 2011-2014)</li>
+<li>Large-scale population studies using wrist-worn devices</li>
+<li>Released raw data - we released processed version</li>
+<li><strong>UK Biobank Wearable Data</strong></li>
+<li>Over 100,000 participants with 7-day wrist accelerometer recordings</li>
+<li>All of US uses FitBit</li>
+</ul>
+</section>
+
+<section id="accelerometers-covered" class="title-slide slide level1 center">
+<h1>Accelerometers Covered</h1>
+<div class="columns">
+<div class="column" style="width:55%;">
+<ul>
+<li>ActiGraph wGT3X+ (pictured)/GT9X: <code>.gt3x</code> extension (NHANES)</li>
+<li>Axivity AX3: <code>.cwa</code> file (UKBiobank)</li>
+</ul>
+<p>This is a research-grade, tri-axial accelerometer—not a consumer step counter.</p>
+</div><div class="column" style="width:22.5%;">
+<p><img data-src="../assets/actigraph-wgt3x-bt.png" style="width:85.0%" alt="ActiGraph wGT3X-BT research accelerometer on a wrist strap"></p>
+<p><small>ActiGraph wGT3X-BT. Image: <a href="https://ametris.com/actigraph-wgt3x-bt">Ametris</a>.</small></p>
+</div><div class="column" style="width:22.5%;">
+<p><img data-src="../assets/ax3_band.jpeg" style="width:100.0%" alt="Axivity AX3 research accelerometer with a wrist band"></p>
+<p><small>Axivity AX3. Image: <a href="https://axivity.com/product/ax3">Axivity</a>.</small></p>
+</div></div>
+</section>
+
+<section id="what-is-raw-accelerometer-data" class="title-slide slide level1 center">
+<h1>What is Raw Accelerometer Data?</h1>
+<ul>
+<li><strong>Sensor that measures acceleration</strong> in 3D space: X/Y/Z</li>
+<li>Typically measured in <strong>g-forces (g, <span class="math inline">\(g=9.81m/s^2\)</span>)</strong> or <strong>m/s²</strong></li>
+<li>Sampled at regular(ish) time intervals (e.g., 30Hz, 100Hz)</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource plaintext number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a></a>Timestamp                  X        Y        Z</span>
+<span id="cb1-2"><a></a>2025-02-17 12:00:00.0125   0.02     0.98     0.03</span>
+<span id="cb1-3"><a></a>2025-02-17 12:00:00.0250   0.04     0.95     0.05</span>
+<span id="cb1-4"><a></a>2025-02-17 12:00:00.0375  -0.01     0.99     0.02</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+
+<section id="wrist-worn-vs.-hip-worn-accelerometers" class="title-slide slide level1 center">
+<h1>Wrist-Worn vs.&nbsp;Hip-Worn Accelerometers</h1>
 <table class="caption-top">
 <colgroup>
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
-<col style="width: 25%">
+<col style="width: 28%">
+<col style="width: 36%">
+<col style="width: 34%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Device class</th>
-<th>Typical output</th>
-<th>Strength</th>
-<th>Limitation</th>
+<th>Feature</th>
+<th>Wrist-Worn Devices</th>
+<th>Hip-Worn Devices</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Commercial wearable</td>
-<td>Proprietary summaries, sometimes raw data</td>
-<td>Low participant burden</td>
-<td>Vendor algorithms can be opaque</td>
+<td>Placement</td>
+<td>Worn on wrist</td>
+<td>Attached to belt</td>
 </tr>
 <tr class="even">
-<td>Research-grade accelerometer</td>
-<td>Raw time, x, y, z, and metadata</td>
-<td>Transparent, reproducible processing</td>
-<td>Requires a full analysis pipeline</td>
+<td>Compliance</td>
+<td>Higher</td>
+<td>Lower</td>
+</tr>
+<tr class="odd">
+<td>Activity Types</td>
+<td>Captures arm movements</td>
+<td>Better for whole-body movement</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="devices-in-large-studies" class="slide level2">
-<h2>Devices in Large Studies</h2>
-<p>ActiGraph GT3X and GT9X devices are commonly used in United States cohort studies, including NHATS, NHANES, and ARIC. They are tri-axial accelerometers and are often encountered as <code>.gt3x</code> archives.</p>
-<p>Axivity AX3 devices are compact, research-grade accelerometers that store data in <code>.cwa</code> files. The UK Biobank accelerometry study used AX3 devices at the wrist. The device is not the study: placement, wear protocol, sampling frequency, dynamic range, and processing rules jointly define the measurement.</p>
-</section>
-<section id="what-is-measured" class="slide level2">
-<h2>What Is Measured?</h2>
-<p>At each sample, a tri-axial accelerometer records acceleration along three device-fixed axes. The observed vector combines gravity, movement, orientation, sensor noise, and any remaining calibration error. It does not directly observe steps, sleep, sedentary behavior, or intensity.</p>
-<p>The raw signal is often expressed in gravitational units (<code>g</code>), where stationary data should have vector magnitude close to 1 <code>g</code> after calibration. Device axes rotate with the device, so a change in x, y, or z alone need not indicate a change in behavior.</p>
-</section>
-<section id="preparation-for-the-next-module" class="slide level2">
-<h2>Preparation for the Next Module</h2>
-<p>The course data directory contains one file from each device family:</p>
+
+<section id="data-resolution" class="title-slide slide level1 center">
+<h1>Data Resolution</h1>
 <ul>
-<li><code>data/TAS1H30182791 (2026-04-29).gt3x</code>: an ActiGraph GT3X archive;</li>
-<li><code>data/114890_0000000000.cwa</code>: an Axivity AX3 file.</li>
+<li><strong>Raw Accelerometer Data</strong> (high-resolution time-series data)
+<ul>
+<li>20-100+ samples/second (Hz)</li>
+</ul></li>
+<li><strong>Activity Counts</strong> (aggregated over time windows)</li>
+<li><strong>Wear Time Detection</strong> (non-wear vs.&nbsp;wear periods)</li>
+<li><strong>Steps</strong> (estimation of a “step”)</li>
 </ul>
-<p>The next module turns these device files into the common raw-data representation: a timestamp and three acceleration columns.</p>
+
+<img data-src="../assets/silly_walks.gif" class="r-stretch"></section>
+
+<section id="course-learning-goals" class="title-slide slide level1 center">
+<h1>Course Learning Goals</h1>
+<ul>
+<li>Read in accelerometry data</li>
+<li>Visualize the data</li>
+<li>Calculate minute-level summaries</li>
+<li>Calculate non-wear and inclusion</li>
+<li>Create daily summaries</li>
+<li>Discuss functional approaches</li>
+</ul>
+</section>
+
+<section id="technical-stuff-condaenvironments" class="title-slide slide level1 center">
+<h1>Technical Stuff: Conda/Environments</h1>
+<ul>
+<li>If using Python, you know <code>conda</code></li>
+<li>If using R, Python link using <code>reticulate</code> package</li>
+<li>Multiple <code>conda</code> environments may be needed</li>
+<li>package/module A needs numpy &lt;= 2.11 and package B needs numpy &gt; 2.30</li>
+<li>“Switching” conda environments <strong>within</strong> a script/session is a hassle</li>
+</ul>
+</section>
+
+<section id="references" class="title-slide slide level1 smaller scrollable">
+<h1>References</h1>
 
 
-</section></section>
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Prince2008" class="csl-entry" role="listitem">
+Prince, Stephanie A, Kristi B Adamo, Meghan Hamel, Jill Hardt, Sarah Connor Gorber, and Mark Tremblay. 2008. <span>“A <span>Comparison</span> of <span>Direct</span> Versus <span class="nocase">Self-report</span> <span>Measures</span> for <span>Assessing</span> <span>Physical</span> <span>Activity</span> in <span>Adults</span>: A <span>Systematic</span> <span>Review</span>.”</span> <em>International Journal of Behavioral Nutrition and Physical Activity</em> 5 (1): 56. <a href="https://doi.org/10.1186/1479-5868-5-56">https://doi.org/10.1186/1479-5868-5-56</a>.
+</div>
+<div id="ref-pa_benefits" class="csl-entry" role="listitem">
+Schoenborn, Charlotte A., and Manfred Stommel. 2011. <span>“Adherence to the 2008 Adult Physical Activity Guidelines and Mortality Risk.”</span> <em>American Journal of Preventive Medicine</em> 40 (5): 514–21. <a href="https://doi.org/10.1016/j.amepre.2010.12.029">https://doi.org/10.1016/j.amepre.2010.12.029</a>.
+</div>
+<div id="ref-tabacu2020quantifying" class="csl-entry" role="listitem">
+Tabacu, Lucia, Mark Ledbetter, Andrew Leroux, Ciprian Crainiceanu, and Ekaterina Smirnova. 2020. <span>“Quantifying the Varying Predictive Value of Physical Activity Measures Obtained from Wearable Accelerometers on All-Cause Mortality over Short to Medium Time Horizons in <span>NHANES</span> 2003–2006.”</span> <em>Sensors</em> 21 (1): 4.
+</div>
+</div>
+</section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="../assets/jhu.png" class="slide-logo"></p>
 <div class="footer footer-default">
-<p>wearabler</p>
+<p>Wearable-R</p>
 </div>
 </div></div>
 
@@ -266,7 +455,7 @@
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: 'h.v',
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
@@ -307,7 +496,7 @@
         rtl: false,
 
         // see https://revealjs.com/vertical-slides/#navigation-mode
-        navigationMode: 'default',
+        navigationMode: 'linear',
 
         // Randomizes the order of slides each time the presentation loads
         shuffle: false,
@@ -425,6 +614,44 @@
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")

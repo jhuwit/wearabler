@@ -5,54 +5,168 @@ format:
     theme: simple
     transition: fade
     slide-number: true
-    navigation-mode: vertical
-    footer: "wearabler"
+    footer: "Wearable-R"
+    logo: ../assets/jhu.png
+    css: ../assets/logo.css
+bibliography: ../assets/references.bib    
 slide-level: 2
 ---
+
+
+
+```{r setup, include = FALSE}
+library(knitr)
+library(hms)
+library(lubridate)
+library(dplyr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Why Measure Activity?
+
+- Physical activity important component of health and contributes to assessing and predicting mortality risk [@pa_benefits]
+
+- Objective assessment in free-living settings - more accurate than self-report [@Prince2008].  
+
+- Shown as strongest predictor of mortality [@tabacu2020quantifying] 
+
+# Goals
+
+Go from this
+```{r}
+knitr::include_graphics("../assets/gt3x_file.png")
+```
+to this
+day level counts and labeled
+
+
+# Goal
+
+Go from this
+```{r}
+knitr::include_graphics("../assets/gt3x_file.png")
+```
+to this
+
+
 
 # Main Question
 
 What does an accelerometer measure?
 
-# Teaching Dataset
+::: {.incremental}
 
-5-minute raw segment from an ActiGraph GT3X/GT9X or Axivity AX3 device.
+* Piezoelectric sensor - material generates an electric charge from mechanical stress/movement
+* Capacitive micro-electro-mechanical system (MEMS) - mobile spring suspended mass with multiple capacitance plates
 
-## Learning Goals
+:::
 
-- distinguish commercial wearables from research-grade accelerometers;
-- describe the signals produced by a tri-axial accelerometer;
-- recognize why device, placement, and sampling configuration matter;
-- identify the device families used by major cohort studies.
+# The Device Landscape
 
-## Slide: The Device Landscape
+**Commercial** wearables (watches and fitness trackers) - designed for consumer experience. 
 
-Commercial wearables, such as watches and fitness trackers, are designed around a consumer experience. They often expose proprietary step, sleep, or activity scores, while the raw signal and processing rules may be unavailable or change over time.
+  - Proprietary step, sleep, or activity scores
+  - Raw signal and processing rules may be unavailable or change over time.
 
-Research-grade accelerometers are configured for a study protocol. They retain high-frequency raw acceleration and device metadata, making calibration, quality control, and alternative processing choices possible. The trade-off is that the analyst, rather than a vendor, must make and document the processing decisions.
+**Research grade** - for studies
 
-| Device class | Typical output | Strength | Limitation |
-|---|---|---|---|
-| Commercial wearable | Proprietary summaries, sometimes raw data | Low participant burden | Vendor algorithms can be opaque |
-| Research-grade accelerometer | Raw time, x, y, z, and metadata | Transparent, reproducible processing | Requires a full analysis pipeline |
+- High-frequency raw acceleration and device metadata
+- Trade off - decide on calibration, QC, and alternative processing
 
-## Devices in Large Studies
 
-ActiGraph GT3X and GT9X devices are commonly used in United States cohort studies, including NHATS, NHANES, and ARIC. They are tri-axial accelerometers and are often encountered as `.gt3x` archives.
+# Example Studies
 
-Axivity AX3 devices are compact, research-grade accelerometers that store data in `.cwa` files. The UK Biobank accelerometry study used AX3 devices at the wrist. The device is not the study: placement, wear protocol, sampling frequency, dynamic range, and processing rules jointly define the measurement.
+- **NHANES Accelerometry (CDC)** (2003-2006, 2011-2014)
+- Large-scale population studies using wrist-worn devices
+- Released raw data - we released processed version
+- **UK Biobank Wearable Data**
+- Over 100,000 participants with 7-day wrist accelerometer recordings
+- All of US uses FitBit
 
-## What Is Measured?
 
-At each sample, a tri-axial accelerometer records acceleration along three device-fixed axes. The observed vector combines gravity, movement, orientation, sensor noise, and any remaining calibration error. It does not directly observe steps, sleep, sedentary behavior, or intensity.
+# Accelerometers Covered
 
-The raw signal is often expressed in gravitational units (`g`), where stationary data should have vector magnitude close to 1 `g` after calibration. Device axes rotate with the device, so a change in x, y, or z alone need not indicate a change in behavior.
+:::: {.columns}
 
-## Preparation for the Next Module
+::: {.column width="55%"}
 
-The course data directory contains one file from each device family:
+- ActiGraph wGT3X+ (pictured)/GT9X: `.gt3x` extension (NHANES)
+- Axivity AX3: `.cwa` file (UKBiobank)
 
-- `data/TAS1H30182791 (2026-04-29).gt3x`: an ActiGraph GT3X archive;
-- `data/114890_0000000000.cwa`: an Axivity AX3 file.
+This is a research-grade, tri-axial accelerometer—not a consumer step counter.
+:::
 
-The next module turns these device files into the common raw-data representation: a timestamp and three acceleration columns.
+::: {.column width="22.5%"}
+![](../assets/actigraph-wgt3x-bt.png){fig-alt="ActiGraph wGT3X-BT research accelerometer on a wrist strap" width="85%"}
+
+<small>ActiGraph wGT3X-BT. Image: [Ametris](https://ametris.com/actigraph-wgt3x-bt).</small>
+:::
+
+::: {.column width="22.5%"}
+![](../assets/ax3_band.jpeg){fig-alt="Axivity AX3 research accelerometer with a wrist band" width="100%"}
+
+<small>Axivity AX3. Image: [Axivity](https://axivity.com/product/ax3).</small>
+:::
+
+::::
+
+
+
+# What is Raw Accelerometer Data?
+
+- **Sensor that measures acceleration** in 3D space: X/Y/Z
+- Typically measured in **g-forces (g, $g=9.81m/s^2$)** or **m/s²**
+- Sampled at regular(ish) time intervals (e.g., 30Hz, 100Hz)
+
+```plaintext
+Timestamp                  X        Y        Z
+2025-02-17 12:00:00.0125   0.02     0.98     0.03
+2025-02-17 12:00:00.0250   0.04     0.95     0.05
+2025-02-17 12:00:00.0375  -0.01     0.99     0.02
+```
+
+
+# Wrist-Worn vs. Hip-Worn Accelerometers
+
+| Feature       | Wrist-Worn Devices  | Hip-Worn Devices  |
+|--------------|------------------|-----------------|
+| Placement    | Worn on wrist    | Attached to belt |
+| Compliance   | Higher           | Lower           |
+| Activity Types | Captures arm movements | Better for whole-body movement |
+
+
+# Data Resolution
+
+- **Raw Accelerometer Data** (high-resolution time-series data)
+  - 20-100+ samples/second (Hz)
+- **Activity Counts** (aggregated over time windows)
+- **Wear Time Detection** (non-wear vs. wear periods)
+- **Steps** (estimation of a "step")
+
+```{r silly_walks}
+#| echo: false
+#| height: 400px
+knitr::include_graphics(here::here("assets/silly_walks.gif"))
+```
+
+
+# Course Learning Goals
+
+- Read in accelerometry data
+- Visualize the data
+- Calculate minute-level summaries 
+- Calculate non-wear and inclusion
+- Create daily summaries
+- Discuss functional approaches
+
+
+
+# Technical Stuff: Conda/Environments
+
+- If using Python, you know `conda`
+- If using R, Python link using `reticulate` package
+- Multiple `conda` environments may be needed
+- package/module A needs numpy <= 2.11 and package B needs numpy > 2.30
+- "Switching" conda environments **within** a script/session is a hassle
+
+# References

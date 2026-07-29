@@ -31,6 +31,16 @@ Two common count-based rules are:
 
 These are protocol definitions, not universal truths. Both were developed around activity counts. Raw-acceleration pipelines can use alternative non-wear detectors, but count-based Choi or Troiano rules remain important when reproducing legacy analysis plans.
 
+## Do Not Confuse Non-wear, Sleep, and Inactivity
+
+Low acceleration may mean the device was removed, the participant was asleep, seated, ill, or simply still. Non-wear algorithms estimate device status; sleep algorithms estimate a behavioral state. Treating every quiet interval as non-wear inflates activity, while treating every quiet interval as sleep or wear can underestimate it.
+
+Use diaries and auxiliary sensors when available, but do not assume that they are a gold standard. Compare inferred intervals with the full-week profile and state whether the protocol targets waking wear, 24-hour wear, or a sleep-specific window.
+
+## Aggregate Flags Deliberately
+
+A non-wear flag often starts at the sample or second level but is applied to minute and day summaries. Define the aggregation rule: for example, whether a minute is non-wear if all samples, most samples, or any part of the minute is non-wear. Boundary choices can change eligible minutes and valid-day status.
+
 ## Plot a Participant's Full Week
 
 Represent the week as 10,080 consecutive one-minute observations. A useful plot shows the chosen activity metric over time, adds day boundaries, and shades non-wear intervals. This makes data loss, device removal, and implausible patterns visible before a validity rule hides them in a summary.
