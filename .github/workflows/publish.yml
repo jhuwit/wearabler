@@ -22,6 +22,11 @@ jobs:
         with:
           r-version: '4.4.0'
 
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes libglpk-dev libxml2-dev
+
       - name: Restore R package dependencies
         uses: r-lib/actions/setup-renv@v2
         with:
