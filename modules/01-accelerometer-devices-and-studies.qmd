@@ -40,10 +40,8 @@ Can use `git clone` or download via: https://github.com/jhuwit/wearabler/archive
 
 
 ![](../assets/gt3x_file.png){.r-stretch}
-
-## Example accelerometer output
-
-![](../assets/ac_with_counts.png){.r-stretch}
+to
+![](../assets/ac_with_counts.png)
 
 
 # Main Question
