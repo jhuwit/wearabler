@@ -192,7 +192,7 @@ head(data_cwa_py, n = 3)
 - We will show small and large example GT3X data
 
 
-## Core Representation
+# Core Representation
 
 Core raw accelerometry is time series 3 axes:
 
@@ -205,7 +205,7 @@ Core raw accelerometry is time series 3 axes:
 
 
 
-## Data Attributes {.small}
+# Data Attributes {.small}
 
 - Sample rate - sampling frequency in Hz: `get_sample_rate`
 - Dynamic accelerometry range in `g`: `get_dynamic_range`
@@ -222,13 +222,13 @@ get_dynamic_range(data_cwa)
 names(attributes(data_gt3x))
 ```
 
-## Data Header from GT9X Device
+# Data Header from GT9X Device
 
 ```{r}
 #| echo: true
 attr(data_gt3x, "header")
 ```
-## Data Header from AX3 Device
+# Data Header from AX3 Device
 
 ```{r attr_header}
 #| echo: true
@@ -237,7 +237,7 @@ attr(data_cwa, "header")
 
 
 
-## Timestamps Need Their Own QC {.small}
+# Timestamps Need Their Own QC {.small}
 
 * Timestamp: use its timezone, precision, regularity, and gaps determine day boundaries, sleep windows, wear-time intervals, and the validity of all downstream summaries. 
 
@@ -245,7 +245,7 @@ attr(data_cwa, "header")
 
 * Rounding milliseconds during a CSV export can corrupt joins, inferred sampling rates, resampling, and step algorithms.
 
-## Timestamps Need Their Own QC {.small}
+# Timestamps Need Their Own QC {.small}
 
 * Use an explicit timezone. 
 * UTC avoids daylight-saving discontinuities during processing

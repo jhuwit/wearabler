@@ -210,7 +210,7 @@ knitr::include_graphics("assets/comparison_data.png")
 ```
 
 
-## Steps Per Minute
+# Steps Per Minute
 
 ```{r}
 #| echo: false
