@@ -389,21 +389,21 @@
     "href": "modules/02-reading-and-processing-data.html#data-attributes",
     "title": "Module 2: Reading and Processing Data",
     "section": "Data Attributes",
-    "text": "Data Attributes\n\nSample rate - sampling frequency in Hz: get_sample_rate\nDynamic accelerometry range in g: get_dynamic_range\n\n\n\n[1] 50\n\n\n[1] 50\n\n\n[1] 50\n\n\n[1] -8  8\n\n\n[1] -8  8\n\n\n [1] \"row.names\"        \"subject_name\"     \"time_zone\"        \"missingness\"     \n [5] \"old_version\"      \"firmware\"         \"last_sample_time\" \"serial_prefix\"   \n [9] \"sample_rate\"      \"acceleration_min\" \"acceleration_max\" \"header\"          \n[13] \"start_time\"       \"stop_time\"        \"total_records\"    \"bad_samples\"     \n[17] \"features\"         \"transformations\"  \"names\"            \"class\""
+    "text": "Data Attributes\n\nSample rate - sampling frequency in Hz: get_sample_rate\nDynamic accelerometry range in g: get_dynamic_range\n\n\nget_sample_rate(data_gt3x)\n\n[1] 50\n\nattr(data_gt3x, \"sample_rate\")\n\n[1] 50\n\nget_sample_rate(data_cwa)\n\n[1] 50\n\nget_dynamic_range(data_gt3x)\n\n[1] -8  8\n\nget_dynamic_range(data_cwa)\n\n[1] -8  8\n\nnames(attributes(data_gt3x))\n\n [1] \"row.names\"        \"subject_name\"     \"time_zone\"        \"missingness\"     \n [5] \"old_version\"      \"firmware\"         \"last_sample_time\" \"serial_prefix\"   \n [9] \"sample_rate\"      \"acceleration_min\" \"acceleration_max\" \"header\"          \n[13] \"start_time\"       \"stop_time\"        \"total_records\"    \"bad_samples\"     \n[17] \"features\"         \"transformations\"  \"names\"            \"class\""
   },
   {
     "objectID": "modules/02-reading-and-processing-data.html#data-header-from-gt9x-device",
     "href": "modules/02-reading-and-processing-data.html#data-header-from-gt9x-device",
     "title": "Module 2: Reading and Processing Data",
     "section": "Data Header from GT9X Device",
-    "text": "Data Header from GT9X Device\n\n\n$`Serial Number`\n[1] \"TAS1H30182791\"\n\n$`Device Type`\n[1] \"Link\"\n\n$Firmware\n[1] \"1.7.2\"\n\n$`Battery Voltage`\n[1] \"4.13\"\n\n$`Sample Rate`\n[1] 50\n\n$`Start Date`\n[1] \"2026-04-29 11:38:00 GMT\"\n\n$`Stop Date`\n[1] \"0001-01-01 GMT\"\n\n$`Last Sample Time`\n[1] \"2026-04-29 14:41:59 GMT\"\n\n$TimeZone\n[1] \"-04:00:00\"\n\n$`Download Date`\n[1] \"2026-04-29 14:41:59 GMT\"\n\n$`Board Revision`\n[1] \"8\"\n\n$`Unexpected Resets`\n[1] \"0\"\n\n$`Acceleration Scale`\n[1] 256\n\n$`Acceleration Min`\n[1] \"-8.0\"\n\n$`Acceleration Max`\n[1] \"8.0\"\n\n$Sex\n[1] \"Male\"\n\n$Limb\n[1] \"Wrist\"\n\n$Side\n[1] \"Left\"\n\n$Dominance\n[1] \"Non-Dominant\"\n\n$`Subject Name`\n[1] \"John\"\n\n$`Serial Prefix`\n[1] \"TAS\"\n\n$sample_rate\n[1] 50\n\nattr(,\"class\")\n[1] \"gt3x_info\" \"list\""
+    "text": "Data Header from GT9X Device\n\nattr(data_gt3x, \"header\")\n\n$`Serial Number`\n[1] \"TAS1H30182791\"\n\n$`Device Type`\n[1] \"Link\"\n\n$Firmware\n[1] \"1.7.2\"\n\n$`Battery Voltage`\n[1] \"4.13\"\n\n$`Sample Rate`\n[1] 50\n\n$`Start Date`\n[1] \"2026-04-29 11:38:00 GMT\"\n\n$`Stop Date`\n[1] \"0001-01-01 GMT\"\n\n$`Last Sample Time`\n[1] \"2026-04-29 14:41:59 GMT\"\n\n$TimeZone\n[1] \"-04:00:00\"\n\n$`Download Date`\n[1] \"2026-04-29 14:41:59 GMT\"\n\n$`Board Revision`\n[1] \"8\"\n\n$`Unexpected Resets`\n[1] \"0\"\n\n$`Acceleration Scale`\n[1] 256\n\n$`Acceleration Min`\n[1] \"-8.0\"\n\n$`Acceleration Max`\n[1] \"8.0\"\n\n$Sex\n[1] \"Male\"\n\n$Limb\n[1] \"Wrist\"\n\n$Side\n[1] \"Left\"\n\n$Dominance\n[1] \"Non-Dominant\"\n\n$`Subject Name`\n[1] \"John\"\n\n$`Serial Prefix`\n[1] \"TAS\"\n\n$sample_rate\n[1] 50\n\nattr(,\"class\")\n[1] \"gt3x_info\" \"list\""
   },
   {
     "objectID": "modules/02-reading-and-processing-data.html#data-header-from-ax3-device",
     "href": "modules/02-reading-and-processing-data.html#data-header-from-ax3-device",
     "title": "Module 2: Reading and Processing Data",
     "section": "Data Header from AX3 Device",
-    "text": "Data Header from AX3 Device\n\n\n$uniqueSerialCode\n[1] 114890\n\n$frequency\n[1] 50\n\n$start\n[1] \"2026-04-29 11:41:18.521 UTC\"\n\n$device\n[1] \"Axivity\"\n\n$firmwareVersion\n[1] 48\n\n$blocks\n[1] 4423\n\n$accrange\n[1] 8\n\n$hardwareType\n[1] \"AX3\"\n\n$blockLength\n[1] 120\n\n$acceleration_min\n[1] \"-8\"\n\n$acceleration_max\n[1] \"8\"\n\n$sample_rate\n[1] 50"
+    "text": "Data Header from AX3 Device\n\nattr(data_cwa, \"header\")\n\n$uniqueSerialCode\n[1] 114890\n\n$frequency\n[1] 50\n\n$start\n[1] \"2026-04-29 11:41:18.521 UTC\"\n\n$device\n[1] \"Axivity\"\n\n$firmwareVersion\n[1] 48\n\n$blocks\n[1] 4423\n\n$accrange\n[1] 8\n\n$hardwareType\n[1] \"AX3\"\n\n$blockLength\n[1] 120\n\n$acceleration_min\n[1] \"-8\"\n\n$acceleration_max\n[1] \"8\"\n\n$sample_rate\n[1] 50"
   },
   {
     "objectID": "modules/02-reading-and-processing-data.html#timestamps-need-their-own-qc",
@@ -417,7 +417,7 @@
     "href": "modules/02-reading-and-processing-data.html#timestamps-need-their-own-qc-1",
     "title": "Module 2: Reading and Processing Data",
     "section": "Timestamps Need Their Own QC",
-    "text": "Timestamps Need Their Own QC\n\nUse an explicit timezone.\nUTC avoids daylight-saving discontinuities during processing\nLocal time is often needed for sleep windows, diary linkage, and calendar-day summaries.\nRecord the original timezone, the analysis timezone, and every conversion between them.\nBefore proceeding, verify the timezone, sampling frequency, acceleration units, start and end times, duplicate timestamps, and gaps. Preserve the original file and keep import metadata with the derived table.\n\n\n\n[1] 0\n\n\n[1] 0"
+    "text": "Timestamps Need Their Own QC\n\nUse an explicit timezone.\nUTC avoids daylight-saving discontinuities during processing\nLocal time is often needed for sleep windows, diary linkage, and calendar-day summaries.\nRecord the original timezone, the analysis timezone, and every conversion between them.\nBefore proceeding, verify the timezone, sampling frequency, acceleration units, start and end times, duplicate timestamps, and gaps. Preserve the original file and keep import metadata with the derived table.\n\n\nanyDuplicated(data_gt3x$time)\n\n[1] 0\n\nanyDuplicated(data_cwa$time)\n\n[1] 0"
   },
   {
     "objectID": "modules/03-signal-metrics.html#step-counts-using-stepcount",

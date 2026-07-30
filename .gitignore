@@ -10,3 +10,6 @@ modules/*_cache/
 JASA-template.*
 pipeline.*
 tutorial.*
+objects
+workspaces
+meta

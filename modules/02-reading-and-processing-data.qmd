@@ -87,6 +87,7 @@ daily |>
 Read in Data (also `acti_read_cwa`):
 ```{r}
 #| eval: false
+#| echo: true
 data_gt3x = acti_read_gt3x(file_gt3x)
 ```
 
@@ -94,6 +95,7 @@ Create minute level summaries, including wear inclusion criteria
 
 ```{r}
 #| eval: false
+#| echo: true
 counts_and_wear = acti_process(data_gt3x, method = "choi")
 counts_and_wear = add_day_inclusion(counts_and_wear, min_required = 1368L)
 ```
@@ -177,7 +179,7 @@ Raw accelerometry is, at its core, a time series with four essential columns:
 - Sample rate - sampling frequency in Hz: `get_sample_rate`
 - Dynamic accelerometry range in `g`: `get_dynamic_range`
 
-```{r}
+```{r attrs}
 #| echo: true
 get_sample_rate(data_gt3x)
 attr(data_gt3x, "sample_rate")
@@ -197,7 +199,7 @@ attr(data_gt3x, "header")
 ```
 ## Data Header from AX3 Device
 
-```{r}
+```{r attr_header}
 #| echo: true
 attr(data_cwa, "header")
 ```
@@ -223,7 +225,7 @@ The timestamp is not merely a row number.
 
 * Before proceeding, verify the timezone, sampling frequency, acceleration units, start and end times, duplicate timestamps, and gaps. Preserve the original file and keep import metadata with the derived table.
 
-```{r}
+```{r any_dup}
 #| echo: true
 anyDuplicated(data_gt3x$time)
 anyDuplicated(data_cwa$time)
@@ -235,7 +237,7 @@ anyDuplicated(data_cwa$time)
 
 - `acti_tidy_axes` will reshape the time/XYZ data to a long format for plotting
 
-```{r}
+```{r tidy_axes}
 #| echo: true
 long = data_gt3x |> acti_tidy_axes()
 head(long, n = 3)
@@ -302,7 +304,7 @@ In a nutshell: 1) Define threshold for no activity, 2) define time threshold for
 * [@neishabouri2022quantification] - made open source the activity count calculation
 * [`agcounts`](https://github.com/bhelsel/agcounts) R package
 
-```{r}
+```{r ac_calculation}
 #| echo: true
 counts_gt3x = acti_calculate_counts(data_gt3x, verbose = FALSE)
 counts_cwa = acti_calculate_counts(data_cwa)
@@ -311,7 +313,7 @@ counts_cwa = acti_calculate_counts(data_cwa)
 
 # Activity Count
 
-```{r}
+```{r ac_plot}
 #| echo: true
 counts_gt3x |> 
   ggplot(aes(x = time, y = counts)) + geom_step()
@@ -332,17 +334,25 @@ head(wear_cwa, n = 3)
 ```
 
 # Just use `acti_process`
-```{r}
+```{r show_load_minute_gt3x}
 #| echo: true
+#| eval: false
 minute_gt3x = acti_process(data_gt3x, verbose = FALSE)
 minute_cwa = acti_process(data_cwa, verbose = FALSE)
 ```
+
+```{r load_minute_gt3x}
+#| echo: false
+tar_load(minute_gt3x)
+tar_load(minute_cwa)
+```
+
 
 # Plotting
 
 <!-- data_gt3x |> filter(time < ymd_hms("2026-04-29 11:39:00.000")) |> select(X, Y, Z) |> as.matrix() |> matrixStats::colVars() -->
 
-```{r}
+```{r running_minute}
 #| echo: true
 minute_gt3x |> 
   ggplot(aes(x = time, y = counts)) + 
@@ -358,11 +368,22 @@ minute_gt3x |>
 
 We can read in the data from [@chadwell2019upper] and run the minute level data with wear/non-wear:
 
-```{r}
-#| cache: true
+```{r load_minute_show}
+#| eval: false
 #| echo: true
 data = acti_read_gt3x(here::here("data/AI15_MOS2D09170398_2017-10-30.gt3x"))
 minute = acti_process(data)
+```
+
+```{r load_minute}
+#| echo: false
+minute = tar_read(data_gt3x_proc)
+```
+
+
+```{r full_minute_plot}
+#| cache: true
+#| echo: true
 minute |> 
   ggplot(aes(x = time, y = counts)) + 
   geom_segment(

@@ -293,6 +293,16 @@
 <section id="reading-in-the-data" class="title-slide slide level1 center">
 <h1>Reading in the Data</h1>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">library</span>(actiread)</span>
+<span id="cb3-2"><a></a>file_gt3x <span class="ot">=</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/TAS1H30182791 (2026-04-29).gt3x"</span>)</span>
+<span id="cb3-3"><a></a>file_cwa <span class="ot">=</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/114890_0000000000.cwa"</span>)</span>
+<span id="cb3-4"><a></a></span>
+<span id="cb3-5"><a></a>data_gt3x <span class="ot">=</span> actiread<span class="sc">::</span><span class="fu">acti_read_gt3x</span>(file_gt3x)</span>
+<span id="cb3-6"><a></a>data_cwa <span class="ot">=</span> actiread<span class="sc">::</span><span class="fu">acti_read_cwa</span>(file_cwa)</span>
+<span id="cb3-7"><a></a><span class="fu">head</span>(data_gt3x, <span class="at">n =</span> <span class="dv">3</span>)</span>
+<span id="cb3-8"><a></a><span class="fu">head</span>(data_cwa, <span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
   time                        X     Y     Z
@@ -352,21 +362,27 @@
 <li>Dynamic accelerometry range in <code>g</code>: <code>get_dynamic_range</code></li>
 </ul>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">get_sample_rate</span>(data_gt3x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 50</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="fu">attr</span>(data_gt3x, <span class="st">"sample_rate"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 50</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">get_sample_rate</span>(data_cwa)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 50</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="fu">get_dynamic_range</span>(data_gt3x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -8  8</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">get_dynamic_range</span>(data_cwa)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -8  8</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">names</span>(<span class="fu">attributes</span>(data_gt3x))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "row.names"        "subject_name"     "time_zone"        "missingness"     
  [5] "old_version"      "firmware"         "last_sample_time" "serial_prefix"   
@@ -379,6 +395,7 @@
 <section id="data-header-from-gt9x-device" class="slide level2">
 <h2>Data Header from GT9X Device</h2>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">attr</span>(data_gt3x, <span class="st">"header"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$`Serial Number`
 [1] "TAS1H30182791"
@@ -454,6 +471,7 @@ attr(,"class")
 <section id="data-header-from-ax3-device" class="slide level2">
 <h2>Data Header from AX3 Device</h2>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a></a><span class="fu">attr</span>(data_cwa, <span class="st">"header"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$uniqueSerialCode
 [1] 114890
@@ -512,9 +530,11 @@ $sample_rate
 <li><p>Before proceeding, verify the timezone, sampling frequency, acceleration units, start and end times, duplicate timestamps, and gaps. Preserve the original file and keep import metadata with the derived table.</p></li>
 </ul>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a></a><span class="fu">anyDuplicated</span>(data_gt3x<span class="sc">$</span>time)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a></a><span class="fu">anyDuplicated</span>(data_cwa<span class="sc">$</span>time)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
@@ -526,6 +546,8 @@ $sample_rate
 <li><code>acti_tidy_axes</code> will reshape the time/XYZ data to a long format for plotting</li>
 </ul>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>long <span class="ot">=</span> data_gt3x <span class="sc">|&gt;</span> <span class="fu">acti_tidy_axes</span>()</span>
+<span id="cb26-2"><a></a><span class="fu">head</span>(long, <span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 3
   time                    axis  value
@@ -534,6 +556,8 @@ $sample_rate
 2 2026-04-29 11:38:00.019 X         0
 3 2026-04-29 11:38:00.039 X         0</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a>long <span class="sc">|&gt;</span> </span>
+<span id="cb28-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> value, <span class="at">colour =</span> axis)) <span class="sc">+</span> <span class="fu">geom_step</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
 <img data-src="02-reading-and-processing-data_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
@@ -613,6 +637,8 @@ $sample_rate
 <li><p><a href="https://github.com/bhelsel/agcounts"><code>agcounts</code></a> R package</p></li>
 </ul>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a></a>counts_gt3x <span class="ot">=</span> <span class="fu">acti_calculate_counts</span>(data_gt3x, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb30-2"><a></a>counts_cwa <span class="ot">=</span> <span class="fu">acti_calculate_counts</span>(data_cwa)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Creating Downsampled Data"
 [1] "Filtering Data"
@@ -626,6 +652,8 @@ $sample_rate
 <section id="activity-count-1" class="title-slide slide level1 center">
 <h1>Activity Count</h1>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a></a>counts_gt3x <span class="sc">|&gt;</span> </span>
+<span id="cb32-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> counts)) <span class="sc">+</span> <span class="fu">geom_step</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure>
@@ -633,6 +661,8 @@ $sample_rate
 </figure>
 </div>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a></a>counts_cwa <span class="sc">|&gt;</span> </span>
+<span id="cb33-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> counts)) <span class="sc">+</span> <span class="fu">geom_step</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure>
@@ -649,6 +679,8 @@ $sample_rate
 <li>Calculate wear using <code>acti_calculate_wear</code>, uses Choi by default</li>
 </ul>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a></a>wear_gt3x <span class="ot">=</span> <span class="fu">acti_calculate_wear</span>(counts_gt3x)</span>
+<span id="cb34-2"><a></a><span class="fu">head</span>(wear_gt3x, <span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
   time                    wear 
@@ -657,6 +689,8 @@ $sample_rate
 2 2026-04-29 11:39:00.000 TRUE 
 3 2026-04-29 11:40:00.000 TRUE </code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a></a>wear_cwa <span class="ot">=</span> <span class="fu">acti_calculate_wear</span>(counts_cwa)</span>
+<span id="cb36-2"><a></a><span class="fu">head</span>(wear_cwa, <span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
   time                    wear 
@@ -670,13 +704,24 @@ $sample_rate
 
 <section id="just-use-acti_process" class="title-slide slide level1 center">
 <h1>Just use <code>acti_process</code></h1>
-
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a></a>minute_gt3x <span class="ot">=</span> <span class="fu">acti_process</span>(data_gt3x, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb38-2"><a></a>minute_cwa <span class="ot">=</span> <span class="fu">acti_process</span>(data_cwa, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </section>
 
 <section id="plotting" class="title-slide slide level1 center">
 <h1>Plotting</h1>
 <!-- data_gt3x |> filter(time < ymd_hms("2026-04-29 11:39:00.000")) |> select(X, Y, Z) |> as.matrix() |> matrixStats::colVars() -->
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a></a>minute_gt3x <span class="sc">|&gt;</span> </span>
+<span id="cb39-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> counts)) <span class="sc">+</span> </span>
+<span id="cb39-3"><a></a>  <span class="fu">geom_step</span>() <span class="sc">+</span> </span>
+<span id="cb39-4"><a></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb39-5"><a></a>    <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">xend =</span> time,</span>
+<span id="cb39-6"><a></a>        <span class="at">y =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">yend =</span> <span class="cn">Inf</span>, <span class="at">color =</span> wear), <span class="at">alpha =</span> <span class="fl">0.25</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
+</div>
 <img data-src="02-reading-and-processing-data_files/figure-revealjs/unnamed-chunk-20-1.png" width="960" class="r-stretch"></section>
 
 <section id="reading-full-data" class="title-slide slide level1 center">
@@ -684,6 +729,8 @@ $sample_rate
 <!-- data_gt3x |> filter(time < ymd_hms("2026-04-29 11:39:00.000")) |> select(X, Y, Z) |> as.matrix() |> matrixStats::colVars() -->
 <p>We can read in the data from <span class="citation" data-cites="chadwell2019upper">(<a href="#/summary" role="doc-biblioref" onclick="">Chadwell et al. 2019</a>)</span> and run the minute level data with wear/non-wear:</p>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a></a>data <span class="ot">=</span> <span class="fu">acti_read_gt3x</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/AI15_MOS2D09170398_2017-10-30.gt3x"</span>))</span>
+<span id="cb40-2"><a></a>minute <span class="ot">=</span> <span class="fu">acti_process</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Creating Downsampled Data"
 [1] "Filtering Data"
@@ -691,6 +738,12 @@ $sample_rate
 [1] "Getting data back to 10Hz for accumulation"
 [1] "Summing epochs"</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a></a>minute <span class="sc">|&gt;</span> </span>
+<span id="cb42-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> counts)) <span class="sc">+</span> </span>
+<span id="cb42-3"><a></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb42-4"><a></a>    <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">xend =</span> time,</span>
+<span id="cb42-5"><a></a>        <span class="at">y =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">yend =</span> <span class="cn">Inf</span>, <span class="at">color =</span> wear), <span class="at">alpha =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb42-6"><a></a>  <span class="fu">geom_step</span>() </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
 <img data-src="02-reading-and-processing-data_files/figure-revealjs/unnamed-chunk-21-1.png" width="960" class="r-stretch"></section>
@@ -708,6 +761,8 @@ $sample_rate
 <li><code>add_day_inclusion</code> - creates and joins with time-series</li>
 </ul>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a></a>minute <span class="sc">|&gt;</span> </span>
+<span id="cb43-2"><a></a>  actibase<span class="sc">::</span><span class="fu">create_day_inclusion</span>(<span class="at">min_required =</span> <span class="dv">1296</span>L)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 6
   date       n_minutes_wear n_minutes_observed prop_minutes_wear
@@ -724,6 +779,8 @@ $sample_rate
 </div>
 </div>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a></a>minute <span class="sc">|&gt;</span> </span>
+<span id="cb45-2"><a></a>  actibase<span class="sc">::</span><span class="fu">add_day_inclusion</span>(<span class="at">min_required =</span> <span class="dv">1296</span>L)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10,080 × 13
    time                    axis1 axis2 axis3 counts counts_log10 wear 
