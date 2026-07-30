@@ -37,6 +37,10 @@ jobs:
           # while restoring those pinned dependencies.
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
       - name: Build targets pipeline
         run: Rscript -e 'targets::tar_make()'
 
