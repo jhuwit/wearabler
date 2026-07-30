@@ -6,9 +6,9 @@ format:
     transition: fade
     slide-number: true
     footer: "Wearable-R: https://github.com/jhuwit/wearabler"
-    logo: ../assets/jhu.png
-    css: ../assets/logo.css
-bibliography: ../assets/references.bib    
+    logo: assets/jhu.png
+    css: assets/logo.css
+bibliography: assets/references.bib    
 slide-level: 2
 ---
 
