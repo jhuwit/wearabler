@@ -504,7 +504,6 @@ minute |>
 ```{r plot_full_data_show}
 #| eval: true
 #| echo: false
-#| cache: true
 #| fig-height: 10
 #| fig-width: 7
 tar_load(data_proc)

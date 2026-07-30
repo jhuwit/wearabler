@@ -254,6 +254,7 @@ tar_load(asleep)
 ```{r plot_asleep_show}
 #| eval: false
 #| echo: true
+#| cache: true
 pred = asleep$predictions |> 
   mutate(time = ymd_hms(time, tz = "GMT"),
          date = lubridate::as_date(time),

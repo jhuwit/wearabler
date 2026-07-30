@@ -38,18 +38,13 @@ Can use `git clone` or download via: https://github.com/jhuwit/wearabler/archive
 
 # Goals
 
-Go from this
+
 ![](../assets/gt3x_file.png){.r-stretch}
-to this
-day level counts and labeled
 
-
-# Goal
-
-Go from this
-![](../assets/gt3x_file.png){.r-stretch}
-to this
-
+```{r ac_with_counts}
+#| echo: false
+knitr::include_graphics("assets/ac_with_counts.png")
+```
 
 
 # Main Question
