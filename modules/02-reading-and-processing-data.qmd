@@ -178,7 +178,7 @@ head(data_cwa, n = 3)
 head(data_cwa_py, n = 3)
 ```
 
-```{r load_raw_data}
+```{r load_raw_data_py}
 #| echo: false
 tar_load(data_cwa_py)
 head(data_cwa, n = 3)
@@ -374,7 +374,7 @@ Gravity correction [@gravity] or gravity calibration: try to correct data that i
 targets::tar_load(data)
 ```
 
-```{r calibrate_cal_estimates}
+```{r calibrate_cal_estimates_load}
 #| echo: true
 #| results: hide
 #| cache: true
@@ -496,6 +496,25 @@ minute |>
     aes(x = time, xend = time,
         y = -Inf, yend = Inf, color = wear), alpha = 0.25) +
   geom_step() 
+```
+
+# Plotting Day-level
+
+
+```{r plot_full_data_show}
+#| eval: true
+#| echo: false
+#| cache: true
+tar_load(data_proc)
+data_proc |> 
+  mutate(date = lubridate::as_date(time),
+         hourtime = hms::as_hms(time)) |> 
+  ggplot(aes(x = hourtime, y = counts)) + 
+  geom_segment(
+    aes(x = hourtime, xend = hourtime,
+        y = -Inf, yend = Inf, color = wear), alpha = 0.25) +
+  geom_step() +
+  facet_wrap(~ date, ncol = 1)
 ```
 
 # Day Level Inclusion

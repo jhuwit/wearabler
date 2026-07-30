@@ -159,7 +159,7 @@ Self-supervised learner 700,000 accelerometer data from UKBB: [@yuan2024self]
 
 ```{r}
 #| echo: false
-knitr::include_graphics(here::here("assets/oxwearables.png"))
+knitr::include_graphics("assets/oxwearables.png")
 ```
 
 # Step Counts using `stepcount` {.smaller}
@@ -168,7 +168,7 @@ SSL model + fine tuning with capture 24 data set.
 
 [@stepcount] python module ported using `reticulate`. 
 ```{r}
-knitr::include_graphics(here::here("assets/stepcount.png"))
+knitr::include_graphics("assets/stepcount.png")
 ```
 
 ```{r code_stepcount}
@@ -206,7 +206,7 @@ steps_gt3x |>
 @koffman2024evaluating
 
 ```{r}
-knitr::include_graphics(here::here("assets/comparison_data.png"))
+knitr::include_graphics("assets/comparison_data.png")
 ```
 
 
@@ -337,7 +337,7 @@ https://scikit-digital-health.readthedocs.io/en/latest/
 
 ```{r}
 #| echo: false
-knitr::include_graphics(here::here("assets/skdh.png"))
+knitr::include_graphics("assets/skdh.png")
 ```
 
 
@@ -346,7 +346,7 @@ knitr::include_graphics(here::here("assets/skdh.png"))
 
 ```{r}
 #| echo: false
-knitr::include_graphics(here::here("assets/wristpy.png"))
+knitr::include_graphics("assets/wristpy.png")
 ```
 
 

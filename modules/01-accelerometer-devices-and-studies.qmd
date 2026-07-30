@@ -39,9 +39,7 @@ Can use `git clone` or download via: https://github.com/jhuwit/wearabler/archive
 # Goals
 
 Go from this
-```{r}
-knitr::include_graphics(here::here("assets/gt3x_file.png"))
-```
+![](../assets/gt3x_file.png){.r-stretch}
 to this
 day level counts and labeled
 
@@ -49,9 +47,7 @@ day level counts and labeled
 # Goal
 
 Go from this
-```{r}
-knitr::include_graphics(here::here("assets/gt3x_file.png"))
-```
+![](../assets/gt3x_file.png){.r-stretch}
 to this
 
 
@@ -151,10 +147,7 @@ Timestamp                  X        Y        Z
   - **Steps** (estimation of a "step")
 - Sleep estimation
 
-```{r silly_walks}
-#| echo: false
-knitr::include_graphics(here::here("assets/silly_walks.gif"))
-```
+![](../assets/silly_walks.gif){.r-stretch}
 
 
 # Course Learning Goals
