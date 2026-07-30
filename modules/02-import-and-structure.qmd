@@ -5,8 +5,10 @@ format:
     theme: simple
     transition: fade
     slide-number: true
-    navigation-mode: vertical
-    footer: "wearabler"
+    footer: "Wearable-R: https://github.com/jhuwit/wearabler"
+    logo: ../assets/jhu.png
+    css: ../assets/logo.css
+bibliography: ../assets/references.bib    
 slide-level: 2
 ---
 
@@ -332,6 +334,8 @@ minute_gt3x |>
 # Reading in the full
 
 <!-- data_gt3x |> filter(time < ymd_hms("2026-04-29 11:39:00.000")) |> select(X, Y, Z) |> as.matrix() |> matrixStats::colVars() -->
+
+We can read in the data from [@chadwell2019upper] and run the minute level data with wear/non-wear:
 
 ```{r}
 #| cache: true

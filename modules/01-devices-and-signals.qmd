@@ -1,5 +1,5 @@
 ---
-title: "Module 1: Devices and Signals"
+title: "Module 1: Accelerometer Devices and Studies"
 format:
   revealjs:
     theme: simple
