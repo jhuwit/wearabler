@@ -228,9 +228,68 @@ list(
         show = TRUE
       )
     }
+  ),
+
+  tar_target(
+    actinet,
+    {
+      actinet::py_acti_net(
+        data,
+        sample_rate = get_sample_rate(data)
+      )
+    }
+  ),
+
+  tar_target(
+    actinet_gt3x,
+    {
+      actinet::py_acti_net(
+        data_gt3x,
+        sample_rate = get_sample_rate(data_gt3x)
+      )
+    }
+  ),
+
+  tar_target(
+    actinet_cwa,
+    {
+      actinet::py_acti_net(
+        data_cwa,
+        sample_rate = get_sample_rate(data_cwa)
+      )
+    }
+  ),
+
+
+
+  tar_target(
+    asleep,
+    {
+      asleep::py_asleep(
+        data,
+        sample_rate = get_sample_rate(data)
+      )
+    }
+  ),
+
+  tar_target(
+    asleep_gt3x,
+    {
+      asleep::py_asleep(
+        data_gt3x,
+        sample_rate = get_sample_rate(data_gt3x)
+      )
+    }
+  ),
+
+  tar_target(
+    asleep_cwa,
+    {
+      asleep::py_asleep(
+        data_cwa,
+        sample_rate = get_sample_rate(data_cwa)
+      )
+    }
   )
-
-
-
 
 )

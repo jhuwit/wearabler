@@ -9,7 +9,7 @@
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.9.38">
 
-  <title>wearabler – Module 1: Accelerometer Devices and Studies</title>
+  <title>wearabler – Module 2: Reading and Processing Data</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -215,7 +215,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Module 1: Accelerometer Devices and Studies</h1>
+  <h1 class="title">Module 2: Reading and Processing Data</h1>
 
 <div class="quarto-title-authors">
 </div>
@@ -227,169 +227,563 @@
 <p>Can use <code>git clone</code> or download via: https://github.com/jhuwit/wearabler/archive/refs/heads/main.zip</p>
 </section>
 
-<section id="why-measure-activity" class="title-slide slide level1 center">
-<h1>Why Measure Activity?</h1>
+<section id="loading-targets-and-environment" class="title-slide slide level1 center">
+<h1>Loading <code>targets</code> and environment</h1>
+<p>Using <a href="https://rstudio.github.io/renv/articles/renv.html"><code>renv</code></a> allows us to specify the packages used to build this pipeline:</p>
+<p>The <a href="https://books.ropensci.org/targets/"><code>targets</code></a> pipeline located <a href="https://github.com/jhuwit/wearabler/blob/main/_targets.R">in the GitHub repo</a> will do the processing (and allows us to cache the pipeline).</p>
+</section>
+
+<section id="data-personal-recording-from-john" class="title-slide slide level1 center">
+<h1>Data: Personal Recording (from John)</h1>
 <ul>
-<li><p>Physical activity important component of health and contributes to assessing and predicting mortality risk <span class="citation" data-cites="pa_benefits">(<a href="#/references" role="doc-biblioref" onclick="">Schoenborn and Stommel 2011</a>)</span></p></li>
-<li><p>Objective assessment in free-living settings - more accurate than self-report <span class="citation" data-cites="Prince2008">(<a href="#/references" role="doc-biblioref" onclick="">Prince et al. 2008</a>)</span>.</p></li>
-<li><p>Shown as strongest predictor of mortality <span class="citation" data-cites="tabacu2020quantifying">(<a href="#/references" role="doc-biblioref" onclick="">Tabacu et al. 2020</a>)</span></p></li>
+<li><code>TAS1H30182791 (2026-04-29).gt3x</code> - wore GT9X device</li>
+<li><code>114890_0000000000.cwa</code> - wore AX3 device</li>
+<li><code>AI15_MOS2D09170398_2017-10-30.gt3x</code> - 7 days of data from <a href="https://springernature.figshare.com/articles/dataset/Unprocessed_raw_30Hz_acceleration_data_stored_as_gt3x/7946189"><span class="citation" data-cites="chadwell2019upper">(<span>Chadwell et al. 2019</span>)</span></a></li>
 </ul>
 </section>
 
-<section id="goals" class="title-slide slide level1 center">
-<h1>Goals</h1>
-<p>Go from this</p>
+<section id="pipeline-overview" class="title-slide slide level1 center">
+<h1>Pipeline Overview</h1>
 
-<img data-src="../assets/gt3x_file.png" width="235" class="r-stretch"><p>to this day level counts and labeled</p>
 </section>
 
-<section id="goal" class="title-slide slide level1 center">
-<h1>Goal</h1>
-<p>Go from this</p>
-
-<img data-src="../assets/gt3x_file.png" width="235" class="r-stretch"><p>to this</p>
+<section id="pipeline-overview-1" class="title-slide slide level1 center">
+<h1>Pipeline Overview</h1>
+<p>Read in Data (also <code>acti_read_cwa</code>):</p>
+<p>Create minute level summaries, including wear inclusion criteria</p>
 </section>
 
-<section id="main-question" class="title-slide slide level1 center">
-<h1>Main Question</h1>
-<p>What does an accelerometer measure?</p>
-<ul>
-<li class="fragment">Piezoelectric sensor - material generates an electric charge from mechanical stress/movement</li>
-<li class="fragment">Capacitive micro-electro-mechanical system (MEMS) - mobile spring suspended mass with multiple capacitance plates</li>
-</ul>
+<section id="pipeline-overview-2" class="title-slide slide level1 center">
+<h1>Pipeline Overview</h1>
+<p>Keep days with minimum wear time, calculate day-level summaries</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>daily <span class="ot">=</span> counts_and_wear <span class="sc">|&gt;</span> </span>
+<span id="cb1-2"><a></a>  <span class="fu">filter</span>(is_included) <span class="sc">|&gt;</span> </span>
+<span id="cb1-3"><a></a>  <span class="fu">group_by</span>(date) <span class="sc">|&gt;</span> </span>
+<span id="cb1-4"><a></a>  <span class="fu">summarise</span>(</span>
+<span id="cb1-5"><a></a>    <span class="at">total_counts =</span> <span class="fu">sum</span>(counts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb1-6"><a></a>    <span class="at">total_counts_log10 =</span> <span class="fu">sum</span>(counts_log10, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-7"><a></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb1-8"><a></a>  <span class="fu">ungroup</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </section>
 
-<section id="the-device-landscape" class="title-slide slide level1 center">
-<h1>The Device Landscape</h1>
-<p><strong>Commercial</strong> wearables (watches and fitness trackers) - designed for consumer experience.</p>
-<ul>
-<li>Proprietary step, sleep, or activity scores</li>
-<li>Raw signal and processing rules may be unavailable or change over time.</li>
-</ul>
-<p><strong>Research grade</strong> - for studies</p>
-<ul>
-<li>High-frequency raw acceleration and device metadata</li>
-<li>Trade off - decide on calibration, QC, and alternative processing</li>
-</ul>
+<section id="pipeline-overview-3" class="title-slide slide level1 center">
+<h1>Pipeline Overview</h1>
+<p>Keep participants with minimum number of days observed, create “average” day activity:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="co"># all_daily = dplyr::bind_rows(daily_1, daily_2, ...)</span></span>
+<span id="cb2-2"><a></a>daily <span class="sc">|&gt;</span> </span>
+<span id="cb2-3"><a></a>  <span class="co"># usually group_by(id)</span></span>
+<span id="cb2-4"><a></a>  <span class="fu">mutate</span>(<span class="at">n_days =</span> <span class="fu">n_distinct</span>(date)) <span class="sc">|&gt;</span> </span>
+<span id="cb2-5"><a></a>  <span class="fu">filter</span>(n_days <span class="sc">&gt;=</span> <span class="dv">3</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb2-6"><a></a>  <span class="fu">summarise</span>(</span>
+<span id="cb2-7"><a></a>    <span class="at">total_counts =</span> <span class="fu">mean</span>(total_counts),</span>
+<span id="cb2-8"><a></a>    <span class="at">total_counts_log10 =</span> <span class="fu">mean</span>(total_counts_log10)</span>
+<span id="cb2-9"><a></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </section>
 
-<section id="example-studies" class="title-slide slide level1 center">
-<h1>Example Studies</h1>
-<ul>
-<li><strong>NHANES Accelerometry (CDC)</strong> (2003-2006, 2011-2014)</li>
-<li>Large-scale population studies using wrist-worn devices</li>
-<li>Released raw data - we released processed version</li>
-<li><strong>UK Biobank Wearable Data</strong></li>
-<li>Over 100,000 participants with 7-day wrist accelerometer recordings</li>
-<li>All of US uses FitBit</li>
-</ul>
+<section id="pipeline-overview-4" class="title-slide slide level1 center">
+<h1>Pipeline Overview</h1>
+<p>Statistics!</p>
 </section>
 
-<section id="accelerometers-covered" class="title-slide slide level1 center">
-<h1>Accelerometers Covered</h1>
-<div class="columns">
-<div class="column" style="width:55%;">
-<ul>
-<li>ActiGraph wGT3X+ (pictured)/GT9X: <code>.gt3x</code> extension (NHANES)</li>
-<li>Axivity AX3: <code>.cwa</code> file (UKBiobank)</li>
-</ul>
-<p>This is a research-grade, tri-axial accelerometer—not a consumer step counter.</p>
-</div><div class="column" style="width:22.5%;">
-<p><img data-src="../assets/actigraph-wgt3x-bt.png" style="width:85.0%" alt="ActiGraph wGT3X-BT research accelerometer on a wrist strap"></p>
-<p><small>ActiGraph wGT3X-BT. Image: <a href="https://ametris.com/actigraph-wgt3x-bt">Ametris</a>.</small></p>
-</div><div class="column" style="width:22.5%;">
-<p><img data-src="../assets/ax3_band.jpeg" style="width:100.0%" alt="Axivity AX3 research accelerometer with a wrist band"></p>
-<p><small>Axivity AX3. Image: <a href="https://axivity.com/product/ax3">Axivity</a>.</small></p>
-</div></div>
+<section>
+<section id="reading-in-the-data" class="title-slide slide level1 center">
+<h1>Reading in the Data</h1>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  time                        X     Y     Z
+  &lt;dttm&gt;                  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 2026-04-29 11:38:00.000     0     0     0
+2 2026-04-29 11:38:00.019     0     0     0
+3 2026-04-29 11:38:00.039     0     0     0</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 7
+  time                         x      y      z  temp battery light
+  &lt;dttm&gt;                   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+1 2026-04-29 11:41:18.521 -0.188 0.0938 -0.984  27.3       0   188
+2 2026-04-29 11:41:18.541 -0.127 0.0482 -1.08   27.3       0   188
+3 2026-04-29 11:41:18.561 -0.155 0.0174 -1.06   27.3       0   188</code></pre>
+</div>
+</div>
 </section>
-
-<section id="what-is-raw-accelerometer-data" class="title-slide slide level1 center">
-<h1>What is Raw Accelerometer Data?</h1>
-<ul>
-<li><strong>Sensor that measures acceleration</strong> in 3D space: X/Y/Z</li>
-<li>Typically measured in <strong>g-forces (g, <span class="math inline">\(g=9.81m/s^2\)</span>)</strong> or <strong>m/s²</strong></li>
-<li>Sampled at regular(ish) time intervals (e.g., 30Hz, 100Hz)</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource plaintext number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a></a>Timestamp                  X        Y        Z</span>
-<span id="cb1-2"><a></a>2025-02-17 12:00:00.0125   0.02     0.98     0.03</span>
-<span id="cb1-3"><a></a>2025-02-17 12:00:00.0250   0.04     0.95     0.05</span>
-<span id="cb1-4"><a></a>2025-02-17 12:00:00.0375  -0.01     0.99     0.02</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-
-<section id="wrist-worn-vs.-hip-worn-accelerometers" class="title-slide slide level1 center">
-<h1>Wrist-Worn vs.&nbsp;Hip-Worn Accelerometers</h1>
+<section id="core-representation" class="slide level2">
+<h2>Core Representation</h2>
+<p>Raw accelerometry is, at its core, a time series with four essential columns:</p>
 <table class="caption-top">
 <colgroup>
-<col style="width: 28%">
-<col style="width: 36%">
-<col style="width: 34%">
+<col style="width: 50%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Feature</th>
-<th>Wrist-Worn Devices</th>
-<th>Hip-Worn Devices</th>
+<th>Column</th>
+<th>Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Placement</td>
-<td>Worn on wrist</td>
-<td>Attached to belt</td>
+<td><code>time</code></td>
+<td>A datetime timestamp identifying when the sample was recorded</td>
 </tr>
 <tr class="even">
-<td>Compliance</td>
-<td>Higher</td>
-<td>Lower</td>
+<td><code>X</code></td>
+<td>Acceleration along the device x axis</td>
 </tr>
 <tr class="odd">
-<td>Activity Types</td>
-<td>Captures arm movements</td>
-<td>Better for whole-body movement</td>
+<td><code>y</code></td>
+<td>Acceleration along the device y axis</td>
+</tr>
+<tr class="even">
+<td><code>z</code></td>
+<td>Acceleration along the device z axis</td>
 </tr>
 </tbody>
 </table>
 </section>
-
-<section id="data-resolution" class="title-slide slide level1 center">
-<h1>Data Resolution</h1>
+<section id="data-attributes" class="slide level2">
+<h2>Data Attributes</h2>
 <ul>
-<li><strong>Raw Accelerometer Data</strong> (high-resolution time-series data)
-<ul>
-<li>20-100+ samples/second (Hz)</li>
-</ul></li>
-<li><strong>Activity Counts</strong> (aggregated over time windows)</li>
-<li><strong>Wear Time Detection</strong> (non-wear vs.&nbsp;wear periods)</li>
-<li><strong>Steps</strong> (estimation of a “step”)</li>
+<li>Sample rate - sampling frequency in Hz: <code>get_sample_rate</code></li>
+<li>Dynamic accelerometry range in <code>g</code>: <code>get_dynamic_range</code></li>
 </ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 50</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 50</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 50</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -8  8</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -8  8</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "row.names"        "subject_name"     "time_zone"        "missingness"     
+ [5] "old_version"      "firmware"         "last_sample_time" "serial_prefix"   
+ [9] "sample_rate"      "acceleration_min" "acceleration_max" "header"          
+[13] "start_time"       "stop_time"        "total_records"    "bad_samples"     
+[17] "features"         "transformations"  "names"            "class"           </code></pre>
+</div>
+</div>
+</section>
+<section id="data-header-from-gt9x-device" class="slide level2">
+<h2>Data Header from GT9X Device</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>$`Serial Number`
+[1] "TAS1H30182791"
 
-<img data-src="../assets/silly_walks.gif" class="r-stretch"></section>
+$`Device Type`
+[1] "Link"
 
-<section id="course-learning-goals" class="title-slide slide level1 center">
-<h1>Course Learning Goals</h1>
+$Firmware
+[1] "1.7.2"
+
+$`Battery Voltage`
+[1] "4.13"
+
+$`Sample Rate`
+[1] 50
+
+$`Start Date`
+[1] "2026-04-29 11:38:00 GMT"
+
+$`Stop Date`
+[1] "0001-01-01 GMT"
+
+$`Last Sample Time`
+[1] "2026-04-29 14:41:59 GMT"
+
+$TimeZone
+[1] "-04:00:00"
+
+$`Download Date`
+[1] "2026-04-29 14:41:59 GMT"
+
+$`Board Revision`
+[1] "8"
+
+$`Unexpected Resets`
+[1] "0"
+
+$`Acceleration Scale`
+[1] 256
+
+$`Acceleration Min`
+[1] "-8.0"
+
+$`Acceleration Max`
+[1] "8.0"
+
+$Sex
+[1] "Male"
+
+$Limb
+[1] "Wrist"
+
+$Side
+[1] "Left"
+
+$Dominance
+[1] "Non-Dominant"
+
+$`Subject Name`
+[1] "John"
+
+$`Serial Prefix`
+[1] "TAS"
+
+$sample_rate
+[1] 50
+
+attr(,"class")
+[1] "gt3x_info" "list"     </code></pre>
+</div>
+</div>
+</section>
+<section id="data-header-from-ax3-device" class="slide level2">
+<h2>Data Header from AX3 Device</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>$uniqueSerialCode
+[1] 114890
+
+$frequency
+[1] 50
+
+$start
+[1] "2026-04-29 11:41:18.521 UTC"
+
+$device
+[1] "Axivity"
+
+$firmwareVersion
+[1] 48
+
+$blocks
+[1] 4423
+
+$accrange
+[1] 8
+
+$hardwareType
+[1] "AX3"
+
+$blockLength
+[1] 120
+
+$acceleration_min
+[1] "-8"
+
+$acceleration_max
+[1] "8"
+
+$sample_rate
+[1] 50</code></pre>
+</div>
+</div>
+</section>
+<section id="timestamps-need-their-own-qc" class="slide level2">
+<h2>Timestamps Need Their Own QC</h2>
+<p>The timestamp is not merely a row number.</p>
 <ul>
-<li>Read in accelerometry data</li>
-<li>Visualize the data</li>
-<li>Calculate minute-level summaries</li>
-<li>Calculate non-wear and inclusion</li>
-<li>Create daily summaries</li>
-<li>Discuss functional approaches</li>
+<li><p>Its timezone, precision, regularity, and gaps determine day boundaries, sleep windows, wear-time intervals, and the validity of all downstream summaries.</p></li>
+<li><p>Sub-second algorithms depend on fractional seconds. Display enough precision to see them (for example, <code>options(digits.secs = 3)</code>) and check observed intervals rather than assuming that every nominal 80 Hz file is exactly 80 Hz at every timestamp.</p></li>
+<li><p>Rounding milliseconds during a CSV export can corrupt joins, inferred sampling rates, resampling, and step algorithms.</p></li>
+</ul>
+</section>
+<section id="timestamps-need-their-own-qc-1" class="slide level2">
+<h2>Timestamps Need Their Own QC</h2>
+<ul>
+<li><p>Use an explicit timezone.</p></li>
+<li><p>UTC avoids daylight-saving discontinuities during processing</p></li>
+<li><p>Local time is often needed for sleep windows, diary linkage, and calendar-day summaries.</p></li>
+<li><p>Record the original timezone, the analysis timezone, and every conversion between them.</p></li>
+<li><p>Before proceeding, verify the timezone, sampling frequency, acceleration units, start and end times, duplicate timestamps, and gaps. Preserve the original file and keep import metadata with the derived table.</p></li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+</section></section>
+<section id="plot-the-data" class="title-slide slide level1 center">
+<h1>Plot the data</h1>
+<ul>
+<li><code>acti_tidy_axes</code> will reshape the time/XYZ data to a long format for plotting</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  time                    axis  value
+  &lt;dttm&gt;                  &lt;chr&gt; &lt;dbl&gt;
+1 2026-04-29 11:38:00.000 X         0
+2 2026-04-29 11:38:00.019 X         0
+3 2026-04-29 11:38:00.039 X         0</code></pre>
+</div>
+
+</div>
+<img data-src="02-reading-and-processing-data_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
+
+<section id="more-data-shouldnt-mean-less-plotting---karl-broman" class="title-slide slide level1 center">
+<h1>More data shouldn’t mean less plotting - Karl Broman</h1>
+<p>But the if the data is &gt; 7 days with 80Hz,</p>
+<p>7 days * 24 hours/day * 60 minutes/hour * 60 seconds/minute * 80 samples/second</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 48384000</code></pre>
+</div>
+</div>
+<p>A lot of Points!</p>
+</section>
+
+<section id="qc-check-for-odd-things" class="title-slide slide level1 center">
+<h1>QC: Check for odd things</h1>
+<ul>
+<li>Zeroes</li>
+<li>Flat data</li>
+<li>Really high values</li>
 </ul>
 </section>
 
-<section id="references" class="title-slide slide level1 smaller scrollable">
-<h1>References</h1>
+<section id="gt3x-idle-sleep-mode" class="title-slide slide level1 center">
+<h1>GT3X: idle sleep mode</h1>
+<ul>
+<li><p>Idle sleep mode - battery saving option when enabling and setting up ActiGraph devices.<br>
+</p></li>
+<li><p>Stops recording after no movement after while</p></li>
+<li><p>It’s a hassle, don’t use it unless you have to.</p></li>
+<li><p>It causes “gaps” in the GT3X file that are truly missing, but this is an issue with many processing methods (gaps), so you can “impute” zeroes into the data set, which aren’t correct either.</p></li>
+</ul>
+</section>
+
+<section id="how-long-is-not-wearingzero" class="title-slide slide level1 center">
+<h1>How long is not wearing/zero</h1>
+<p>Question:</p>
+<ul>
+<li>How long is low/no activity not wearing?</li>
+</ul>
+</section>
+
+<section id="non-wear-estimation" class="title-slide slide level1 center">
+<h1>Non-wear Estimation</h1>
+<p>In a nutshell: 1) Define threshold for no activity, 2) define time threshold for how long it lasts (e.g.&nbsp;90 minutes), 3) do you allow for any “spikes”?</p>
+<ul>
+<li><span class="citation" data-cites="van2011estimation">(<a href="#/summary" role="doc-biblioref" onclick=""><span class="nocase">Hees et al.</span> 2011</a>)</span>: Non-wear is a 30-min non-overlapping raw-acceleration window with SD &lt;3 mg or range &lt;50 mg in at least 2 of 3 axes.</li>
+<li><span class="citation" data-cites="van2013separating">(<a href="#/summary" role="doc-biblioref" onclick=""><span class="nocase">Van Hees et al.</span> 2013</a>)</span>: Same thresholds, but 60-min rolling window using 15-min steps, 00:00–01:00, then 00:15–01:15, then 00:30–01:30</li>
+<li><span class="citation" data-cites="CHOI2011">(<a href="#/summary" role="doc-biblioref" onclick="">Choi et al. 2011</a>)</span>: Classifies ≥90 minutes of zero activity counts, allowing brief interruptions, as non-wear. (Popular)</li>
+<li><span class="citation" data-cites="troiano2008physical">(<a href="#/summary" role="doc-biblioref" onclick=""><span class="nocase">Troiano et al.</span> 2008</a>)</span>: Defines non-wear as ≥60 consecutive zero-count minutes, permitting short low-count interruptions.</li>
+</ul>
+</section>
+
+<section id="ggir-why-not-being-used-here" class="title-slide slide level1 center">
+<h1>GGIR: Why not being used here</h1>
+<ul>
+<li>Very popular</li>
+<li>Has changed and added a number of algorithms over the yeas
+<ul>
+<li>Good: state of the art, bad: some reproducibility concerns over time</li>
+</ul></li>
+<li>Want something more modular
+<ul>
+<li>GGIR creates a “buffet” of activity measures</li>
+</ul></li>
+<li>A lot of python modules have made considerable contributions</li>
+</ul>
+</section>
+
+<section id="activity-count" class="title-slide slide level1 center">
+<h1>Activity Count</h1>
+<ul>
+<li><p>Choi/Troiano use Activity Counts</p></li>
+<li><p><span class="citation" data-cites="neishabouri2022quantification">(<a href="#/summary" role="doc-biblioref" onclick=""><span class="nocase">Neishabouri et al.</span> 2022</a>)</span> - made open source the activity count calculation</p></li>
+<li><p><a href="https://github.com/bhelsel/agcounts"><code>agcounts</code></a> R package</p></li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Creating Downsampled Data"
+[1] "Filtering Data"
+[1] "Trimming Data"
+[1] "Getting data back to 10Hz for accumulation"
+[1] "Summing epochs"</code></pre>
+</div>
+</div>
+</section>
+
+<section id="activity-count-1" class="title-slide slide level1 center">
+<h1>Activity Count</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="02-reading-and-processing-data_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="02-reading-and-processing-data_files/figure-revealjs/unnamed-chunk-17-2.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+
+<section id="estimate-non-wear-from-counts" class="title-slide slide level1 center">
+<h1>Estimate Non-wear from counts</h1>
+<ul>
+<li>Calculate wear using <code>acti_calculate_wear</code>, uses Choi by default</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  time                    wear 
+  &lt;dttm&gt;                  &lt;lgl&gt;
+1 2026-04-29 11:38:00.000 TRUE 
+2 2026-04-29 11:39:00.000 TRUE 
+3 2026-04-29 11:40:00.000 TRUE </code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  time                    wear 
+  &lt;dttm&gt;                  &lt;lgl&gt;
+1 2026-04-29 11:41:00.000 TRUE 
+2 2026-04-29 11:42:00.000 TRUE 
+3 2026-04-29 11:43:00.000 TRUE </code></pre>
+</div>
+</div>
+</section>
+
+<section id="just-use-acti_process" class="title-slide slide level1 center">
+<h1>Just use <code>acti_process</code></h1>
+
+</section>
+
+<section id="plotting" class="title-slide slide level1 center">
+<h1>Plotting</h1>
+<!-- data_gt3x |> filter(time < ymd_hms("2026-04-29 11:39:00.000")) |> select(X, Y, Z) |> as.matrix() |> matrixStats::colVars() -->
+
+<img data-src="02-reading-and-processing-data_files/figure-revealjs/unnamed-chunk-20-1.png" width="960" class="r-stretch"></section>
+
+<section id="reading-full-data" class="title-slide slide level1 center">
+<h1>Reading Full Data</h1>
+<!-- data_gt3x |> filter(time < ymd_hms("2026-04-29 11:39:00.000")) |> select(X, Y, Z) |> as.matrix() |> matrixStats::colVars() -->
+<p>We can read in the data from <span class="citation" data-cites="chadwell2019upper">(<a href="#/summary" role="doc-biblioref" onclick="">Chadwell et al. 2019</a>)</span> and run the minute level data with wear/non-wear:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Creating Downsampled Data"
+[1] "Filtering Data"
+[1] "Trimming Data"
+[1] "Getting data back to 10Hz for accumulation"
+[1] "Summing epochs"</code></pre>
+</div>
+
+</div>
+<img data-src="02-reading-and-processing-data_files/figure-revealjs/unnamed-chunk-21-1.png" width="960" class="r-stretch"></section>
+
+<section id="day-level-inclusion" class="title-slide slide level1 center">
+<h1>Day Level Inclusion</h1>
+<p>Usually determined by number of minutes wear time</p>
+<p>Choices: - 1296 - 90% of 1440 minutes <span class="citation" data-cites="schrack2014assessing">(<a href="#/summary" role="doc-biblioref" onclick="">Schrack et al. 2014</a>)</span> - 1368 - 95% of 1440 minutes <span class="citation" data-cites="leroux2024nhanes">(<a href="#/summary" role="doc-biblioref" onclick="">Leroux et al. 2024</a>)</span> - 10 hours of wear (may be contiguous or not) <span class="citation" data-cites="troiano2008physical">(<a href="#/summary" role="doc-biblioref" onclick=""><span class="nocase">Troiano et al.</span> 2008</a>)</span> - 10 hours daytime wear (6AM-12AM, not good for sleep) <span class="citation" data-cites="dillon2018associations">(<a href="#/summary" role="doc-biblioref" onclick="">Dillon et al. 2018</a>)</span></p>
+</section>
+
+<section id="day-level-inclusion-1" class="title-slide slide level1 center">
+<h1>Day Level Inclusion</h1>
+<ul>
+<li><code>create_day_inclusion</code> - creates a table for inclusion</li>
+<li><code>add_day_inclusion</code> - creates and joins with time-series</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 6
+  date       n_minutes_wear n_minutes_observed prop_minutes_wear
+  &lt;date&gt;              &lt;int&gt;              &lt;int&gt;             &lt;dbl&gt;
+1 2017-10-30            443               1440             0.308
+2 2017-10-31            909               1440             0.631
+3 2017-11-01            701               1440             0.487
+4 2017-11-02            939               1440             0.652
+5 2017-11-03            821               1440             0.570
+6 2017-11-04            602               1440             0.418
+7 2017-11-05            231               1440             0.160
+8 2017-11-06            364               1440             0.253
+# ℹ 2 more variables: prop_minutes_wear_from_observed &lt;dbl&gt;, is_included &lt;lgl&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10,080 × 13
+   time                    axis1 axis2 axis3 counts counts_log10 wear 
+   &lt;dttm&gt;                  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;        &lt;dbl&gt; &lt;lgl&gt;
+ 1 2017-10-30 15:00:00.000   180   201    25    271         2.43 TRUE 
+ 2 2017-10-30 15:01:00.000   371  1262   806   1543         3.19 TRUE 
+ 3 2017-10-30 15:02:00.000   452   553   465    852         2.93 TRUE 
+ 4 2017-10-30 15:03:00.000  1315  1486  1880   2733         3.44 TRUE 
+ 5 2017-10-30 15:04:00.000   756   317   510    965         2.98 TRUE 
+ 6 2017-10-30 15:05:00.000    80    60   136    169         2.23 TRUE 
+ 7 2017-10-30 15:06:00.000   682   420   599   1000         3.00 TRUE 
+ 8 2017-10-30 15:07:00.000  1160  1192  2164   2729         3.44 TRUE 
+ 9 2017-10-30 15:08:00.000     0     0     0      0         0    TRUE 
+10 2017-10-30 15:09:00.000   606   362   345    786         2.90 TRUE 
+# ℹ 10,070 more rows
+# ℹ 6 more variables: date &lt;date&gt;, n_minutes_wear &lt;int&gt;,
+#   n_minutes_observed &lt;int&gt;, prop_minutes_wear &lt;dbl&gt;,
+#   prop_minutes_wear_from_observed &lt;dbl&gt;, is_included &lt;lgl&gt;</code></pre>
+</div>
+</div>
+</section>
+
+<section id="summary" class="title-slide slide level1 smaller scrollable">
+<h1>Summary</h1>
+<ul>
+<li>Raw data to minute level counts</li>
+<li>Non-wear estimated from low activity for long periods of time</li>
+<li><code>acti_process</code> can do that and merge the data</li>
+<li>Plotting the data typically using <code>geom_step</code> and color by <code>geom_segment</code></li>
+<li>Day level inclusion usually based on wear</li>
+</ul>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-Prince2008" class="csl-entry" role="listitem">
-Prince, Stephanie A, Kristi B Adamo, Meghan Hamel, Jill Hardt, Sarah Connor Gorber, and Mark Tremblay. 2008. <span>“A <span>Comparison</span> of <span>Direct</span> Versus <span class="nocase">Self-report</span> <span>Measures</span> for <span>Assessing</span> <span>Physical</span> <span>Activity</span> in <span>Adults</span>: A <span>Systematic</span> <span>Review</span>.”</span> <em>International Journal of Behavioral Nutrition and Physical Activity</em> 5 (1): 56. <a href="https://doi.org/10.1186/1479-5868-5-56">https://doi.org/10.1186/1479-5868-5-56</a>.
+<div id="ref-chadwell2019upper" class="csl-entry" role="listitem">
+Chadwell, Alix, Laurence Kenney, Malcolm Granat, Sibylle Thies, Adam Galpin, and John Head. 2019. <span>“Upper Limb Activity of Twenty Myoelectric Prosthesis Users and Twenty Healthy Anatomically Intact Adults.”</span> <em>Scientific Data</em> 6 (1): 199.
 </div>
-<div id="ref-pa_benefits" class="csl-entry" role="listitem">
-Schoenborn, Charlotte A., and Manfred Stommel. 2011. <span>“Adherence to the 2008 Adult Physical Activity Guidelines and Mortality Risk.”</span> <em>American Journal of Preventive Medicine</em> 40 (5): 514–21. <a href="https://doi.org/10.1016/j.amepre.2010.12.029">https://doi.org/10.1016/j.amepre.2010.12.029</a>.
+<div id="ref-CHOI2011" class="csl-entry" role="listitem">
+Choi, Leena, Zhouwen Loiu, Charles E. Matthews, and Maciej S. Buchowskie. 2011. <span>“Validation of Accelerometer Wear and Nonwear Time Classification Algorithm.”</span> <em>Medicine &amp; Science in Sports &amp; Exercise</em> 43 (2): 357–64. <a href="https://doi.org/10.1249/mss.0b013e3181ed61a3">https://doi.org/10.1249/mss.0b013e3181ed61a3</a>.
 </div>
-<div id="ref-tabacu2020quantifying" class="csl-entry" role="listitem">
-Tabacu, Lucia, Mark Ledbetter, Andrew Leroux, Ciprian Crainiceanu, and Ekaterina Smirnova. 2020. <span>“Quantifying the Varying Predictive Value of Physical Activity Measures Obtained from Wearable Accelerometers on All-Cause Mortality over Short to Medium Time Horizons in <span>NHANES</span> 2003–2006.”</span> <em>Sensors</em> 21 (1): 4.
+<div id="ref-dillon2018associations" class="csl-entry" role="listitem">
+Dillon, Christina B, Elaine McMahon, Grace O’Regan, and Ivan J Perry. 2018. <span>“Associations Between Physical Behaviour Patterns and Levels of Depressive Symptoms, Anxiety and Well-Being in Middle-Aged Adults: A Cross-Sectional Study Using Isotemporal Substitution Models.”</span> <em>BMJ Open</em> 8 (1): e018978.
+</div>
+<div id="ref-van2011estimation" class="csl-entry" role="listitem">
+<span class="nocase">Hees, Vincent T van, Frida Renström, Antony Wright, et al.</span> 2011. <span>“Estimation of Daily Energy Expenditure in Pregnant and Non-Pregnant Women Using a Wrist-Worn Tri-Axial Accelerometer.”</span> <em>PloS One</em> 6 (7): e22922.
+</div>
+<div id="ref-leroux2024nhanes" class="csl-entry" role="listitem">
+Leroux, Andrew, Erjia Cui, Ekaterina Smirnova, John Muschelli, Jennifer A Schrack, and Ciprian M Crainiceanu. 2024. <span>“<span>NHANES</span> 2011–2014: Objective Physical Activity Is the Strongest Predictor of All-Cause Mortality.”</span> <em>Medicine and Science in Sports and Exercise</em> 56 (10): 1926.
+</div>
+<div id="ref-neishabouri2022quantification" class="csl-entry" role="listitem">
+<span class="nocase">Neishabouri, Ali, Joe Nguyen, John Samuelsson, et al.</span> 2022. <span>“Quantification of Acceleration as Activity Counts in <span>ActiGraph</span> Wearable.”</span> <em>Scientific Reports</em> 12 (1): 11958.
+</div>
+<div id="ref-schrack2014assessing" class="csl-entry" role="listitem">
+Schrack, Jennifer A, Vadim Zipunnikov, Jeff Goldsmith, et al. 2014. <span>“Assessing the <span>‘Physical Cliff’</span>: Detailed Quantification of Age-Related Differences in Daily Patterns of Physical Activity.”</span> <em>Journals of Gerontology Series A: Biomedical Sciences and Medical Sciences</em> 69 (8): 973–79.
+</div>
+<div id="ref-troiano2008physical" class="csl-entry" role="listitem">
+<span class="nocase">Troiano, Richard P, David Berrigan, Kevin W Dodd, et al.</span> 2008. <span>“Physical Activity in the <span>U</span>nited <span>S</span>tates Measured by Accelerometer.”</span> <em>Medicine and Science in Sports and Exercise</em> 40 (1): 181.
+</div>
+<div id="ref-van2013separating" class="csl-entry" role="listitem">
+<span class="nocase">Van Hees, Vincent T, Lukas Gorzelniak, Emmanuel Carlos Dean León, et al.</span> 2013. <span>“Separating Movement and Gravity Components in an Acceleration Signal and Implications for the Assessment of Human Daily Physical Activity.”</span> <em>PloS One</em> 8 (4): e61691.
 </div>
 </div>
 </section>

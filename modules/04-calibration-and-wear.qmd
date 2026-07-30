@@ -1,5 +1,6 @@
 ---
 title: "Module 3: Import and Structure"
+format:
   revealjs:
     theme: simple
     transition: fade
@@ -33,129 +34,6 @@ measures = acti_calculate_measures(data_gt3x)
 
 
 
-# Do plots of 10 people
-
-# Lasagna plot of NHANES
-
-
-## Other Walking Measures
-
-
-## Step Counts
-
-Open source method for estimating stepcounts: https://github.com/OxWearables/stepcount [@stepcount], ported using `reticulate`. 
-
-Must load module and then run (can use GPU):
-
-```{r code_stepcount}
-#| eval: false
-actimetrics::py_acti_calculate_stepcount()
-```
-
-```{r get_stepcount}
-#| echo: false
-sc = readr::read_rds(here::here("data/stepcount.rds"))
-```
-
-```{r}
-
-```
-
-If no model is specified, the model is downloaded to a temporary directory, but users can use the `stepcount::sc_download_model` function to download the model file, store it, and pass it via the `model_path` argument. 
-
-## Step Counts
-
-:::: {.columns}
-
-::: {.column width="50%"}
-
-The output of `stepcount` is a list of different pieces of information, including information about the device:
-
-```{r stepcount_output}
-names(sc)
-```
-
-A `data.frame` of flags for walking:
-
-```{r stepcount_walking}
-head(sc$walking)
-```
-
-
-:::
-
-::: {.column width="50%"}
-
-The main output of interest: `data.frame` of estimated steps:
-
-```{r stepcount_steps}
-head(sc$steps)
-```
-
-```{r plot_steps}
-#| echo: false
-sc$steps |> 
-  ggplot(aes(x = steps)) + geom_histogram() + xlab("Number of Steps in 10s")
-```
-
-:::
-::::
-
-## Step Counts Aggregation
-
-The `stepcount` method estimates steps in 10-second windows, which we can aggregate into minutes:
-
-```{r sc_steps_minute}
-sc60 = sc$steps |> 
-  mutate(time = floor_date(time, "1 minute")) |> 
-  group_by(time) |> 
-  summarise(steps = sum(steps), .groups = "drop")
-head(sc60)
-```
-
-## Steps Per Minute
-
-
-```{r plot_sc60_show}
-#| eval: false
-sc60 |> 
-  mutate(date = lubridate::as_date(time),
-         hourtime = hms::as_hms(time)) |> 
-  ggplot(aes(x = hourtime, y = steps)) + 
-  geom_step() +
-  facet_wrap(~ date, ncol = 1)
-```
-
-
-```{r plot_sc60}
-#| dependson: plot_sc60_show
-#| echo: false
-#| out-width: "100%"
-<<plot_sc60_show>>
-```
-********
-
-
-# Step Count
-
-# Step Count Plot
-
-# Actinet
-
-# Actinet Plot
-
-
-# `actipy`
-
-# `pygt3x`
-
-# Pfizer Package
-
-
-# MVPA definition
-
-- Montoye thresholds
-- bring in actinet vs. AC discussion
 
 
 # Overall premise (is all activity created equal)
@@ -179,21 +57,18 @@ sc60 |>
 
 
 
+# Do plots of 10 people
+
+# Lasagna plot of NHANES
+
+
+## Other Walking Measures
+
+
 
 # Step Count Plot
 
 
-# Threshold for Inclusion
-- 1296
-- 1368
-- 10 hours
-- 10 hours daytime
-
-# MPVA/Sedentary/LPA 
-- threshold
-- threshold for measures (Montoye)
-
-# MPVA/Sedentary/LPA history
 
 
 
@@ -213,4 +88,3 @@ raw |>
 ```{r}
 # actiquantiles::
 ```
-

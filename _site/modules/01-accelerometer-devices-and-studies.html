@@ -9,7 +9,7 @@
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.9.38">
 
-  <title>wearabler – Module 3: Alternative Metrics</title>
+  <title>wearabler – Module 1: Accelerometer Devices and Studies</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -30,6 +30,72 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     /* CSS for citations */
     div.csl-bib-body { }
     div.csl-entry {
@@ -149,204 +215,185 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Module 3: Alternative Metrics</h1>
+  <h1 class="title">Module 1: Accelerometer Devices and Studies</h1>
 
 <div class="quarto-title-authors">
 </div>
 
 </section>
-<section id="minute-level-metrics" class="title-slide slide level1 center">
-<h1>Minute Level Metrics</h1>
+<section id="materials" class="title-slide slide level1 center">
+<h1>Materials</h1>
+<p>Materials are at: https://github.com/jhuwit/wearabler</p>
+<p>Can use <code>git clone</code> or download via: https://github.com/jhuwit/wearabler/archive/refs/heads/main.zip</p>
+</section>
+
+<section id="why-measure-activity" class="title-slide slide level1 center">
+<h1>Why Measure Activity?</h1>
 <ul>
-<li>Activity Count popular measure, describe other activity measure</li>
-<li>Steps</li>
-<li>Activity Levels - high/medium/low</li>
-<li>Human Activity (running, biking)</li>
-<li>Sleep (usually 30 second epoch)</li>
+<li><p>Physical activity important component of health and contributes to assessing and predicting mortality risk <span class="citation" data-cites="pa_benefits">(<a href="#/references" role="doc-biblioref" onclick="">Schoenborn and Stommel 2011</a>)</span></p></li>
+<li><p>Objective assessment in free-living settings - more accurate than self-report <span class="citation" data-cites="Prince2008">(<a href="#/references" role="doc-biblioref" onclick="">Prince et al. 2008</a>)</span>.</p></li>
+<li><p>Shown as strongest predictor of mortality <span class="citation" data-cites="tabacu2020quantifying">(<a href="#/references" role="doc-biblioref" onclick="">Tabacu et al. 2020</a>)</span></p></li>
 </ul>
 </section>
 
-<section id="activity-index-ai" class="title-slide slide level1 center">
-<h1>Activity Index: AI</h1>
-<p><span class="citation" data-cites="bai2016activity">Bai et al. (<a href="#/technical-stuff-condaenvironments" role="doc-biblioref" onclick="">2016</a>)</span> introduced the Activity Index (AI)</p>
-<p>For a given window <span class="math inline">\(H\)</span>, AI is calculated for a given participant is calculated using <span class="math inline">\(AI_{0}\)</span> (no baseline variance estimated as in paper):</p>
-<p><span class="math display">\[
-\text{AI}(t; H)_0 = \sqrt{ \frac{1}{3} \sum\limits_{m=1}^3 \sigma_{m}^2(t; H)  }
-\]</span></p>
-<p>which is the square root of the average variance of the 3 axes, and provides an average standard deviation.</p>
+<section id="goals" class="title-slide slide level1 center">
+<h1>Goals</h1>
+<p>Go from this</p>
+
+<img data-src="../assets/gt3x_file.png" width="235" class="r-stretch"><p>to this day level counts and labeled</p>
 </section>
 
-<section id="activity-index-ai-1" class="title-slide slide level1 center">
-<h1>Activity Index: AI</h1>
-<p><span class="citation" data-cites="bai2016activity">Bai et al. (<a href="#/technical-stuff-condaenvironments" role="doc-biblioref" onclick="">2016</a>)</span> indicated AI is more sensitive ROC curves for moderate and vigorous physical activities compared to AC and was shown to be more sensitive to sedentary and light activities than ENMO.</p>
-<p><span class="citation" data-cites="bai2016activity">Bai et al. (<a href="#/technical-stuff-condaenvironments" role="doc-biblioref" onclick="">2016</a>)</span> indicated that the window to calculate AI was 1 second and “any aggregated AI was obtained by summing up all the adjacent 1-second AIs within that period”. Thus, to calculate AI at a minute level, we would calculate it at a second level and then add the 60 <span class="math inline">\(\text{AI}_0\)</span> values together.</p>
+<section id="goal" class="title-slide slide level1 center">
+<h1>Goal</h1>
+<p>Go from this</p>
+
+<img data-src="../assets/gt3x_file.png" width="235" class="r-stretch"><p>to this</p>
 </section>
 
-<section id="activity-index-ai-2" class="title-slide slide level1 center">
-<h1>Activity Index: AI</h1>
-
-<img data-src="03-signal-metrics_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
-
-<section id="mad" class="title-slide slide level1 center">
-<h1>MAD</h1>
-<p><span class="citation" data-cites="mad">Vähä-Ypyä et al. (<a href="#/technical-stuff-condaenvironments" role="doc-biblioref" onclick="">2015</a>)</span> recommended the Mean Amplitude Deviation (MAD): the mean of the absolute difference between the acceleration and the mean acceleration for a given epoch.</p>
-<p>For a given epoch of length <span class="math inline">\(m\)</span>, and where <span class="math inline">\(\text{VM}\)</span> represents the vector magnitude of the signal, the calculation of MAD is: <span class="math display">\[
-\text{MAD} = \frac{1}{m} \sum_{i=1}^{m} \left|\text{VM}_i- \overline{\text{VM}}_m \right|
-\]</span> For a given epoch, <span class="citation" data-cites="mad">Vähä-Ypyä et al. (<a href="#/technical-stuff-condaenvironments" role="doc-biblioref" onclick="">2015</a>)</span> recommended taking the mean value of MAD for summarization and recommended 5-second epochs.</p>
-</section>
-
-<section id="alternative-metrics-mad" class="title-slide slide level1 center">
-<h1>Alternative Metrics: MAD</h1>
-
-<img data-src="03-signal-metrics_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
-
-<section id="mims" class="title-slide slide level1 smaller center">
-<h1>MIMS</h1>
-<p>Monitor-Independent Movement Summary, an “open-source, universal acceleration summary metric that accounts for discrepancies in raw data among research and consumer devices” <span class="citation" data-cites="mims">John et al. (<a href="#/technical-stuff-condaenvironments" role="doc-biblioref" onclick="">2019</a>)</span>.</p>
+<section id="main-question" class="title-slide slide level1 center">
+<h1>Main Question</h1>
+<p>What does an accelerometer measure?</p>
 <ul>
-<li>raw data interpolated of the signal to 100Hz</li>
-<li>extrapolates signal for regions that have hit the maximum/minimum acceleration units</li>
-<li>band-pass filters from 0.2 to 5Hz</li>
-<li>absolute value of the area under the curve (AUC) using a trapezoidal rule</li>
-<li>truncates low signal values to <span class="math inline">\(0\)</span>.</li>
+<li class="fragment">Piezoelectric sensor - material generates an electric charge from mechanical stress/movement</li>
+<li class="fragment">Capacitive micro-electro-mechanical system (MEMS) - mobile spring suspended mass with multiple capacitance plates</li>
 </ul>
 </section>
 
-<section id="mims-1" class="title-slide slide level1 center">
-<h1>MIMS</h1>
-<p><span class="citation" data-cites="karas2022comparison">Karas et al. (<a href="#/technical-stuff-condaenvironments" role="doc-biblioref" onclick="">2022</a>)</span> found a correlation of <span class="math inline">\(\geq 0.97\)</span> between AC and MIMS units.</p>
-
-<img data-src="03-signal-metrics_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
-
-<section id="enmo" class="title-slide slide level1 center">
-<h1>ENMO</h1>
+<section id="the-device-landscape" class="title-slide slide level1 center">
+<h1>The Device Landscape</h1>
+<p><strong>Commercial</strong> wearables (watches and fitness trackers) - designed for consumer experience.</p>
 <ul>
-<li>Euclidean Norm Minus One (ENMO)</li>
-<li>At raw level <span class="math inline">\(\sqrt{X^2+Y^2+Z^2} - 1\)</span>, truncate</li>
-<li>Mean values are calculated for different windows</li>
+<li>Proprietary step, sleep, or activity scores</li>
+<li>Raw signal and processing rules may be unavailable or change over time.</li>
 </ul>
-
-<img data-src="03-signal-metrics_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
-
-<section id="calculate-them-all" class="title-slide slide level1 center">
-<h1>Calculate Them All</h1>
+<p><strong>Research grade</strong> - for studies</p>
 <ul>
-<li>The <code>acti_calculate_measures</code> will run AC, AI, MIMS, and MAD</li>
+<li>High-frequency raw acceleration and device metadata</li>
+<li>Trade off - decide on calibration, QC, and alternative processing</li>
 </ul>
 </section>
 
-<section id="other-minute-level-metrics" class="title-slide slide level1 center">
-<h1>Other Minute-Level Metrics</h1>
-
-</section>
-
-<section id="mvpa-definition" class="title-slide slide level1 center">
-<h1>MVPA definition</h1>
-<p>Counts per minute <span class="citation" data-cites="montoye2020development">(<a href="#/technical-stuff-condaenvironments" role="doc-biblioref" onclick="">Montoye et al. 2020</a>)</span> - &lt; 2860: sedentary, - 2860-3940: light activity - <span class="math inline">\(\geq\)</span> 3941: moderate to vigorous physical activity (MVPA)</p>
-<p>From <span class="citation" data-cites="sasaki2011validation">(<a href="#/technical-stuff-condaenvironments" role="doc-biblioref" onclick="">Sasaki et al. 2011</a>)</span> - &lt; 2690: light - 2690-6166 moderate - 6167–9642: vigorous - &gt;9642: very vigorous</p>
+<section id="example-studies" class="title-slide slide level1 center">
+<h1>Example Studies</h1>
 <ul>
-<li><code>actinet</code>: deep learning <span class="citation" data-cites="acquah_2026">(<a href="#/technical-stuff-condaenvironments" role="doc-biblioref" onclick="">Acquah et al. 2026</a>)</span></li>
+<li><strong>NHANES Accelerometry (CDC)</strong> (2003-2006, 2011-2014)</li>
+<li>Large-scale population studies using wrist-worn devices</li>
+<li>Released raw data - we released processed version</li>
+<li><strong>UK Biobank Wearable Data</strong></li>
+<li>Over 100,000 participants with 7-day wrist accelerometer recordings</li>
+<li>All of US uses FitBit</li>
 </ul>
 </section>
 
-<section>
-<section id="oxwearables" class="title-slide slide level1 center">
-<h1>Oxwearables</h1>
-<p>https://github.com/OxWearables</p>
-<p>Self-supervised learner 700,000 accelerometer data from UKBB: <span class="citation" data-cites="yuan2024self">(<a href="#/technical-stuff-condaenvironments" role="doc-biblioref" onclick="">Yuan et al. 2024</a>)</span></p>
-
-<img data-src="../assets/oxwearables.png" width="871" class="r-stretch"></section>
-<section id="step-counts-using-stepcount" class="slide level2">
-<h2>Step Counts using <code>stepcount</code></h2>
-<p><span class="citation" data-cites="stepcount">(<a href="#/technical-stuff-condaenvironments" role="doc-biblioref" onclick=""><span class="nocase">Small et al.</span> 2023</a>)</span> python module ported using <code>reticulate</code>.</p>
-<p>If no model is specified, the model is downloaded to a temporary directory, but users can use the <code>stepcount::sc_download_model</code> function to download the model file, store it, and pass it via the <code>model_path</code> argument.</p>
-</section>
-<section id="step-counts" class="slide level2">
-<h2>Step Counts</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="03-signal-metrics_files/figure-revealjs/steps_over_time-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="03-signal-metrics_files/figure-revealjs/plot_steps-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="steps-per-minute" class="slide level2">
-<h2>Steps Per Minute</h2>
-
-<img data-src="03-signal-metrics_files/figure-revealjs/plot_sc60-1.png" style="width:100.0%" class="r-stretch"></section></section>
-<section id="actinet" class="title-slide slide level1 center">
-<h1>Actinet</h1>
-<p><span class="citation" data-cites="acquah_2026">(<a href="#/technical-stuff-condaenvironments" role="doc-biblioref" onclick="">Acquah et al. 2026</a>)</span> - identifies “how much time is spent in sleep, sedentary behaviour, or doing physical activity.”</p>
-<p>https://github.com/OxWearables/actinet</p>
-</section>
-
-<section id="actinet-plot" class="title-slide slide level1 center">
-<h1>Actinet Plot</h1>
-
-<img data-src="03-signal-metrics_files/figure-revealjs/plot_actinet-1.png" style="width:100.0%" class="r-stretch"></section>
-
-<section id="skdh-module" class="title-slide slide level1 center">
-<h1><code>skdh</code> module</h1>
-<p>From Pfizer group: https://scikit-digital-health.readthedocs.io/en/latest/</p>
-
-<img data-src="../assets/skdh.png" width="619" class="r-stretch"></section>
-
-<section id="wristpy-module" class="title-slide slide level1 center">
-<h1><code>wristpy</code> Module</h1>
-<p><a href="https://github.com/childmindresearch/wristpy"><code>wristpy</code></a> - python package for wrist-worn accelerometer data processing from Child Mind Institute</p>
-
-<img data-src="../assets/wristpy.png" width="910" class="r-stretch"></section>
-
-<section id="technical-stuff-condaenvironments" class="title-slide slide level1 smaller scrollable">
-<h1>Technical Stuff: Conda/Environments</h1>
+<section id="accelerometers-covered" class="title-slide slide level1 center">
+<h1>Accelerometers Covered</h1>
+<div class="columns">
+<div class="column" style="width:55%;">
 <ul>
-<li>If using Python, you know <code>conda</code></li>
-<li>If using R, Python link using <code>reticulate</code> package</li>
-<li>Multiple <code>conda</code> environments may be needed</li>
-<li>package/module A needs numpy &lt;= 2.11 and package B needs numpy &gt; 2.30</li>
-<li>“Switching” conda environments <strong>within</strong> a script/session is a hassle</li>
+<li>ActiGraph wGT3X+ (pictured)/GT9X: <code>.gt3x</code> extension (NHANES)</li>
+<li>Axivity AX3: <code>.cwa</code> file (UKBiobank)</li>
 </ul>
+<p>This is a research-grade, tri-axial accelerometer—not a consumer step counter.</p>
+</div><div class="column" style="width:22.5%;">
+<p><img data-src="../assets/actigraph-wgt3x-bt.png" style="width:85.0%" alt="ActiGraph wGT3X-BT research accelerometer on a wrist strap"></p>
+<p><small>ActiGraph wGT3X-BT. Image: <a href="https://ametris.com/actigraph-wgt3x-bt">Ametris</a>.</small></p>
+</div><div class="column" style="width:22.5%;">
+<p><img data-src="../assets/ax3_band.jpeg" style="width:100.0%" alt="Axivity AX3 research accelerometer with a wrist band"></p>
+<p><small>Axivity AX3. Image: <a href="https://axivity.com/product/ax3">Axivity</a>.</small></p>
+</div></div>
+</section>
+
+<section id="what-is-raw-accelerometer-data" class="title-slide slide level1 center">
+<h1>What is Raw Accelerometer Data?</h1>
+<ul>
+<li><strong>Sensor that measures acceleration</strong> in 3D space: X/Y/Z</li>
+<li>Typically measured in <strong>g-forces (g, <span class="math inline">\(g=9.81m/s^2\)</span>)</strong> or <strong>m/s²</strong></li>
+<li>Sampled at regular(ish) time intervals (e.g., 30Hz, 100Hz)</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource plaintext number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a></a>Timestamp                  X        Y        Z</span>
+<span id="cb1-2"><a></a>2025-02-17 12:00:00.0125   0.02     0.98     0.03</span>
+<span id="cb1-3"><a></a>2025-02-17 12:00:00.0250   0.04     0.95     0.05</span>
+<span id="cb1-4"><a></a>2025-02-17 12:00:00.0375  -0.01     0.99     0.02</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+
+<section id="wrist-worn-vs.-hip-worn-accelerometers" class="title-slide slide level1 center">
+<h1>Wrist-Worn vs.&nbsp;Hip-Worn Accelerometers</h1>
+<table class="caption-top">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 36%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>Wrist-Worn Devices</th>
+<th>Hip-Worn Devices</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Placement</td>
+<td>Worn on wrist</td>
+<td>Attached to belt</td>
+</tr>
+<tr class="even">
+<td>Compliance</td>
+<td>Higher</td>
+<td>Lower</td>
+</tr>
+<tr class="odd">
+<td>Activity Types</td>
+<td>Captures arm movements</td>
+<td>Better for whole-body movement</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+<section id="data-resolution" class="title-slide slide level1 center">
+<h1>Data Resolution</h1>
+<ul>
+<li><strong>Raw Accelerometer Data</strong> (high-resolution time-series)
+<ul>
+<li>20-100+ samples/second (Hz)</li>
+</ul></li>
+<li><strong>Wear Time Detection</strong> (non-wear vs.&nbsp;wear periods)</li>
+<li>Minute Level
+<ul>
+<li><strong>Activity Counts</strong>, <strong>Activity Index</strong>, <strong>ENMO</strong>, <strong>MAD</strong></li>
+<li><strong>Steps</strong> (estimation of a “step”)</li>
+</ul></li>
+<li>Sleep estimation</li>
+</ul>
+
+<img data-src="../assets/silly_walks.gif" class="r-stretch"></section>
+
+<section id="course-learning-goals" class="title-slide slide level1 center">
+<h1>Course Learning Goals</h1>
+<ul>
+<li>Read in accelerometry data</li>
+<li>Visualize the data</li>
+<li>Calculate minute-level summaries</li>
+<li>Calculate non-wear and inclusion</li>
+<li>Create daily summaries</li>
+<li>Discuss functional approaches</li>
+</ul>
+</section>
+
+<section id="references" class="title-slide slide level1 smaller scrollable">
+<h1>References</h1>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-acquah_2026" class="csl-entry" role="listitem">
-Acquah, Aidan, Shing Chan, and Aiden Doherty. 2026. <em><span>ActiNet</span>: An Open-Source Tool for Activity Intensity Classification of Wrist-Worn Accelerometry Using Self-Supervised Deep Learning</em>. April. <a href="https://doi.org/10.48550/arXiv.2510.01712">https://doi.org/10.48550/arXiv.2510.01712</a>.
+<div id="ref-Prince2008" class="csl-entry" role="listitem">
+Prince, Stephanie A, Kristi B Adamo, Meghan Hamel, Jill Hardt, Sarah Connor Gorber, and Mark Tremblay. 2008. <span>“A <span>Comparison</span> of <span>Direct</span> Versus <span class="nocase">Self-report</span> <span>Measures</span> for <span>Assessing</span> <span>Physical</span> <span>Activity</span> in <span>Adults</span>: A <span>Systematic</span> <span>Review</span>.”</span> <em>International Journal of Behavioral Nutrition and Physical Activity</em> 5 (1): 56. <a href="https://doi.org/10.1186/1479-5868-5-56">https://doi.org/10.1186/1479-5868-5-56</a>.
 </div>
-<div id="ref-bai2016activity" class="csl-entry" role="listitem">
-Bai, Jiawei, Chongzhi Di, Luo Xiao, et al. 2016. <span>“An Activity Index for Raw Accelerometry Data and Its Comparison with Other Activity Metrics.”</span> <em>PloS One</em> 11 (8): e0160644.
+<div id="ref-pa_benefits" class="csl-entry" role="listitem">
+Schoenborn, Charlotte A., and Manfred Stommel. 2011. <span>“Adherence to the 2008 Adult Physical Activity Guidelines and Mortality Risk.”</span> <em>American Journal of Preventive Medicine</em> 40 (5): 514–21. <a href="https://doi.org/10.1016/j.amepre.2010.12.029">https://doi.org/10.1016/j.amepre.2010.12.029</a>.
 </div>
-<div id="ref-mims" class="csl-entry" role="listitem">
-John, Dinesh, Qu Tang, Fahd Albinali, and Stephen Intille. 2019. <span>“An <span>Open</span>-<span>Source</span> <span>Monitor</span>-<span>Independent</span> <span>Movement</span> <span>Summary</span> for <span>Accelerometer</span> <span>Data</span> <span>Processing</span>.”</span> <em>Journal for the Measurement of Physical Behaviour</em> 2 (4): 268–81. <a href="https://doi.org/10.1123/jmpb.2018-0068">https://doi.org/10.1123/jmpb.2018-0068</a>.
-</div>
-<div id="ref-karas2022comparison" class="csl-entry" role="listitem">
-Karas, Marta, John Muschelli, Andrew Leroux, et al. 2022. <span>“Comparison of Accelerometry-Based Measures of Physical Activity: Retrospective Observational Data Analysis Study.”</span> <em>JMIR mHealth and uHealth</em> 10 (7): e38077.
-</div>
-<div id="ref-montoye2020development" class="csl-entry" role="listitem">
-Montoye, Alexander HK, Kimberly A Clevenger, Karin A Pfeiffer, et al. 2020. <span>“Development of Cut-Points for Determining Activity Intensity from a Wrist-Worn ActiGraph Accelerometer in Free-Living Adults.”</span> <em>Journal of Sports Sciences</em> 38 (22): 2569–78.
-</div>
-<div id="ref-sasaki2011validation" class="csl-entry" role="listitem">
-Sasaki, Jeffer E, Dinesh John, and Patty S Freedson. 2011. <span>“Validation and Comparison of <span>ActiGraph</span> Activity Monitors.”</span> <em>Journal of Science and Medicine in Sport</em> 14 (5): 411–16.
-</div>
-<div id="ref-stepcount" class="csl-entry" role="listitem">
-<span class="nocase">Small, Scott R, Shing Chan, Rosemary Walmsley, et al.</span> 2023. <span>“Development and Validation of a Machine Learning Wrist-Worn Step Detection Algorithm with Deployment in the <span>UK</span> <span>Biobank</span>.”</span> <em>MedRxiv</em>.
-</div>
-<div id="ref-mad" class="csl-entry" role="listitem">
-Vähä-Ypyä, Henri, Tommi Vasankari, Pauliina Husu, Jaana Suni, and Harri Sievänen. 2015. <span>“A Universal, Accurate Intensity-Based Classification of Different Physical Activities Using Raw Data of Accelerometer.”</span> <em>Clinical Physiology and Functional Imaging</em> 35 (1): 64–70.
-</div>
-<div id="ref-yuan2024self" class="csl-entry" role="listitem">
-Yuan, Hang, Shing Chan, Andrew P Creagh, et al. 2024. <span>“Self-Supervised Learning for Human Activity Recognition Using 700,000 Person-Days of Wearable Data.”</span> <em>NPJ Digital Medicine</em> 7 (1): 91.
+<div id="ref-tabacu2020quantifying" class="csl-entry" role="listitem">
+Tabacu, Lucia, Mark Ledbetter, Andrew Leroux, Ciprian Crainiceanu, and Ekaterina Smirnova. 2020. <span>“Quantifying the Varying Predictive Value of Physical Activity Measures Obtained from Wearable Accelerometers on All-Cause Mortality over Short to Medium Time Horizons in <span>NHANES</span> 2003–2006.”</span> <em>Sensors</em> 21 (1): 4.
 </div>
 </div>
 </section>

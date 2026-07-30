@@ -376,5 +376,68 @@
     "title": "Module 1: Devices and Signals",
     "section": "What are the units?",
     "text": "What are the units?\n\nSome times in m/s\\(^2\\)\nMost times in gravitational units (g), 1\\(g=9.81m/s^2\\)\nStationary data should have vector magnitude close to 1g after calibration.\nAxes rotate, so a change in x, y, or z alone may not indicate a change in behavior."
+  },
+  {
+    "objectID": "modules/02-reading-and-processing-data.html#core-representation",
+    "href": "modules/02-reading-and-processing-data.html#core-representation",
+    "title": "Module 2: Reading and Processing Data",
+    "section": "Core Representation",
+    "text": "Core Representation\nRaw accelerometry is, at its core, a time series with four essential columns:\n\n\n\n\n\n\n\nColumn\nMeaning\n\n\n\n\ntime\nA datetime timestamp identifying when the sample was recorded\n\n\nX\nAcceleration along the device x axis\n\n\ny\nAcceleration along the device y axis\n\n\nz\nAcceleration along the device z axis"
+  },
+  {
+    "objectID": "modules/02-reading-and-processing-data.html#data-attributes",
+    "href": "modules/02-reading-and-processing-data.html#data-attributes",
+    "title": "Module 2: Reading and Processing Data",
+    "section": "Data Attributes",
+    "text": "Data Attributes\n\nSample rate - sampling frequency in Hz: get_sample_rate\nDynamic accelerometry range in g: get_dynamic_range\n\n\n\n[1] 50\n\n\n[1] 50\n\n\n[1] 50\n\n\n[1] -8  8\n\n\n[1] -8  8\n\n\n [1] \"row.names\"        \"subject_name\"     \"time_zone\"        \"missingness\"     \n [5] \"old_version\"      \"firmware\"         \"last_sample_time\" \"serial_prefix\"   \n [9] \"sample_rate\"      \"acceleration_min\" \"acceleration_max\" \"header\"          \n[13] \"start_time\"       \"stop_time\"        \"total_records\"    \"bad_samples\"     \n[17] \"features\"         \"transformations\"  \"names\"            \"class\""
+  },
+  {
+    "objectID": "modules/02-reading-and-processing-data.html#data-header-from-gt9x-device",
+    "href": "modules/02-reading-and-processing-data.html#data-header-from-gt9x-device",
+    "title": "Module 2: Reading and Processing Data",
+    "section": "Data Header from GT9X Device",
+    "text": "Data Header from GT9X Device\n\n\n$`Serial Number`\n[1] \"TAS1H30182791\"\n\n$`Device Type`\n[1] \"Link\"\n\n$Firmware\n[1] \"1.7.2\"\n\n$`Battery Voltage`\n[1] \"4.13\"\n\n$`Sample Rate`\n[1] 50\n\n$`Start Date`\n[1] \"2026-04-29 11:38:00 GMT\"\n\n$`Stop Date`\n[1] \"0001-01-01 GMT\"\n\n$`Last Sample Time`\n[1] \"2026-04-29 14:41:59 GMT\"\n\n$TimeZone\n[1] \"-04:00:00\"\n\n$`Download Date`\n[1] \"2026-04-29 14:41:59 GMT\"\n\n$`Board Revision`\n[1] \"8\"\n\n$`Unexpected Resets`\n[1] \"0\"\n\n$`Acceleration Scale`\n[1] 256\n\n$`Acceleration Min`\n[1] \"-8.0\"\n\n$`Acceleration Max`\n[1] \"8.0\"\n\n$Sex\n[1] \"Male\"\n\n$Limb\n[1] \"Wrist\"\n\n$Side\n[1] \"Left\"\n\n$Dominance\n[1] \"Non-Dominant\"\n\n$`Subject Name`\n[1] \"John\"\n\n$`Serial Prefix`\n[1] \"TAS\"\n\n$sample_rate\n[1] 50\n\nattr(,\"class\")\n[1] \"gt3x_info\" \"list\""
+  },
+  {
+    "objectID": "modules/02-reading-and-processing-data.html#data-header-from-ax3-device",
+    "href": "modules/02-reading-and-processing-data.html#data-header-from-ax3-device",
+    "title": "Module 2: Reading and Processing Data",
+    "section": "Data Header from AX3 Device",
+    "text": "Data Header from AX3 Device\n\n\n$uniqueSerialCode\n[1] 114890\n\n$frequency\n[1] 50\n\n$start\n[1] \"2026-04-29 11:41:18.521 UTC\"\n\n$device\n[1] \"Axivity\"\n\n$firmwareVersion\n[1] 48\n\n$blocks\n[1] 4423\n\n$accrange\n[1] 8\n\n$hardwareType\n[1] \"AX3\"\n\n$blockLength\n[1] 120\n\n$acceleration_min\n[1] \"-8\"\n\n$acceleration_max\n[1] \"8\"\n\n$sample_rate\n[1] 50"
+  },
+  {
+    "objectID": "modules/02-reading-and-processing-data.html#timestamps-need-their-own-qc",
+    "href": "modules/02-reading-and-processing-data.html#timestamps-need-their-own-qc",
+    "title": "Module 2: Reading and Processing Data",
+    "section": "Timestamps Need Their Own QC",
+    "text": "Timestamps Need Their Own QC\nThe timestamp is not merely a row number.\n\nIts timezone, precision, regularity, and gaps determine day boundaries, sleep windows, wear-time intervals, and the validity of all downstream summaries.\nSub-second algorithms depend on fractional seconds. Display enough precision to see them (for example, options(digits.secs = 3)) and check observed intervals rather than assuming that every nominal 80 Hz file is exactly 80 Hz at every timestamp.\nRounding milliseconds during a CSV export can corrupt joins, inferred sampling rates, resampling, and step algorithms."
+  },
+  {
+    "objectID": "modules/02-reading-and-processing-data.html#timestamps-need-their-own-qc-1",
+    "href": "modules/02-reading-and-processing-data.html#timestamps-need-their-own-qc-1",
+    "title": "Module 2: Reading and Processing Data",
+    "section": "Timestamps Need Their Own QC",
+    "text": "Timestamps Need Their Own QC\n\nUse an explicit timezone.\nUTC avoids daylight-saving discontinuities during processing\nLocal time is often needed for sleep windows, diary linkage, and calendar-day summaries.\nRecord the original timezone, the analysis timezone, and every conversion between them.\nBefore proceeding, verify the timezone, sampling frequency, acceleration units, start and end times, duplicate timestamps, and gaps. Preserve the original file and keep import metadata with the derived table.\n\n\n\n[1] 0\n\n\n[1] 0"
+  },
+  {
+    "objectID": "modules/03-signal-metrics.html#step-counts-using-stepcount",
+    "href": "modules/03-signal-metrics.html#step-counts-using-stepcount",
+    "title": "Module 3: Alternative Metrics",
+    "section": "Step Counts using stepcount",
+    "text": "Step Counts using stepcount\n(Small et al. 2023) python module ported using reticulate.\nIf no model is specified, the model is downloaded to a temporary directory, but users can use the stepcount::sc_download_model function to download the model file, store it, and pass it via the model_path argument."
+  },
+  {
+    "objectID": "modules/03-signal-metrics.html#step-counts",
+    "href": "modules/03-signal-metrics.html#step-counts",
+    "title": "Module 3: Alternative Metrics",
+    "section": "Step Counts",
+    "text": "Step Counts"
+  },
+  {
+    "objectID": "modules/03-signal-metrics.html#steps-per-minute",
+    "href": "modules/03-signal-metrics.html#steps-per-minute",
+    "title": "Module 3: Alternative Metrics",
+    "section": "Steps Per Minute",
+    "text": "Steps Per Minute"
   }
 ]

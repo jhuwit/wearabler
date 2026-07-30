@@ -35,10 +35,17 @@ tar_load(data_gt3x)
 measures = acti_calculate_measures(data_gt3x, flag_data = FALSE)
 ```
 
+# Minute Level Metrics
 
-# Alternative Metrics: AI
+* Activity Count popular measure, describe other activity measure
+* Steps
+* Activity Levels - high/medium/low
+* Human Activity (running, biking)
+* Sleep (usually 30 second epoch)
 
-@bai2016activity introduced the Activity Index (AI), an open-source metric that operates on raw data, has units in SI units ($g$ or milli-$g$) and has more sensitive ROC curves for moderate and vigorous physical activities compared to AC and was shown to be more sensitive to sedentary and light activities than ENMO.
+# Activity Index: AI
+
+@bai2016activity introduced the Activity Index (AI)
 
 For a given window $H$, AI is calculated for a given participant is calculated using $AI_{0}$ (no baseline variance estimated as in paper):
 
@@ -49,9 +56,13 @@ $$
 
 which is the square root of the average variance of the 3 axes, and provides an average standard deviation. 
 
+# Activity Index: AI
+
+@bai2016activity indicated AI is more sensitive ROC curves for moderate and vigorous physical activities compared to AC and was shown to be more sensitive to sedentary and light activities than ENMO.
+
 @bai2016activity indicated that the window to calculate AI was 1 second and "any aggregated AI was obtained by summing up all the adjacent 1-second AIs within that period".  Thus, to calculate AI at a minute level, we would calculate it at a second level and then add the 60 $\text{AI}_0$ values together.
 
-# Alternative Metrics: AI
+# Activity Index: AI
 
 ```{r}
 #| echo: false
@@ -61,9 +72,9 @@ measures |>
 
 
 
-# Alternative Metrics: Mean Amplitude Deviation (MAD)
+# MAD
 
-@mad recommended the Mean Amplitude Deviation (MAD) as a measure that was an open-source, in SI units, and had good discriminating power for separating activity levels from each other.  The MAD is calculated as the mean of the absolute difference between the acceleration and the mean acceleration for a given epoch.
+@mad recommended the Mean Amplitude Deviation (MAD): the mean of the absolute difference between the acceleration and the mean acceleration for a given epoch.
 
 For a given epoch of length $m$, and where $\text{VM}$ represents the vector magnitude of the signal, the calculation of MAD is:
 $$
@@ -79,29 +90,30 @@ measures |>
   ggplot(aes(x = time, y = MAD)) + geom_step()
 ```
 
-# Alternative Metrics: Monitor-Independent Movement Summary (MIMS) Units
+# MIMS {.smaller}
+Monitor-Independent Movement Summary, an "open-source, universal acceleration summary metric that accounts for discrepancies in raw data among research and consumer devices" @mims. 
 
-@mims introduced the Monitor-Independent Movement Summary (MIMS) unit that was to be an "open-source, universal acceleration summary metric that accounts for discrepancies in raw data among research and consumer devices". 
-
-* raw data interpolated of the signal to 100H 
+* raw data interpolated of the signal to 100Hz
 * extrapolates signal for regions that have hit the maximum/minimum acceleration units 
-* band-pass filters from 0.2 to 5Hz,
+* band-pass filters from 0.2 to 5Hz
 * absolute value of the area under the curve (AUC) using a trapezoidal rule
 * truncates low signal values to $0$.
+
+# MIMS 
 
 @karas2022comparison found a correlation of $\geq 0.97$ between AC and MIMS units.  
 
 ```{r}
 #| echo: false
 measures |> 
-  ggplot(aes(x = time, y = MIMS)) + geom_step()
+  ggplot(aes(x = time, y = MIMS_UNIT)) + geom_step()
 ```
 
-# Alternative Metrics: ENMO
+# ENMO
 
 * Euclidean Norm Minus One (ENMO)
-* At raw level $\sqrt(X^2+Y^2+Z^2) - 1$.  Usually truncated at 0.
-* Mean values (not sums) are calculated for different windows
+* At raw level $\sqrt{X^2+Y^2+Z^2} - 1$, truncate
+* Mean values are calculated for different windows
 
 ```{r}
 #| echo: false
@@ -119,4 +131,184 @@ measures |>
 measures = acti_calculate_measures(data_gt3x)
 ```
 
+# Other Minute-Level Metrics
+
+# MVPA definition
+
+Counts per minute [@montoye2020development]
+- < 2860: sedentary, 
+- 2860-3940: light activity
+- $\geq$ 3941: moderate to vigorous physical activity (MVPA)
+
+From [@sasaki2011validation]
+- < 2690: light
+- 2690-6166 moderate
+- 6167–9642: vigorous
+- >9642: very vigorous
+
+- `actinet`: deep learning [@acquah_2026]
+
+# Oxwearables
+https://github.com/OxWearables
+
+Self-supervised learner 700,000 accelerometer data from UKBB: [@yuan2024self]
+
+```{r}
+#| echo: false
+knitr::include_graphics(here::here("assets/oxwearables.png"))
+```
+
+# Step Counts using `stepcount` {.smaller}
+
+SSL model + fine tuning with capture 24 data set.
+
+[@stepcount] python module ported using `reticulate`. 
+
+```{r code_stepcount}
+#| eval: false
+#| echo: true
+steps_gt3x = actimetrics::py_acti_calculate_stepcount(data_gt3x)
+```
+
+```{r get_stepcount}
+#| echo: false
+tar_load(steps_gt3x)
+```
+
+# Step Counts
+
+```{r steps_over_time}
+steps_gt3x |> ggplot(aes(x = time, y = steps)) + geom_step()
+```
+
+```{r plot_steps}
+steps_gt3x |> 
+  ggplot(aes(x = steps)) + geom_histogram() + xlab("Number of Steps in 1min")
+```
+
+# Stepcount works pretty well
+
+@koffman2024evaluating
+
+> stepcount algorithm exhibited the highest F1 score (0.89 ± 0.11) and lowest MAPE (8.6 ± 9%) across all data sets and had the best, or comparable, F1 scores and MAPE in each individual data set.
+
+```{r}
+knitr::include_graphics(here::here("assets/comparison_data.png"))
+```
+
+
+## Steps Per Minute
+
+
+```{r plot_sc60_show}
+#| eval: false
+steps |> 
+  mutate(date = lubridate::as_date(time),
+         hourtime = hms::as_hms(time)) |> 
+  ggplot(aes(x = hourtime, y = steps)) + 
+  geom_step() +
+  facet_wrap(~ date, ncol = 1)
+```
+
+
+```{r plot_sc60}
+#| dependson: plot_sc60_show
+#| echo: false
+#| out-width: "100%"
+<<plot_sc60_show>>
+```
+
+
+
+# Asleep
+
+asleep - a sleep classifier for wearable sensor data using machine learning [@yuan2024self]
+
+https://github.com/OxWearables/asleep
+
+```{r}
+tar_load(asleep)
+```
+
+# Actinet Plot
+
+```{r plot_actinet_show}
+#| eval: false
+actinet |> 
+  mutate(date = lubridate::as_date(time),
+         hourtime = hms::as_hms(time)) |> 
+  ggplot(aes(x = hourtime, y = moderate_vigorous)) + 
+  geom_step() +
+  facet_wrap(~ date, ncol = 1)
+```
+
+
+```{r plot_actinet}
+#| dependson: plot_actinet_show
+#| echo: false
+#| out-width: "100%"
+<<plot_actinet_show>>
+```
+
+
+# Actinet
+
+[@acquah_2026] - identifies "how much time is spent in sleep, sedentary behaviour, or doing physical activity."
+
+https://github.com/OxWearables/actinet
+
+```{r}
+tar_load(actinet)
+```
+
+# Actinet Plot
+
+```{r plot_actinet_show}
+#| eval: false
+actinet |> 
+  mutate(date = lubridate::as_date(time),
+         hourtime = hms::as_hms(time)) |> 
+  ggplot(aes(x = hourtime, y = moderate_vigorous)) + 
+  geom_step() +
+  facet_wrap(~ date, ncol = 1)
+```
+
+
+```{r plot_actinet}
+#| dependson: plot_actinet_show
+#| echo: false
+#| out-width: "100%"
+<<plot_actinet_show>>
+```
+
+# `skdh` module
+
+From Pfizer group: 
+https://scikit-digital-health.readthedocs.io/en/latest/
+
+```{r}
+#| echo: false
+knitr::include_graphics(here::here("assets/skdh.png"))
+```
+
+
+# `wristpy` Module
+[`wristpy`](https://github.com/childmindresearch/wristpy) - python package for wrist-worn accelerometer data processing from Child Mind Institute
+
+```{r}
+#| echo: false
+knitr::include_graphics(here::here("assets/wristpy.png"))
+```
+
+
+
+
+
+# Technical Stuff: Conda/Environments
+
+- If using Python, you know `conda`
+- If using R, Python link using `reticulate` package
+- Multiple `conda` environments may be needed
+- package/module A needs numpy <= 2.11 and package B needs numpy > 2.30
+- "Switching" conda environments **within** a script/session is a hassle
 
