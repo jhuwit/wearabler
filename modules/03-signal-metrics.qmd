@@ -72,15 +72,15 @@ measures |>
 
 
 
-# MAD
+# MAD {.small}
 
 @mad recommended the Mean Amplitude Deviation (MAD): the mean of the absolute difference between the acceleration and the mean acceleration for a given epoch.
 
-For a given epoch of length $m$, and where $\text{VM}$ represents the vector magnitude of the signal, the calculation of MAD is:
+For a given epoch of length $m$ (5), and where $\text{VM}$ represents the vector magnitude of the signal, the calculation of MAD is:
 $$
 \text{MAD} = \frac{1}{m} \sum_{i=1}^{m} \left|\text{VM}_i- \overline{\text{VM}}_m \right|
 $$
-For a given epoch, @mad recommended taking the mean value of MAD for summarization and recommended 5-second epochs.
+They recommended taking the mean value of MAD for summarization and recommended 5-second epochs.
 
 # Alternative Metrics: MAD
 
@@ -135,12 +135,14 @@ measures = acti_calculate_measures(data_gt3x)
 
 # MVPA definition
 
-Counts per minute [@montoye2020development]
+Counts per minute [@montoye2020development]:
+
 - < 2860: sedentary, 
 - 2860-3940: light activity
 - $\geq$ 3941: moderate to vigorous physical activity (MVPA)
 
-From [@sasaki2011validation]
+From [@sasaki2011validation]:
+
 - < 2690: light
 - 2690-6166 moderate
 - 6167–9642: vigorous
@@ -181,6 +183,8 @@ tar_load(steps_gt3x)
 steps_gt3x |> ggplot(aes(x = time, y = steps)) + geom_step()
 ```
 
+# Step Counts
+
 ```{r plot_steps}
 steps_gt3x |> 
   ggplot(aes(x = steps)) + geom_histogram() + xlab("Number of Steps in 1min")
@@ -192,6 +196,10 @@ steps_gt3x |>
 
 > stepcount algorithm exhibited the highest F1 score (0.89 ± 0.11) and lowest MAPE (8.6 ± 9%) across all data sets and had the best, or comparable, F1 scores and MAPE in each individual data set.
 
+# Stepcount works pretty well
+
+@koffman2024evaluating
+
 ```{r}
 knitr::include_graphics(here::here("assets/comparison_data.png"))
 ```
@@ -199,6 +207,10 @@ knitr::include_graphics(here::here("assets/comparison_data.png"))
 
 ## Steps Per Minute
 
+```{r}
+#| echo: false
+tar_load(steps)
+```
 
 ```{r plot_sc60_show}
 #| eval: false
@@ -227,29 +239,43 @@ asleep - a sleep classifier for wearable sensor data using machine learning [@yu
 https://github.com/OxWearables/asleep
 
 ```{r}
+tar_load(data_proc)
 tar_load(asleep)
 ```
 
-# Actinet Plot
+# Asleep Plot
 
-```{r plot_actinet_show}
+```{r plot_asleep_show}
 #| eval: false
-actinet |> 
+#| echo: true
+pred = asleep$predictions |> 
+  mutate(time = ymd_hms(time, tz = "GMT"),
+         date = lubridate::as_date(time),
+         hourtime = hms::as_hms(time))
+data_proc = data_proc |> 
   mutate(date = lubridate::as_date(time),
-         hourtime = hms::as_hms(time)) |> 
-  ggplot(aes(x = hourtime, y = moderate_vigorous)) + 
+         hourtime = hms::as_hms(time))
+data_proc |> 
+  ggplot(aes(x = hourtime, y = counts)) + 
+  geom_segment(
+    data = pred,
+    aes(x = hourtime, xend = hourtime,
+        y = -Inf, yend = Inf, color = sleep_stage), alpha = 0.25) +
   geom_step() +
   facet_wrap(~ date, ncol = 1)
 ```
+# Asleep Plot
 
-
-```{r plot_actinet}
+```{r plot_asleep}
 #| dependson: plot_actinet_show
 #| echo: false
 #| out-width: "100%"
-<<plot_actinet_show>>
+<<plot_asleep_show>>
 ```
 
+# Disclaimer
+
+I haven't used `asleep` in publications yet and haven't delved into those that have
 
 # Actinet
 
@@ -259,17 +285,26 @@ https://github.com/OxWearables/actinet
 
 ```{r}
 tar_load(actinet)
+actinet = actinet |> 
+  mutate(date = lubridate::as_date(time),
+         hourtime = hms::as_hms(time)) 
+actinet = actinet |> 
+  janitor::clean_names()
 ```
 
 # Actinet Plot
 
 ```{r plot_actinet_show}
 #| eval: false
-actinet |> 
-  mutate(date = lubridate::as_date(time),
-         hourtime = hms::as_hms(time)) |> 
-  ggplot(aes(x = hourtime, y = moderate_vigorous)) + 
+#| echo: true
+data_proc |> 
+  ggplot(aes(x = hourtime, y = counts)) + 
+  geom_segment(
+    data = actinet,
+    aes(x = hourtime, xend = hourtime,
+        y = -Inf, yend = Inf, color = moderate_vigorous == 1), alpha = 0.25) +
   geom_step() +
+  guides(colour = guide_legend(title = "MVPA")) + 
   facet_wrap(~ date, ncol = 1)
 ```
 
@@ -280,6 +315,11 @@ actinet |>
 #| out-width: "100%"
 <<plot_actinet_show>>
 ```
+
+# Disclaimer
+
+I haven't used `asleep` in publications yet, but **have** seen people use it.
+
 
 # `skdh` module
 

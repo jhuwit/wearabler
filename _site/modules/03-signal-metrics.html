@@ -30,6 +30,72 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     /* CSS for citations */
     div.csl-bib-body { }
     div.csl-entry {
@@ -168,7 +234,7 @@
 
 <section id="activity-index-ai" class="title-slide slide level1 center">
 <h1>Activity Index: AI</h1>
-<p><span class="citation" data-cites="bai2016activity">Bai et al. (<a href="#/technical-stuff-condaenvironments" role="doc-biblioref" onclick="">2016</a>)</span> introduced the Activity Index (AI)</p>
+<p><span class="citation" data-cites="bai2016activity">Bai et al. (<a href="#/references" role="doc-biblioref" onclick="">2016</a>)</span> introduced the Activity Index (AI)</p>
 <p>For a given window <span class="math inline">\(H\)</span>, AI is calculated for a given participant is calculated using <span class="math inline">\(AI_{0}\)</span> (no baseline variance estimated as in paper):</p>
 <p><span class="math display">\[
 \text{AI}(t; H)_0 = \sqrt{ \frac{1}{3} \sum\limits_{m=1}^3 \sigma_{m}^2(t; H)  }
@@ -178,8 +244,8 @@
 
 <section id="activity-index-ai-1" class="title-slide slide level1 center">
 <h1>Activity Index: AI</h1>
-<p><span class="citation" data-cites="bai2016activity">Bai et al. (<a href="#/technical-stuff-condaenvironments" role="doc-biblioref" onclick="">2016</a>)</span> indicated AI is more sensitive ROC curves for moderate and vigorous physical activities compared to AC and was shown to be more sensitive to sedentary and light activities than ENMO.</p>
-<p><span class="citation" data-cites="bai2016activity">Bai et al. (<a href="#/technical-stuff-condaenvironments" role="doc-biblioref" onclick="">2016</a>)</span> indicated that the window to calculate AI was 1 second and “any aggregated AI was obtained by summing up all the adjacent 1-second AIs within that period”. Thus, to calculate AI at a minute level, we would calculate it at a second level and then add the 60 <span class="math inline">\(\text{AI}_0\)</span> values together.</p>
+<p><span class="citation" data-cites="bai2016activity">Bai et al. (<a href="#/references" role="doc-biblioref" onclick="">2016</a>)</span> indicated AI is more sensitive ROC curves for moderate and vigorous physical activities compared to AC and was shown to be more sensitive to sedentary and light activities than ENMO.</p>
+<p><span class="citation" data-cites="bai2016activity">Bai et al. (<a href="#/references" role="doc-biblioref" onclick="">2016</a>)</span> indicated that the window to calculate AI was 1 second and “any aggregated AI was obtained by summing up all the adjacent 1-second AIs within that period”. Thus, to calculate AI at a minute level, we would calculate it at a second level and then add the 60 <span class="math inline">\(\text{AI}_0\)</span> values together.</p>
 </section>
 
 <section id="activity-index-ai-2" class="title-slide slide level1 center">
@@ -187,12 +253,12 @@
 
 <img data-src="03-signal-metrics_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
 
-<section id="mad" class="title-slide slide level1 center">
+<section id="mad" class="title-slide slide level1 small center">
 <h1>MAD</h1>
-<p><span class="citation" data-cites="mad">Vähä-Ypyä et al. (<a href="#/technical-stuff-condaenvironments" role="doc-biblioref" onclick="">2015</a>)</span> recommended the Mean Amplitude Deviation (MAD): the mean of the absolute difference between the acceleration and the mean acceleration for a given epoch.</p>
-<p>For a given epoch of length <span class="math inline">\(m\)</span>, and where <span class="math inline">\(\text{VM}\)</span> represents the vector magnitude of the signal, the calculation of MAD is: <span class="math display">\[
+<p><span class="citation" data-cites="mad">Vähä-Ypyä et al. (<a href="#/references" role="doc-biblioref" onclick="">2015</a>)</span> recommended the Mean Amplitude Deviation (MAD): the mean of the absolute difference between the acceleration and the mean acceleration for a given epoch.</p>
+<p>For a given epoch of length <span class="math inline">\(m\)</span> (5), and where <span class="math inline">\(\text{VM}\)</span> represents the vector magnitude of the signal, the calculation of MAD is: <span class="math display">\[
 \text{MAD} = \frac{1}{m} \sum_{i=1}^{m} \left|\text{VM}_i- \overline{\text{VM}}_m \right|
-\]</span> For a given epoch, <span class="citation" data-cites="mad">Vähä-Ypyä et al. (<a href="#/technical-stuff-condaenvironments" role="doc-biblioref" onclick="">2015</a>)</span> recommended taking the mean value of MAD for summarization and recommended 5-second epochs.</p>
+\]</span> They recommended taking the mean value of MAD for summarization and recommended 5-second epochs.</p>
 </section>
 
 <section id="alternative-metrics-mad" class="title-slide slide level1 center">
@@ -202,7 +268,7 @@
 
 <section id="mims" class="title-slide slide level1 smaller center">
 <h1>MIMS</h1>
-<p>Monitor-Independent Movement Summary, an “open-source, universal acceleration summary metric that accounts for discrepancies in raw data among research and consumer devices” <span class="citation" data-cites="mims">John et al. (<a href="#/technical-stuff-condaenvironments" role="doc-biblioref" onclick="">2019</a>)</span>.</p>
+<p>Monitor-Independent Movement Summary, an “open-source, universal acceleration summary metric that accounts for discrepancies in raw data among research and consumer devices” <span class="citation" data-cites="mims">John et al. (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span>.</p>
 <ul>
 <li>raw data interpolated of the signal to 100Hz</li>
 <li>extrapolates signal for regions that have hit the maximum/minimum acceleration units</li>
@@ -214,7 +280,7 @@
 
 <section id="mims-1" class="title-slide slide level1 center">
 <h1>MIMS</h1>
-<p><span class="citation" data-cites="karas2022comparison">Karas et al. (<a href="#/technical-stuff-condaenvironments" role="doc-biblioref" onclick="">2022</a>)</span> found a correlation of <span class="math inline">\(\geq 0.97\)</span> between AC and MIMS units.</p>
+<p><span class="citation" data-cites="karas2022comparison">Karas et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> found a correlation of <span class="math inline">\(\geq 0.97\)</span> between AC and MIMS units.</p>
 
 <img data-src="03-signal-metrics_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
 
@@ -242,27 +308,42 @@
 
 <section id="mvpa-definition" class="title-slide slide level1 center">
 <h1>MVPA definition</h1>
-<p>Counts per minute <span class="citation" data-cites="montoye2020development">(<a href="#/technical-stuff-condaenvironments" role="doc-biblioref" onclick="">Montoye et al. 2020</a>)</span> - &lt; 2860: sedentary, - 2860-3940: light activity - <span class="math inline">\(\geq\)</span> 3941: moderate to vigorous physical activity (MVPA)</p>
-<p>From <span class="citation" data-cites="sasaki2011validation">(<a href="#/technical-stuff-condaenvironments" role="doc-biblioref" onclick="">Sasaki et al. 2011</a>)</span> - &lt; 2690: light - 2690-6166 moderate - 6167–9642: vigorous - &gt;9642: very vigorous</p>
+<p>Counts per minute <span class="citation" data-cites="montoye2020development">(<a href="#/references" role="doc-biblioref" onclick="">Montoye et al. 2020</a>)</span>:</p>
 <ul>
-<li><code>actinet</code>: deep learning <span class="citation" data-cites="acquah_2026">(<a href="#/technical-stuff-condaenvironments" role="doc-biblioref" onclick="">Acquah et al. 2026</a>)</span></li>
+<li>&lt; 2860: sedentary,</li>
+<li>2860-3940: light activity</li>
+<li><span class="math inline">\(\geq\)</span> 3941: moderate to vigorous physical activity (MVPA)</li>
+</ul>
+<p>From <span class="citation" data-cites="sasaki2011validation">(<a href="#/references" role="doc-biblioref" onclick="">Sasaki et al. 2011</a>)</span>:</p>
+<ul>
+<li>&lt; 2690: light</li>
+<li>2690-6166 moderate</li>
+<li>6167–9642: vigorous</li>
+<li><blockquote>
+<p>9642: very vigorous</p>
+</blockquote></li>
+<li><code>actinet</code>: deep learning <span class="citation" data-cites="acquah_2026">(<a href="#/references" role="doc-biblioref" onclick="">Acquah et al. 2026</a>)</span></li>
 </ul>
 </section>
 
-<section>
 <section id="oxwearables" class="title-slide slide level1 center">
 <h1>Oxwearables</h1>
 <p>https://github.com/OxWearables</p>
-<p>Self-supervised learner 700,000 accelerometer data from UKBB: <span class="citation" data-cites="yuan2024self">(<a href="#/technical-stuff-condaenvironments" role="doc-biblioref" onclick="">Yuan et al. 2024</a>)</span></p>
+<p>Self-supervised learner 700,000 accelerometer data from UKBB: <span class="citation" data-cites="yuan2024self">(<a href="#/references" role="doc-biblioref" onclick="">Yuan et al. 2024</a>)</span></p>
 
 <img data-src="../assets/oxwearables.png" width="871" class="r-stretch"></section>
-<section id="step-counts-using-stepcount" class="slide level2">
-<h2>Step Counts using <code>stepcount</code></h2>
-<p><span class="citation" data-cites="stepcount">(<a href="#/technical-stuff-condaenvironments" role="doc-biblioref" onclick=""><span class="nocase">Small et al.</span> 2023</a>)</span> python module ported using <code>reticulate</code>.</p>
-<p>If no model is specified, the model is downloaded to a temporary directory, but users can use the <code>stepcount::sc_download_model</code> function to download the model file, store it, and pass it via the <code>model_path</code> argument.</p>
+
+<section id="step-counts-using-stepcount" class="title-slide slide level1 smaller center">
+<h1>Step Counts using <code>stepcount</code></h1>
+<p>SSL model + fine tuning with capture 24 data set.</p>
+<p><span class="citation" data-cites="stepcount">(<a href="#/references" role="doc-biblioref" onclick=""><span class="nocase">Small et al.</span> 2023</a>)</span> python module ported using <code>reticulate</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>steps_gt3x <span class="ot">=</span> actimetrics<span class="sc">::</span><span class="fu">py_acti_calculate_stepcount</span>(data_gt3x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </section>
-<section id="step-counts" class="slide level2">
-<h2>Step Counts</h2>
+
+<section id="step-counts" class="title-slide slide level1 center">
+<h1>Step Counts</h1>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -282,18 +363,71 @@
 </div>
 </div>
 </section>
+
+<section>
+<section id="stepcount-works-pretty-well" class="title-slide slide level1 center">
+<h1>Stepcount works pretty well</h1>
+<p><span class="citation" data-cites="koffman2024evaluating">Koffman and Muschelli (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></p>
+<blockquote>
+<p>stepcount algorithm exhibited the highest F1 score (0.89 ± 0.11) and lowest MAPE (8.6 ± 9%) across all data sets and had the best, or comparable, F1 scores and MAPE in each individual data set.</p>
+</blockquote>
+
+<img data-src="../assets/comparison_data.png" width="1025" class="r-stretch"></section>
 <section id="steps-per-minute" class="slide level2">
 <h2>Steps Per Minute</h2>
 
 <img data-src="03-signal-metrics_files/figure-revealjs/plot_sc60-1.png" style="width:100.0%" class="r-stretch"></section></section>
+<section id="asleep" class="title-slide slide level1 center">
+<h1>Asleep</h1>
+<p>asleep - a sleep classifier for wearable sensor data using machine learning <span class="citation" data-cites="yuan2024self">(<a href="#/references" role="doc-biblioref" onclick="">Yuan et al. 2024</a>)</span></p>
+<p>https://github.com/OxWearables/asleep</p>
+</section>
+
+<section id="asleep-plot" class="title-slide slide level1 center">
+<h1>Asleep Plot</h1>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>pred <span class="ot">=</span> asleep<span class="sc">$</span>predictions <span class="sc">|&gt;</span> </span>
+<span id="cb2-2"><a></a>  <span class="fu">mutate</span>(<span class="at">time =</span> <span class="fu">ymd_hms</span>(time, <span class="at">tz =</span> <span class="st">"GMT"</span>),</span>
+<span id="cb2-3"><a></a>         <span class="at">date =</span> lubridate<span class="sc">::</span><span class="fu">as_date</span>(time),</span>
+<span id="cb2-4"><a></a>         <span class="at">hourtime =</span> hms<span class="sc">::</span><span class="fu">as_hms</span>(time))</span>
+<span id="cb2-5"><a></a>data_proc <span class="ot">=</span> data_proc <span class="sc">|&gt;</span> </span>
+<span id="cb2-6"><a></a>  <span class="fu">mutate</span>(<span class="at">date =</span> lubridate<span class="sc">::</span><span class="fu">as_date</span>(time),</span>
+<span id="cb2-7"><a></a>         <span class="at">hourtime =</span> hms<span class="sc">::</span><span class="fu">as_hms</span>(time))</span>
+<span id="cb2-8"><a></a>data_proc <span class="sc">|&gt;</span> </span>
+<span id="cb2-9"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hourtime, <span class="at">y =</span> counts)) <span class="sc">+</span> </span>
+<span id="cb2-10"><a></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb2-11"><a></a>    <span class="at">data =</span> pred,</span>
+<span id="cb2-12"><a></a>    <span class="fu">aes</span>(<span class="at">x =</span> hourtime, <span class="at">xend =</span> hourtime,</span>
+<span id="cb2-13"><a></a>        <span class="at">y =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">yend =</span> <span class="cn">Inf</span>, <span class="at">color =</span> sleep_stage), <span class="at">alpha =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb2-14"><a></a>  <span class="fu">geom_step</span>() <span class="sc">+</span></span>
+<span id="cb2-15"><a></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> date, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+
+<section id="asleep-plot-1" class="title-slide slide level1 center">
+<h1>Asleep Plot</h1>
+
+<img data-src="03-signal-metrics_files/figure-revealjs/plot_asleep-1.png" style="width:100.0%" class="r-stretch"></section>
+
 <section id="actinet" class="title-slide slide level1 center">
 <h1>Actinet</h1>
-<p><span class="citation" data-cites="acquah_2026">(<a href="#/technical-stuff-condaenvironments" role="doc-biblioref" onclick="">Acquah et al. 2026</a>)</span> - identifies “how much time is spent in sleep, sedentary behaviour, or doing physical activity.”</p>
+<p><span class="citation" data-cites="acquah_2026">(<a href="#/references" role="doc-biblioref" onclick="">Acquah et al. 2026</a>)</span> - identifies “how much time is spent in sleep, sedentary behaviour, or doing physical activity.”</p>
 <p>https://github.com/OxWearables/actinet</p>
 </section>
 
 <section id="actinet-plot" class="title-slide slide level1 center">
 <h1>Actinet Plot</h1>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>data_proc <span class="sc">|&gt;</span> </span>
+<span id="cb3-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hourtime, <span class="at">y =</span> counts)) <span class="sc">+</span> </span>
+<span id="cb3-3"><a></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb3-4"><a></a>    <span class="at">data =</span> actinet,</span>
+<span id="cb3-5"><a></a>    <span class="fu">aes</span>(<span class="at">x =</span> hourtime, <span class="at">xend =</span> hourtime,</span>
+<span id="cb3-6"><a></a>        <span class="at">y =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">yend =</span> <span class="cn">Inf</span>, <span class="at">color =</span> moderate_vigorous <span class="sc">==</span> <span class="dv">1</span>), <span class="at">alpha =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb3-7"><a></a>  <span class="fu">geom_step</span>() <span class="sc">+</span></span>
+<span id="cb3-8"><a></a>  <span class="fu">guides</span>(<span class="at">colour =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">"MVPA"</span>)) <span class="sc">+</span> </span>
+<span id="cb3-9"><a></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> date, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 
 <img data-src="03-signal-metrics_files/figure-revealjs/plot_actinet-1.png" style="width:100.0%" class="r-stretch"></section>
 
@@ -309,7 +443,7 @@
 
 <img data-src="../assets/wristpy.png" width="910" class="r-stretch"></section>
 
-<section id="technical-stuff-condaenvironments" class="title-slide slide level1 smaller scrollable">
+<section id="technical-stuff-condaenvironments" class="title-slide slide level1 center">
 <h1>Technical Stuff: Conda/Environments</h1>
 <ul>
 <li>If using Python, you know <code>conda</code></li>
@@ -318,6 +452,10 @@
 <li>package/module A needs numpy &lt;= 2.11 and package B needs numpy &gt; 2.30</li>
 <li>“Switching” conda environments <strong>within</strong> a script/session is a hassle</li>
 </ul>
+</section>
+
+<section id="references" class="title-slide slide level1 smaller scrollable">
+<h1>References</h1>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
@@ -332,6 +470,9 @@ John, Dinesh, Qu Tang, Fahd Albinali, and Stephen Intille. 2019. <span>“An <sp
 </div>
 <div id="ref-karas2022comparison" class="csl-entry" role="listitem">
 Karas, Marta, John Muschelli, Andrew Leroux, et al. 2022. <span>“Comparison of Accelerometry-Based Measures of Physical Activity: Retrospective Observational Data Analysis Study.”</span> <em>JMIR mHealth and uHealth</em> 10 (7): e38077.
+</div>
+<div id="ref-koffman2024evaluating" class="csl-entry" role="listitem">
+Koffman, Lily, and John Muschelli. 2024. <span>“Evaluating Step Counting Algorithms on Subsecond Wrist-Worn Accelerometry: A Comparison Using Publicly Available Data Sets.”</span> <em>Journal for the Measurement of Physical Behaviour</em> 7 (1).
 </div>
 <div id="ref-montoye2020development" class="csl-entry" role="listitem">
 Montoye, Alexander HK, Kimberly A Clevenger, Karin A Pfeiffer, et al. 2020. <span>“Development of Cut-Points for Determining Activity Intensity from a Wrist-Worn ActiGraph Accelerometer in Free-Living Adults.”</span> <em>Journal of Sports Sciences</em> 38 (22): 2569–78.

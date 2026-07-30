@@ -26,6 +26,11 @@ jobs:
         uses: r-lib/actions/setup-renv@v2
         with:
           cache-version: 1
+        env:
+          # renv.lock includes packages hosted in GitHub repositories.
+          # Supplying the workflow token avoids unauthenticated API rate limits
+          # while restoring those pinned dependencies.
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Render and publish
         uses: quarto-dev/quarto-actions/publish@v2

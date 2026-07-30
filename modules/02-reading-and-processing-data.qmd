@@ -153,11 +153,36 @@ head(data_gt3x, n = 3)
 head(data_cwa, n = 3)
 ```
 
+
 ```{r load_raw_data}
+#| echo: false
 tar_load(data_cwa)
 tar_load(data_gt3x)
 head(data_gt3x, n = 3)
 head(data_cwa, n = 3)
+```
+
+
+# Reading CWA files
+
+Different implementations of reading in the data
+* we recommend `acti_py_read_cwa` (closer to OMGUI)
+
+
+```{r}
+#| eval: false
+#| echo: true
+# uses actipy implementation not `GGIR:readAxivity`
+data_cwa_py = actiread::acti_py_read_cwa(file_cwa)
+head(data_cwa, n = 3)
+head(data_cwa_py, n = 3)
+```
+
+```{r load_raw_data}
+#| echo: false
+tar_load(data_cwa_py)
+head(data_cwa, n = 3)
+head(data_cwa_py, n = 3)
 ```
 
 
@@ -168,9 +193,9 @@ Core raw accelerometry is time series 3 axes:
 | Column | Meaning |
 |---|---|
 | `time` | A datetime timestamp identifying when the sample was recorded |
-| `X` | Acceleration along the device x axis |
-| `y` | Acceleration along the device y axis |
-| `z` | Acceleration along the device z axis |
+| `x`,`X` | Acceleration along the device x axis |
+| `y`,`Y` | Acceleration along the device y axis |
+| `z`,`Z` | Acceleration along the device z axis |
 
 
 
@@ -380,10 +405,10 @@ minute_cwa = tar_read(data_cwa_proc)
 #| echo: true
 minute_gt3x |> 
   ggplot(aes(x = time, y = counts)) + 
-  geom_step() + 
   geom_segment(
     aes(x = time, xend = time,
-        y = -Inf, yend = Inf, color = wear), alpha = 0.25)
+        y = -Inf, yend = Inf, color = wear), alpha = 0.25) +
+  geom_step() 
 ```
 
 # Reading Full Data

@@ -166,6 +166,30 @@ list(
                acti_process(data_cwa_py)
              }),
 
+
+
+
+  # measures
+  tar_target(measures,
+             {
+               acti_calculate_measures(data, flag_data = FALSE)
+             }),
+
+  tar_target(measures_gt3x,
+             {
+               acti_calculate_measures(data_gt3x, flag_data = FALSE)
+             }),
+
+  tar_target(measures_cwa,
+             {
+               acti_calculate_measures(data_cwa, flag_data = FALSE)
+             }),
+
+  tar_target(measures_cwa_py,
+             {
+               acti_calculate_measures(data_cwa_py, flag_data = FALSE)
+             }),
+
   tar_target(stepcount_pyenv,
              {
 
@@ -233,30 +257,40 @@ list(
   tar_target(
     actinet,
     {
-      actinet::py_acti_net(
+      actinet::py_actinet(
         data,
         sample_rate = get_sample_rate(data)
-      )
+      )$data$time_series
     }
   ),
 
   tar_target(
     actinet_gt3x,
     {
-      actinet::py_acti_net(
+      actinet::py_actinet(
         data_gt3x,
         sample_rate = get_sample_rate(data_gt3x)
-      )
+      )$data$time_series
     }
   ),
 
   tar_target(
     actinet_cwa,
     {
-      actinet::py_acti_net(
+      actinet::py_actinet(
         data_cwa,
         sample_rate = get_sample_rate(data_cwa)
-      )
+      )$data$time_series
+    }
+  ),
+
+  tar_target(
+    actinet_cwa_py,
+    {
+      actinet::py_actinet(
+        data_cwa_py,
+        sample_rate = get_sample_rate(data_cwa)
+      )$data$time_series
     }
   ),
 
