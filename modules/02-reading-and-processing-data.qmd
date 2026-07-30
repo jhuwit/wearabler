@@ -294,6 +294,7 @@ Question:
 # Non-wear Estimation
 
 In a nutshell: 
+
 1. define threshold for no activity
 2. define time threshold for how long it lasts (e.g. 90 minutes)
 3. do you allow for any "spikes"?
@@ -429,13 +430,16 @@ Usually determined by number of minutes wear time
 # Day Level Inclusion
 
 * `create_day_inclusion` - creates a table for inclusion
-* `add_day_inclusion` - creates and joins with time-series
 
 ```{r create_day_inclusion}
 #| echo: true
 minute |> 
   actibase::create_day_inclusion(min_required = 1296L) |> knitr::kable()
 ```
+
+# Day Level Inclusion
+
+* `add_day_inclusion` - creates and joins with time-series
 
 ```{r day_inclusion}
 #| echo: true

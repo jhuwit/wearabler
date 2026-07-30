@@ -644,10 +644,10 @@ $sample_rate
 <section id="non-wear-estimation-1" class="title-slide slide level1 center">
 <h1>Non-wear Estimation</h1>
 <ul>
-<li><span class="citation" data-cites="van2011estimation">(<a href="#/summary" role="doc-biblioref" onclick=""><span class="nocase">Hees et al.</span> 2011</a>)</span>: Non-wear is a 30-min non-overlapping raw-acceleration window with SD &lt;3 mg or range &lt;50 mg in at least 2 of 3 axes.</li>
-<li><span class="citation" data-cites="van2013separating">(<a href="#/summary" role="doc-biblioref" onclick=""><span class="nocase">Van Hees et al.</span> 2013</a>)</span>: now 60-min rolling window w/15-min steps, 00:00–01:00, then 00:15–01:15</li>
-<li><strong><span class="citation" data-cites="CHOI2011">(<a href="#/summary" role="doc-biblioref" onclick="">Choi et al. 2011</a>)</span></strong>: Classifies ≥90 minutes of zero activity counts, allowing brief interruptions, as non-wear.</li>
-<li><span class="citation" data-cites="troiano2008physical">(<a href="#/summary" role="doc-biblioref" onclick=""><span class="nocase">Troiano et al.</span> 2008</a>)</span>: Defines non-wear as ≥60 consecutive zero-count minutes, permitting short low-count interruptions.</li>
+<li><span class="citation" data-cites="van2011estimation">(<a href="#/references" role="doc-biblioref" onclick=""><span class="nocase">Hees et al.</span> 2011</a>)</span>: Non-wear is a 30-min non-overlapping raw-acceleration window with SD &lt;3 mg or range &lt;50 mg in at least 2 of 3 axes.</li>
+<li><span class="citation" data-cites="van2013separating">(<a href="#/references" role="doc-biblioref" onclick=""><span class="nocase">Van Hees et al.</span> 2013</a>)</span>: now 60-min rolling window w/15-min steps, 00:00–01:00, then 00:15–01:15</li>
+<li><strong><span class="citation" data-cites="CHOI2011">(<a href="#/references" role="doc-biblioref" onclick="">Choi et al. 2011</a>)</span></strong>: Classifies ≥90 minutes of zero activity counts, allowing brief interruptions, as non-wear.</li>
+<li><span class="citation" data-cites="troiano2008physical">(<a href="#/references" role="doc-biblioref" onclick=""><span class="nocase">Troiano et al.</span> 2008</a>)</span>: Defines non-wear as ≥60 consecutive zero-count minutes, permitting short low-count interruptions.</li>
 </ul>
 </section>
 
@@ -672,7 +672,7 @@ $sample_rate
 <h1>Activity Counts</h1>
 <ul>
 <li><p>Choi/Troiano use (ActiGraph) Activity Counts</p></li>
-<li><p><span class="citation" data-cites="neishabouri2022quantification">(<a href="#/summary" role="doc-biblioref" onclick=""><span class="nocase">Neishabouri et al.</span> 2022</a>)</span> - made open source the activity count calculation</p></li>
+<li><p><span class="citation" data-cites="neishabouri2022quantification">(<a href="#/references" role="doc-biblioref" onclick=""><span class="nocase">Neishabouri et al.</span> 2022</a>)</span> - made open source the activity count calculation</p></li>
 <li><p><a href="https://github.com/bhelsel/agcounts"><code>agcounts</code></a> R package</p></li>
 </ul>
 <div class="cell">
@@ -771,7 +771,7 @@ $sample_rate
 <section id="reading-full-data" class="title-slide slide level1 center">
 <h1>Reading Full Data</h1>
 <!-- data_gt3x |> filter(time < ymd_hms("2026-04-29 11:39:00.000")) |> select(X, Y, Z) |> as.matrix() |> matrixStats::colVars() -->
-<p>We can read in the data from <span class="citation" data-cites="chadwell2019upper">(<a href="#/summary" role="doc-biblioref" onclick="">Chadwell et al. 2019</a>)</span> and run the minute level data with wear/non-wear:</p>
+<p>We can read in the data from <span class="citation" data-cites="chadwell2019upper">(<a href="#/references" role="doc-biblioref" onclick="">Chadwell et al. 2019</a>)</span> and run the minute level data with wear/non-wear:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a></a>data <span class="ot">=</span> <span class="fu">acti_read_gt3x</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/AI15_MOS2D09170398_2017-10-30.gt3x"</span>))</span>
 <span id="cb44-2"><a></a>minute <span class="ot">=</span> <span class="fu">acti_process</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -794,7 +794,12 @@ $sample_rate
 <section id="day-level-inclusion" class="title-slide slide level1 center">
 <h1>Day Level Inclusion</h1>
 <p>Usually determined by number of minutes wear time</p>
-<p>Choices: - 1296 - 90% of 1440 minutes <span class="citation" data-cites="schrack2014assessing">(<a href="#/summary" role="doc-biblioref" onclick="">Schrack et al. 2014</a>)</span> - 1368 - 95% of 1440 minutes <span class="citation" data-cites="leroux2024nhanes">(<a href="#/summary" role="doc-biblioref" onclick="">Leroux et al. 2024</a>)</span> - 10 hours of wear (may be contiguous or not) <span class="citation" data-cites="troiano2008physical">(<a href="#/summary" role="doc-biblioref" onclick=""><span class="nocase">Troiano et al.</span> 2008</a>)</span> - 10 hours daytime wear (6AM-12AM, not good for sleep) <span class="citation" data-cites="dillon2018associations">(<a href="#/summary" role="doc-biblioref" onclick="">Dillon et al. 2018</a>)</span></p>
+<ul>
+<li>1296 - 90% of 1440 minutes <span class="citation" data-cites="schrack2014assessing">(<a href="#/references" role="doc-biblioref" onclick="">Schrack et al. 2014</a>)</span></li>
+<li>1368 - 95% of 1440 minutes <span class="citation" data-cites="leroux2024nhanes">(<a href="#/references" role="doc-biblioref" onclick="">Leroux et al. 2024</a>)</span></li>
+<li>10 hours of wear (may be contiguous or not) <span class="citation" data-cites="troiano2008physical">(<a href="#/references" role="doc-biblioref" onclick=""><span class="nocase">Troiano et al.</span> 2008</a>)</span></li>
+<li>10 hours daytime wear (6AM-12AM, not good for sleep) <span class="citation" data-cites="dillon2018associations">(<a href="#/references" role="doc-biblioref" onclick="">Dillon et al. 2018</a>)</span></li>
+</ul>
 </section>
 
 <section id="day-level-inclusion-1" class="title-slide slide level1 center">
@@ -805,41 +810,1344 @@ $sample_rate
 </ul>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a></a>minute <span class="sc">|&gt;</span> </span>
-<span id="cb46-2"><a></a>  actibase<span class="sc">::</span><span class="fu">create_day_inclusion</span>(<span class="at">min_required =</span> <span class="dv">1296</span>L)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 6
-  date       n_minutes_wear n_minutes_observed prop_minutes_wear
-  &lt;date&gt;              &lt;int&gt;              &lt;int&gt;             &lt;dbl&gt;
-1 2026-04-29            183               1440             0.127
-# ℹ 2 more variables: prop_minutes_wear_from_observed &lt;dbl&gt;, is_included &lt;lgl&gt;</code></pre>
+<span id="cb46-2"><a></a>  actibase<span class="sc">::</span><span class="fu">create_day_inclusion</span>(<span class="at">min_required =</span> <span class="dv">1296</span>L) <span class="sc">|&gt;</span> knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 14%">
+<col style="width: 17%">
+<col style="width: 16%">
+<col style="width: 29%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">date</th>
+<th style="text-align: right;">n_minutes_wear</th>
+<th style="text-align: right;">n_minutes_observed</th>
+<th style="text-align: right;">prop_minutes_wear</th>
+<th style="text-align: right;">prop_minutes_wear_from_observed</th>
+<th style="text-align: left;">is_included</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: right;">1440</td>
+<td style="text-align: right;">0.1270833</td>
+<td style="text-align: right;">0.1270833</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a></a>minute <span class="sc">|&gt;</span> </span>
-<span id="cb48-2"><a></a>  actibase<span class="sc">::</span><span class="fu">add_day_inclusion</span>(<span class="at">min_required =</span> <span class="dv">1296</span>L)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 183 × 13
-   time                    axis1 axis2 axis3 counts counts_log10 wear 
-   &lt;dttm&gt;                  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;        &lt;dbl&gt; &lt;lgl&gt;
- 1 2026-04-29 11:38:00.000   437   226   265    559         2.75 TRUE 
- 2 2026-04-29 11:39:00.000     0     0     0      0         0    TRUE 
- 3 2026-04-29 11:40:00.000     0     0     0      0         0    TRUE 
- 4 2026-04-29 11:41:00.000  1094   479  1349   1802         3.26 TRUE 
- 5 2026-04-29 11:42:00.000  3528  3991  4177   6769         3.83 TRUE 
- 6 2026-04-29 11:43:00.000  1099  2055  1122   2586         3.41 TRUE 
- 7 2026-04-29 11:44:00.000  2020  3411  2160   4515         3.65 TRUE 
- 8 2026-04-29 11:45:00.000  2365  3445  2492   4865         3.69 TRUE 
- 9 2026-04-29 11:46:00.000  6089  4766  4635   9015         3.96 TRUE 
-10 2026-04-29 11:47:00.000  6827  6924  5864  11355         4.06 TRUE 
-# ℹ 173 more rows
-# ℹ 6 more variables: date &lt;date&gt;, n_minutes_wear &lt;int&gt;,
-#   n_minutes_observed &lt;int&gt;, prop_minutes_wear &lt;dbl&gt;,
-#   prop_minutes_wear_from_observed &lt;dbl&gt;, is_included &lt;lgl&gt;</code></pre>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a></a>minute <span class="sc">|&gt;</span> </span>
+<span id="cb47-2"><a></a>  actibase<span class="sc">::</span><span class="fu">add_day_inclusion</span>(<span class="at">min_required =</span> <span class="dv">1296</span>L) <span class="sc">|&gt;</span> </span>
+<span id="cb47-3"><a></a>  <span class="fu">select</span>(time, counts, wear, n_minutes_wear, is_included) <span class="sc">|&gt;</span> knitr<span class="sc">::</span><span class="fu">kable</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">time</th>
+<th style="text-align: right;">counts</th>
+<th style="text-align: left;">wear</th>
+<th style="text-align: right;">n_minutes_wear</th>
+<th style="text-align: left;">is_included</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 11:38:00</td>
+<td style="text-align: right;">559</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 11:39:00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 11:40:00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 11:41:00</td>
+<td style="text-align: right;">1802</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 11:42:00</td>
+<td style="text-align: right;">6769</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 11:43:00</td>
+<td style="text-align: right;">2586</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 11:44:00</td>
+<td style="text-align: right;">4515</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 11:45:00</td>
+<td style="text-align: right;">4865</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 11:46:00</td>
+<td style="text-align: right;">9015</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 11:47:00</td>
+<td style="text-align: right;">11355</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 11:48:00</td>
+<td style="text-align: right;">3981</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 11:49:00</td>
+<td style="text-align: right;">375</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 11:50:00</td>
+<td style="text-align: right;">650</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 11:51:00</td>
+<td style="text-align: right;">87</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 11:52:00</td>
+<td style="text-align: right;">531</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 11:53:00</td>
+<td style="text-align: right;">185</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 11:54:00</td>
+<td style="text-align: right;">1009</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 11:55:00</td>
+<td style="text-align: right;">653</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 11:56:00</td>
+<td style="text-align: right;">3293</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 11:57:00</td>
+<td style="text-align: right;">3663</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 11:58:00</td>
+<td style="text-align: right;">7129</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 11:59:00</td>
+<td style="text-align: right;">1333</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:00:00</td>
+<td style="text-align: right;">3064</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:01:00</td>
+<td style="text-align: right;">3580</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:02:00</td>
+<td style="text-align: right;">4215</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:03:00</td>
+<td style="text-align: right;">853</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:04:00</td>
+<td style="text-align: right;">647</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:05:00</td>
+<td style="text-align: right;">1451</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:06:00</td>
+<td style="text-align: right;">718</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:07:00</td>
+<td style="text-align: right;">1480</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:08:00</td>
+<td style="text-align: right;">1575</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:09:00</td>
+<td style="text-align: right;">2785</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:10:00</td>
+<td style="text-align: right;">2561</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:11:00</td>
+<td style="text-align: right;">1357</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:12:00</td>
+<td style="text-align: right;">2573</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:13:00</td>
+<td style="text-align: right;">3767</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:14:00</td>
+<td style="text-align: right;">1230</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:15:00</td>
+<td style="text-align: right;">1058</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:16:00</td>
+<td style="text-align: right;">2195</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:17:00</td>
+<td style="text-align: right;">1884</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:18:00</td>
+<td style="text-align: right;">1920</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:19:00</td>
+<td style="text-align: right;">3220</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:20:00</td>
+<td style="text-align: right;">1543</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:21:00</td>
+<td style="text-align: right;">262</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:22:00</td>
+<td style="text-align: right;">346</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:23:00</td>
+<td style="text-align: right;">3030</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:24:00</td>
+<td style="text-align: right;">1886</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:25:00</td>
+<td style="text-align: right;">216</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:26:00</td>
+<td style="text-align: right;">2352</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:27:00</td>
+<td style="text-align: right;">591</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:28:00</td>
+<td style="text-align: right;">444</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:29:00</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:30:00</td>
+<td style="text-align: right;">1669</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:31:00</td>
+<td style="text-align: right;">1230</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:32:00</td>
+<td style="text-align: right;">119</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:33:00</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:34:00</td>
+<td style="text-align: right;">1120</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:35:00</td>
+<td style="text-align: right;">2930</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:36:00</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:37:00</td>
+<td style="text-align: right;">1472</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:38:00</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:39:00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:40:00</td>
+<td style="text-align: right;">2553</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:41:00</td>
+<td style="text-align: right;">842</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:42:00</td>
+<td style="text-align: right;">282</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:43:00</td>
+<td style="text-align: right;">1844</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:44:00</td>
+<td style="text-align: right;">669</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:45:00</td>
+<td style="text-align: right;">1004</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:46:00</td>
+<td style="text-align: right;">259</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:47:00</td>
+<td style="text-align: right;">1217</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:48:00</td>
+<td style="text-align: right;">208</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:49:00</td>
+<td style="text-align: right;">495</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:50:00</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:51:00</td>
+<td style="text-align: right;">1307</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:52:00</td>
+<td style="text-align: right;">371</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:53:00</td>
+<td style="text-align: right;">1566</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:54:00</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:55:00</td>
+<td style="text-align: right;">51</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:56:00</td>
+<td style="text-align: right;">413</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:57:00</td>
+<td style="text-align: right;">1132</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 12:58:00</td>
+<td style="text-align: right;">1090</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 12:59:00</td>
+<td style="text-align: right;">2487</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:00:00</td>
+<td style="text-align: right;">2266</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:01:00</td>
+<td style="text-align: right;">138</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:02:00</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:03:00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:04:00</td>
+<td style="text-align: right;">415</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:05:00</td>
+<td style="text-align: right;">1484</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:06:00</td>
+<td style="text-align: right;">2691</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:07:00</td>
+<td style="text-align: right;">4110</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:08:00</td>
+<td style="text-align: right;">1270</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:09:00</td>
+<td style="text-align: right;">2686</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:10:00</td>
+<td style="text-align: right;">2530</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:11:00</td>
+<td style="text-align: right;">1703</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:12:00</td>
+<td style="text-align: right;">847</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:13:00</td>
+<td style="text-align: right;">1188</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:14:00</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:15:00</td>
+<td style="text-align: right;">83</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:16:00</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:17:00</td>
+<td style="text-align: right;">1604</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:18:00</td>
+<td style="text-align: right;">755</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:19:00</td>
+<td style="text-align: right;">1810</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:20:00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:21:00</td>
+<td style="text-align: right;">429</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:22:00</td>
+<td style="text-align: right;">3836</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:23:00</td>
+<td style="text-align: right;">4990</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:24:00</td>
+<td style="text-align: right;">4195</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:25:00</td>
+<td style="text-align: right;">1322</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:26:00</td>
+<td style="text-align: right;">2885</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:27:00</td>
+<td style="text-align: right;">2174</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:28:00</td>
+<td style="text-align: right;">1708</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:29:00</td>
+<td style="text-align: right;">1082</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:30:00</td>
+<td style="text-align: right;">980</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:31:00</td>
+<td style="text-align: right;">2594</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:32:00</td>
+<td style="text-align: right;">583</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:33:00</td>
+<td style="text-align: right;">1195</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:34:00</td>
+<td style="text-align: right;">3546</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:35:00</td>
+<td style="text-align: right;">626</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:36:00</td>
+<td style="text-align: right;">1882</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:37:00</td>
+<td style="text-align: right;">5121</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:38:00</td>
+<td style="text-align: right;">1684</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:39:00</td>
+<td style="text-align: right;">1085</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:40:00</td>
+<td style="text-align: right;">706</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:41:00</td>
+<td style="text-align: right;">221</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:42:00</td>
+<td style="text-align: right;">1066</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:43:00</td>
+<td style="text-align: right;">2024</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:44:00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:45:00</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:46:00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:47:00</td>
+<td style="text-align: right;">1201</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:48:00</td>
+<td style="text-align: right;">753</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:49:00</td>
+<td style="text-align: right;">591</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:50:00</td>
+<td style="text-align: right;">1479</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:51:00</td>
+<td style="text-align: right;">1649</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:52:00</td>
+<td style="text-align: right;">695</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:53:00</td>
+<td style="text-align: right;">2304</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:54:00</td>
+<td style="text-align: right;">1153</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:55:00</td>
+<td style="text-align: right;">1181</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:56:00</td>
+<td style="text-align: right;">1150</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:57:00</td>
+<td style="text-align: right;">1137</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 13:58:00</td>
+<td style="text-align: right;">3943</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 13:59:00</td>
+<td style="text-align: right;">4269</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 14:00:00</td>
+<td style="text-align: right;">1281</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 14:01:00</td>
+<td style="text-align: right;">5143</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 14:02:00</td>
+<td style="text-align: right;">8162</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 14:03:00</td>
+<td style="text-align: right;">8814</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 14:04:00</td>
+<td style="text-align: right;">3755</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 14:05:00</td>
+<td style="text-align: right;">7879</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 14:06:00</td>
+<td style="text-align: right;">2941</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 14:07:00</td>
+<td style="text-align: right;">1943</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 14:08:00</td>
+<td style="text-align: right;">1508</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 14:09:00</td>
+<td style="text-align: right;">912</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 14:10:00</td>
+<td style="text-align: right;">367</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 14:11:00</td>
+<td style="text-align: right;">585</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 14:12:00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 14:13:00</td>
+<td style="text-align: right;">307</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 14:14:00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 14:15:00</td>
+<td style="text-align: right;">861</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 14:16:00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 14:17:00</td>
+<td style="text-align: right;">662</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 14:18:00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 14:19:00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 14:20:00</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 14:21:00</td>
+<td style="text-align: right;">2221</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 14:22:00</td>
+<td style="text-align: right;">967</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 14:23:00</td>
+<td style="text-align: right;">1282</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 14:24:00</td>
+<td style="text-align: right;">2516</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 14:25:00</td>
+<td style="text-align: right;">8585</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 14:26:00</td>
+<td style="text-align: right;">11095</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 14:27:00</td>
+<td style="text-align: right;">8144</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 14:28:00</td>
+<td style="text-align: right;">7393</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 14:29:00</td>
+<td style="text-align: right;">7285</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 14:30:00</td>
+<td style="text-align: right;">8586</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 14:31:00</td>
+<td style="text-align: right;">6868</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 14:32:00</td>
+<td style="text-align: right;">8154</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 14:33:00</td>
+<td style="text-align: right;">7745</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 14:34:00</td>
+<td style="text-align: right;">5505</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 14:35:00</td>
+<td style="text-align: right;">906</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 14:36:00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 14:37:00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 14:38:00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2026-04-29 14:39:00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2026-04-29 14:40:00</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">TRUE</td>
+<td style="text-align: right;">183</td>
+<td style="text-align: left;">FALSE</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </section>
 
-<section id="summary" class="title-slide slide level1 smaller scrollable">
+<section id="summary" class="title-slide slide level1 center">
 <h1>Summary</h1>
 <ul>
 <li>Raw data to minute level counts</li>
@@ -848,6 +2156,10 @@ $sample_rate
 <li>Plotting the data typically using <code>geom_step</code> and color by <code>geom_segment</code></li>
 <li>Day level inclusion usually based on wear</li>
 </ul>
+</section>
+
+<section id="references" class="title-slide slide level1 smaller scrollable">
+<h1>References</h1>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
