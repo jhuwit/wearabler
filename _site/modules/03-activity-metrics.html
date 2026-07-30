@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Module 3: Activity Metrics – wearabler</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-158031087360bce0ff56dc785ce39e06.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">wearabler</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../modules/index.html"> 
+<span class="menu-text">Modules</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#minute-level-metrics" id="toc-minute-level-metrics" class="nav-link active" data-scroll-target="#minute-level-metrics">Minute Level Metrics</a></li>
+  <li><a href="#activity-index-ai" id="toc-activity-index-ai" class="nav-link" data-scroll-target="#activity-index-ai">Activity Index: AI</a></li>
+  <li><a href="#activity-index-ai-1" id="toc-activity-index-ai-1" class="nav-link" data-scroll-target="#activity-index-ai-1">Activity Index: AI</a></li>
+  <li><a href="#activity-index-ai-2" id="toc-activity-index-ai-2" class="nav-link" data-scroll-target="#activity-index-ai-2">Activity Index: AI</a></li>
+  <li><a href="#mad" id="toc-mad" class="nav-link" data-scroll-target="#mad">MAD</a></li>
+  <li><a href="#alternative-metrics-mad" id="toc-alternative-metrics-mad" class="nav-link" data-scroll-target="#alternative-metrics-mad">Alternative Metrics: MAD</a></li>
+  <li><a href="#mims" id="toc-mims" class="nav-link" data-scroll-target="#mims">MIMS</a></li>
+  <li><a href="#mims-1" id="toc-mims-1" class="nav-link" data-scroll-target="#mims-1">MIMS</a></li>
+  <li><a href="#enmo" id="toc-enmo" class="nav-link" data-scroll-target="#enmo">ENMO</a></li>
+  <li><a href="#calculate-them-all" id="toc-calculate-them-all" class="nav-link" data-scroll-target="#calculate-them-all">Calculate Them All</a></li>
+  <li><a href="#other-minute-level-metrics" id="toc-other-minute-level-metrics" class="nav-link" data-scroll-target="#other-minute-level-metrics">Other Minute-Level Metrics</a></li>
+  <li><a href="#mvpa-definition" id="toc-mvpa-definition" class="nav-link" data-scroll-target="#mvpa-definition">MVPA definition</a></li>
+  <li><a href="#mvpa-definition-1" id="toc-mvpa-definition-1" class="nav-link" data-scroll-target="#mvpa-definition-1">MVPA definition</a></li>
+  <li><a href="#mvpa-definition-2" id="toc-mvpa-definition-2" class="nav-link" data-scroll-target="#mvpa-definition-2">MVPA definition</a></li>
+  <li><a href="#oxwearables" id="toc-oxwearables" class="nav-link" data-scroll-target="#oxwearables">Oxwearables</a></li>
+  <li><a href="#step-counts-using-stepcount" id="toc-step-counts-using-stepcount" class="nav-link" data-scroll-target="#step-counts-using-stepcount">Step Counts using <code>stepcount</code></a></li>
+  <li><a href="#step-counts" id="toc-step-counts" class="nav-link" data-scroll-target="#step-counts">Step Counts</a></li>
+  <li><a href="#step-counts-1" id="toc-step-counts-1" class="nav-link" data-scroll-target="#step-counts-1">Step Counts</a></li>
+  <li><a href="#stepcount-works-pretty-well" id="toc-stepcount-works-pretty-well" class="nav-link" data-scroll-target="#stepcount-works-pretty-well">Stepcount works pretty well</a></li>
+  <li><a href="#stepcount-works-pretty-well-1" id="toc-stepcount-works-pretty-well-1" class="nav-link" data-scroll-target="#stepcount-works-pretty-well-1">Stepcount works pretty well</a>
+  <ul class="collapse">
+  <li><a href="#steps-per-minute" id="toc-steps-per-minute" class="nav-link" data-scroll-target="#steps-per-minute">Steps Per Minute</a></li>
+  </ul></li>
+  <li><a href="#asleep" id="toc-asleep" class="nav-link" data-scroll-target="#asleep">Asleep</a></li>
+  <li><a href="#asleep-plot" id="toc-asleep-plot" class="nav-link" data-scroll-target="#asleep-plot">Asleep Plot</a></li>
+  <li><a href="#asleep-plot-1" id="toc-asleep-plot-1" class="nav-link" data-scroll-target="#asleep-plot-1">Asleep Plot</a></li>
+  <li><a href="#disclaimer" id="toc-disclaimer" class="nav-link" data-scroll-target="#disclaimer">Disclaimer</a></li>
+  <li><a href="#actinet" id="toc-actinet" class="nav-link" data-scroll-target="#actinet">Actinet</a></li>
+  <li><a href="#actinet-plot" id="toc-actinet-plot" class="nav-link" data-scroll-target="#actinet-plot">Actinet Plot</a></li>
+  <li><a href="#actinet-plot-1" id="toc-actinet-plot-1" class="nav-link" data-scroll-target="#actinet-plot-1">Actinet Plot</a></li>
+  <li><a href="#disclaimer-1" id="toc-disclaimer-1" class="nav-link" data-scroll-target="#disclaimer-1">Disclaimer</a></li>
+  <li><a href="#skdh-module" id="toc-skdh-module" class="nav-link" data-scroll-target="#skdh-module"><code>skdh</code> module</a></li>
+  <li><a href="#wristpy-module" id="toc-wristpy-module" class="nav-link" data-scroll-target="#wristpy-module"><code>wristpy</code> Module</a></li>
+  <li><a href="#technical-stuff-condaenvironments" id="toc-technical-stuff-condaenvironments" class="nav-link" data-scroll-target="#technical-stuff-condaenvironments">Technical Stuff: Conda/Environments</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="03-activity-metrics.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Module 3: Activity Metrics</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Fixing Zeros with fix_zeros</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Calculating ai0</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Calculating MAD</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining AI and MAD</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Calculating MIMS</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 methods overwritten by 'signal':
+  method         from   
+  print.freqs    gsignal
+  print.freqz    gsignal
+  print.grpdelay gsignal
+  plot.grpdelay  gsignal
+  print.impz     gsignal
+  print.specgram gsignal
+  plot.specgram  gsignal</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Calculating AC</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining AC</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining MIMS</code></pre>
+</div>
+</div>
+<section id="minute-level-metrics" class="level1">
+<h1>Minute Level Metrics</h1>
+<ul>
+<li>Activity Count popular measure, describe other activity measure</li>
+<li>Steps</li>
+<li>Activity Levels - high/medium/low</li>
+<li>Human Activity (running, biking)</li>
+<li>Sleep (usually 30 second epoch)</li>
+</ul>
+</section>
+<section id="activity-index-ai" class="level1">
+<h1>Activity Index: AI</h1>
+<p><span class="citation" data-cites="bai2016activity">Bai et al. (<a href="#ref-bai2016activity" role="doc-biblioref">2016</a>)</span> introduced the Activity Index (AI)</p>
+<p>For a given window <span class="math inline">\(H\)</span>, AI is calculated for a given participant is calculated using <span class="math inline">\(AI_{0}\)</span> (no baseline variance estimated as in paper):</p>
+<p><span class="math display">\[
+\text{AI}(t; H)_0 = \sqrt{ \frac{1}{3} \sum\limits_{m=1}^3 \sigma_{m}^2(t; H)  }
+\]</span></p>
+<p>which is the square root of the average variance of the 3 axes, and provides an average standard deviation.</p>
+</section>
+<section id="activity-index-ai-1" class="level1">
+<h1>Activity Index: AI</h1>
+<p><span class="citation" data-cites="bai2016activity">Bai et al. (<a href="#ref-bai2016activity" role="doc-biblioref">2016</a>)</span> indicated AI is more sensitive ROC curves for moderate and vigorous physical activities compared to AC and was shown to be more sensitive to sedentary and light activities than ENMO.</p>
+<p><span class="citation" data-cites="bai2016activity">Bai et al. (<a href="#ref-bai2016activity" role="doc-biblioref">2016</a>)</span> indicated that the window to calculate AI was 1 second and “any aggregated AI was obtained by summing up all the adjacent 1-second AIs within that period”. Thus, to calculate AI at a minute level, we would calculate it at a second level and then add the 60 <span class="math inline">\(\text{AI}_0\)</span> values together.</p>
+</section>
+<section id="activity-index-ai-2" class="level1">
+<h1>Activity Index: AI</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03-activity-metrics_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="mad" class="level1 small">
+<h1 class="small">MAD</h1>
+<p><span class="citation" data-cites="mad">Vähä-Ypyä et al. (<a href="#ref-mad" role="doc-biblioref">2015</a>)</span> recommended the Mean Amplitude Deviation (MAD): for=r a given epoch of length <span class="math inline">\(m\)</span> (5sec), and where <span class="math inline">\(\text{VM}\)</span> represents the vector magnitude of the signal, the calculation of MAD is: <span class="math display">\[
+\text{MAD} = \frac{1}{m} \sum_{i=1}^{m} \left|\text{VM}_i- \overline{\text{VM}}_m \right|
+\]</span> They recommended taking the mean value of MAD for summarization and recommended 5-second epochs.</p>
+</section>
+<section id="alternative-metrics-mad" class="level1">
+<h1>Alternative Metrics: MAD</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03-activity-metrics_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="mims" class="level1 smaller">
+<h1 class="smaller">MIMS</h1>
+<p>Monitor-Independent Movement Summary, an “open-source, universal acceleration summary metric that accounts for discrepancies in raw data among research and consumer devices” <span class="citation" data-cites="mims">John et al. (<a href="#ref-mims" role="doc-biblioref">2019</a>)</span>.</p>
+<ul>
+<li>raw data interpolated of the signal to 100Hz</li>
+<li>extrapolates signal for regions that have hit the maximum/minimum acceleration units</li>
+<li>band-pass filters from 0.2 to 5Hz</li>
+<li>absolute value of the area under the curve (AUC) using a trapezoidal rule</li>
+<li>truncates low signal values to <span class="math inline">\(0\)</span>.</li>
+</ul>
+</section>
+<section id="mims-1" class="level1">
+<h1>MIMS</h1>
+<p><span class="citation" data-cites="karas2022comparison">Karas et al. (<a href="#ref-karas2022comparison" role="doc-biblioref">2022</a>)</span> found a correlation of <span class="math inline">\(\geq 0.97\)</span> between AC and MIMS units.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03-activity-metrics_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="enmo" class="level1">
+<h1>ENMO</h1>
+<ul>
+<li>Euclidean Norm Minus One (ENMO)</li>
+<li>At raw level <span class="math inline">\(\sqrt{X^2+Y^2+Z^2} - 1\)</span>, truncate</li>
+<li>Mean values are calculated for different windows</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03-activity-metrics_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="calculate-them-all" class="level1">
+<h1>Calculate Them All</h1>
+<ul>
+<li>The <code>acti_calculate_measures</code> will run AC, AI, MIMS, and MAD</li>
+</ul>
+</section>
+<section id="other-minute-level-metrics" class="level1">
+<h1>Other Minute-Level Metrics</h1>
+</section>
+<section id="mvpa-definition" class="level1">
+<h1>MVPA definition</h1>
+<p>Counts per minute <span class="citation" data-cites="montoye2020development">(<a href="#ref-montoye2020development" role="doc-biblioref">Montoye et al. 2020</a>)</span>:</p>
+<ul>
+<li>&lt; 2860: sedentary,</li>
+<li>2860-3940: light activity</li>
+<li><span class="math inline">\(\geq\)</span> 3941: moderate to vigorous physical activity (MVPA)</li>
+</ul>
+</section>
+<section id="mvpa-definition-1" class="level1">
+<h1>MVPA definition</h1>
+<p>From <span class="citation" data-cites="sasaki2011validation">(<a href="#ref-sasaki2011validation" role="doc-biblioref">Sasaki et al. 2011</a>)</span>:</p>
+<ul>
+<li>&lt; 2690: light</li>
+<li>2690-6166 moderate</li>
+<li>6167–9642: vigorous</li>
+<li><blockquote class="blockquote">
+<p>9642: very vigorous</p>
+</blockquote></li>
+</ul>
+</section>
+<section id="mvpa-definition-2" class="level1">
+<h1>MVPA definition</h1>
+<ul>
+<li><code>actinet</code>: deep learning <span class="citation" data-cites="acquah_2026">(<a href="#ref-acquah_2026" role="doc-biblioref">Acquah et al. 2026</a>)</span></li>
+</ul>
+</section>
+<section id="oxwearables" class="level1">
+<h1>Oxwearables</h1>
+<p>https://github.com/OxWearables</p>
+<p>Self-supervised learner 700,000 accelerometer data from UKBB: <span class="citation" data-cites="yuan2024self">(<a href="#ref-yuan2024self" role="doc-biblioref">Yuan et al. 2024</a>)</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="../assets/oxwearables.png" class="img-fluid figure-img" width="871"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="step-counts-using-stepcount" class="level1 smaller">
+<h1 class="smaller">Step Counts using <code>stepcount</code></h1>
+<p>SSL model + fine tuning with capture 24 data set.</p>
+<p><span class="citation" data-cites="stepcount">(<a href="#ref-stepcount" role="doc-biblioref"><span class="nocase">Small et al.</span> 2023</a>)</span> python module ported using <code>reticulate</code>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="../assets/stepcount.png" class="img-fluid figure-img" width="1288"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>steps_gt3x <span class="ot">=</span> actimetrics<span class="sc">::</span><span class="fu">py_acti_calculate_stepcount</span>(data_gt3x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="step-counts" class="level1">
+<h1>Step Counts</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03-activity-metrics_files/figure-html/steps_over_time-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="step-counts-1" class="level1">
+<h1>Step Counts</h1>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value `binwidth`.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03-activity-metrics_files/figure-html/plot_steps-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="stepcount-works-pretty-well" class="level1">
+<h1>Stepcount works pretty well</h1>
+<p><span class="citation" data-cites="koffman2024evaluating">Koffman and Muschelli (<a href="#ref-koffman2024evaluating" role="doc-biblioref">2024</a>)</span></p>
+<blockquote class="blockquote">
+<p>stepcount algorithm exhibited the highest F1 score (0.89 ± 0.11) and lowest MAPE (8.6 ± 9%) across all data sets and had the best, or comparable, F1 scores and MAPE in each individual data set.</p>
+</blockquote>
+</section>
+<section id="stepcount-works-pretty-well-1" class="level1">
+<h1>Stepcount works pretty well</h1>
+<p><span class="citation" data-cites="koffman2024evaluating">Koffman and Muschelli (<a href="#ref-koffman2024evaluating" role="doc-biblioref">2024</a>)</span></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="../assets/comparison_data.png" class="img-fluid figure-img" width="1025"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="steps-per-minute" class="level2">
+<h2 class="anchored" data-anchor-id="steps-per-minute">Steps Per Minute</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03-activity-metrics_files/figure-html/plot_sc60-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="asleep" class="level1">
+<h1>Asleep</h1>
+<p>asleep - a sleep classifier for wearable sensor data using machine learning <span class="citation" data-cites="yuan2024self">(<a href="#ref-yuan2024self" role="doc-biblioref">Yuan et al. 2024</a>)</span></p>
+<p>https://github.com/OxWearables/asleep</p>
+</section>
+<section id="asleep-plot" class="level1">
+<h1>Asleep Plot</h1>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pred <span class="ot">=</span> asleep<span class="sc">$</span>predictions <span class="sc">|&gt;</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time =</span> <span class="fu">ymd_hms</span>(time, <span class="at">tz =</span> <span class="st">"GMT"</span>),</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">date =</span> lubridate<span class="sc">::</span><span class="fu">as_date</span>(time),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">hourtime =</span> hms<span class="sc">::</span><span class="fu">as_hms</span>(time))</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>data_proc <span class="ot">=</span> data_proc <span class="sc">|&gt;</span> </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date =</span> lubridate<span class="sc">::</span><span class="fu">as_date</span>(time),</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">hourtime =</span> hms<span class="sc">::</span><span class="fu">as_hms</span>(time))</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>data_proc <span class="sc">|&gt;</span> </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hourtime, <span class="at">y =</span> counts)) <span class="sc">+</span> </span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> pred,</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> hourtime, <span class="at">xend =</span> hourtime,</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">yend =</span> <span class="cn">Inf</span>, <span class="at">color =</span> sleep_stage), <span class="at">alpha =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_step</span>() <span class="sc">+</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> date, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="asleep-plot-1" class="level1">
+<h1>Asleep Plot</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03-activity-metrics_files/figure-html/plot_asleep-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="disclaimer" class="level1">
+<h1>Disclaimer</h1>
+<p>I haven’t used <code>asleep</code> in publications yet and haven’t delved into those that have</p>
+</section>
+<section id="actinet" class="level1">
+<h1>Actinet</h1>
+<p><span class="citation" data-cites="acquah_2026">(<a href="#ref-acquah_2026" role="doc-biblioref">Acquah et al. 2026</a>)</span> - identifies “how much time is spent in sleep, sedentary behaviour, or doing physical activity.”</p>
+<p>https://github.com/OxWearables/actinet</p>
+</section>
+<section id="actinet-plot" class="level1">
+<h1>Actinet Plot</h1>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data_proc <span class="sc">|&gt;</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hourtime, <span class="at">y =</span> counts)) <span class="sc">+</span> </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> actinet,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> hourtime, <span class="at">xend =</span> hourtime,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">y =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">yend =</span> <span class="cn">Inf</span>, <span class="at">color =</span> moderate_vigorous <span class="sc">==</span> <span class="dv">1</span>), <span class="at">alpha =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_step</span>() <span class="sc">+</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">colour =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">"MVPA"</span>)) <span class="sc">+</span> </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> date, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>https://link.springer.com/article/10.1186/s12889-026-27719-0</p>
+</section>
+<section id="actinet-plot-1" class="level1">
+<h1>Actinet Plot</h1>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03-activity-metrics_files/figure-html/plot_actinet-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="disclaimer-1" class="level1">
+<h1>Disclaimer</h1>
+<p>I haven’t used <code>asleep</code> in publications yet, but <strong>have</strong> seen people use it.</p>
+</section>
+<section id="skdh-module" class="level1">
+<h1><code>skdh</code> module</h1>
+<p>From Pfizer group: https://scikit-digital-health.readthedocs.io/en/latest/</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="../assets/skdh.png" class="img-fluid figure-img" width="619"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="wristpy-module" class="level1">
+<h1><code>wristpy</code> Module</h1>
+<p><a href="https://github.com/childmindresearch/wristpy"><code>wristpy</code></a> - python package for wrist-worn accelerometer data processing from Child Mind Institute</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="../assets/wristpy.png" class="img-fluid figure-img" width="910"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="technical-stuff-condaenvironments" class="level1">
+<h1>Technical Stuff: Conda/Environments</h1>
+<ul>
+<li>Lots of Python modules</li>
+<li>If using Python, you know <code>conda</code></li>
+<li>If using R, Python link using <code>reticulate</code> package</li>
+<li>Multiple <code>conda</code> environments may be needed</li>
+<li>package/module A needs numpy &lt;= 2.11 and package B needs numpy &gt; 2.30</li>
+<li>“Switching” conda environments <strong>within</strong> a script/session is a hassle</li>
+</ul>
+</section>
+<section id="summary" class="level1">
+<h1>Summary</h1>
+<ul>
+<li>Many ways to characterize activity</li>
+<li>Many ways to characterize behavior</li>
+<li>Deep learning is moving forward with this</li>
+</ul>
+</section>
+<section id="references" class="level1">
+
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-acquah_2026" class="csl-entry" role="listitem">
+Acquah, Aidan, Shing Chan, and Aiden Doherty. 2026. <em><span>ActiNet</span>: An Open-Source Tool for Activity Intensity Classification of Wrist-Worn Accelerometry Using Self-Supervised Deep Learning</em>. April. <a href="https://doi.org/10.48550/arXiv.2510.01712">https://doi.org/10.48550/arXiv.2510.01712</a>.
+</div>
+<div id="ref-bai2016activity" class="csl-entry" role="listitem">
+Bai, Jiawei, Chongzhi Di, Luo Xiao, et al. 2016. <span>“An Activity Index for Raw Accelerometry Data and Its Comparison with Other Activity Metrics.”</span> <em>PloS One</em> 11 (8): e0160644.
+</div>
+<div id="ref-mims" class="csl-entry" role="listitem">
+John, Dinesh, Qu Tang, Fahd Albinali, and Stephen Intille. 2019. <span>“An <span>Open</span>-<span>Source</span> <span>Monitor</span>-<span>Independent</span> <span>Movement</span> <span>Summary</span> for <span>Accelerometer</span> <span>Data</span> <span>Processing</span>.”</span> <em>Journal for the Measurement of Physical Behaviour</em> 2 (4): 268–81. <a href="https://doi.org/10.1123/jmpb.2018-0068">https://doi.org/10.1123/jmpb.2018-0068</a>.
+</div>
+<div id="ref-karas2022comparison" class="csl-entry" role="listitem">
+Karas, Marta, John Muschelli, Andrew Leroux, et al. 2022. <span>“Comparison of Accelerometry-Based Measures of Physical Activity: Retrospective Observational Data Analysis Study.”</span> <em>JMIR mHealth and uHealth</em> 10 (7): e38077.
+</div>
+<div id="ref-koffman2024evaluating" class="csl-entry" role="listitem">
+Koffman, Lily, and John Muschelli. 2024. <span>“Evaluating Step Counting Algorithms on Subsecond Wrist-Worn Accelerometry: A Comparison Using Publicly Available Data Sets.”</span> <em>Journal for the Measurement of Physical Behaviour</em> 7 (1).
+</div>
+<div id="ref-montoye2020development" class="csl-entry" role="listitem">
+Montoye, Alexander HK, Kimberly A Clevenger, Karin A Pfeiffer, et al. 2020. <span>“Development of Cut-Points for Determining Activity Intensity from a Wrist-Worn ActiGraph Accelerometer in Free-Living Adults.”</span> <em>Journal of Sports Sciences</em> 38 (22): 2569–78.
+</div>
+<div id="ref-sasaki2011validation" class="csl-entry" role="listitem">
+Sasaki, Jeffer E, Dinesh John, and Patty S Freedson. 2011. <span>“Validation and Comparison of <span>ActiGraph</span> Activity Monitors.”</span> <em>Journal of Science and Medicine in Sport</em> 14 (5): 411–16.
+</div>
+<div id="ref-stepcount" class="csl-entry" role="listitem">
+<span class="nocase">Small, Scott R, Shing Chan, Rosemary Walmsley, et al.</span> 2023. <span>“Development and Validation of a Machine Learning Wrist-Worn Step Detection Algorithm with Deployment in the <span>UK</span> <span>Biobank</span>.”</span> <em>MedRxiv</em>.
+</div>
+<div id="ref-mad" class="csl-entry" role="listitem">
+Vähä-Ypyä, Henri, Tommi Vasankari, Pauliina Husu, Jaana Suni, and Harri Sievänen. 2015. <span>“A Universal, Accurate Intensity-Based Classification of Different Physical Activities Using Raw Data of Accelerometer.”</span> <em>Clinical Physiology and Functional Imaging</em> 35 (1): 64–70.
+</div>
+<div id="ref-yuan2024self" class="csl-entry" role="listitem">
+Yuan, Hang, Shing Chan, Andrew P Creagh, et al. 2024. <span>“Self-Supervised Learning for Human Activity Recognition Using 700,000 Person-Days of Wearable Data.”</span> <em>NPJ Digital Medicine</em> 7 (1): 91.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

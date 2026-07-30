@@ -5,5 +5,19 @@
     "title": "Module 3: Alternative Metrics",
     "section": "Steps Per Minute",
     "text": "Steps Per Minute"
+  },
+  {
+    "objectID": "modules/index.html",
+    "href": "modules/index.html",
+    "title": "Modules",
+    "section": "",
+    "text": "This course covers the path from raw wrist-worn accelerometry to reproducible analysis: device and study design, reading and processing raw signals, activity metrics, analysis and summaries, and quality control. Throughout, it distinguishes observed data from inserted, filtered, resampled, or inferred values.\n\n\n\n\n\nModule\nMain question\nTeaching dataset\n\n\n\n\n1. Accelerometer Devices and Studies\nWhat do accelerometers measure, and how are wearable studies designed?\nRaw device data and study examples\n\n\n2. Reading and Processing Data\nHow do we read, inspect, calibrate, and process raw acceleration?\nRaw time/x/y/z data\n\n\n3. Activity Metrics\nHow do ENMO, MAD, MIMS, counts, and steps summarize movement?\nRaw acceleration segment\n\n\n4. Analysis and Summaries\nHow do we visualize, summarize, and model minute-level activity?\nNHANES minute-level data\n\n\n99. Reproducibility, QC, and Other Methods\nHow do we audit the pipeline and extend it to specialized methods?\nFull example project"
+  },
+  {
+    "objectID": "modules/index.html#slide-decks",
+    "href": "modules/index.html#slide-decks",
+    "title": "Modules",
+    "section": "",
+    "text": "Module\nMain question\nTeaching dataset\n\n\n\n\n1. Accelerometer Devices and Studies\nWhat do accelerometers measure, and how are wearable studies designed?\nRaw device data and study examples\n\n\n2. Reading and Processing Data\nHow do we read, inspect, calibrate, and process raw acceleration?\nRaw time/x/y/z data\n\n\n3. Activity Metrics\nHow do ENMO, MAD, MIMS, counts, and steps summarize movement?\nRaw acceleration segment\n\n\n4. Analysis and Summaries\nHow do we visualize, summarize, and model minute-level activity?\nNHANES minute-level data\n\n\n99. Reproducibility, QC, and Other Methods\nHow do we audit the pipeline and extend it to specialized methods?\nFull example project"
   }
 ]

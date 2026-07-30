@@ -185,6 +185,12 @@ head(data_cwa, n = 3)
 head(data_cwa_py, n = 3)
 ```
 
+# Summary
+
+- Use `actiread::acti_py_read_cwa` for CWA
+- Use `actiread::acti_read_gt3x` for GT3X
+- We will show small and large example GT3X data
+
 
 ## Core Representation
 
@@ -256,7 +262,7 @@ anyDuplicated(data_cwa$time)
 
 
 
-# Plot the data
+# Plot raw data
 
 - `acti_tidy_axes` will reshape the time/XYZ data to a long format for plotting
 
@@ -267,7 +273,7 @@ head(long, n = 3)
 long |> count(axis)
 ```
 
-# Plot the data
+# Plot raw  data
 
 ```{r tidy_axes_plot}
 #| echo: true
