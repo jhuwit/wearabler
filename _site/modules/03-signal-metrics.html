@@ -255,8 +255,7 @@
 
 <section id="mad" class="title-slide slide level1 small center">
 <h1>MAD</h1>
-<p><span class="citation" data-cites="mad">Vähä-Ypyä et al. (<a href="#/references" role="doc-biblioref" onclick="">2015</a>)</span> recommended the Mean Amplitude Deviation (MAD): the mean of the absolute difference between the acceleration and the mean acceleration for a given epoch.</p>
-<p>For a given epoch of length <span class="math inline">\(m\)</span> (5), and where <span class="math inline">\(\text{VM}\)</span> represents the vector magnitude of the signal, the calculation of MAD is: <span class="math display">\[
+<p><span class="citation" data-cites="mad">Vähä-Ypyä et al. (<a href="#/references" role="doc-biblioref" onclick="">2015</a>)</span> recommended the Mean Amplitude Deviation (MAD): for=r a given epoch of length <span class="math inline">\(m\)</span> (5sec), and where <span class="math inline">\(\text{VM}\)</span> represents the vector magnitude of the signal, the calculation of MAD is: <span class="math display">\[
 \text{MAD} = \frac{1}{m} \sum_{i=1}^{m} \left|\text{VM}_i- \overline{\text{VM}}_m \right|
 \]</span> They recommended taking the mean value of MAD for summarization and recommended 5-second epochs.</p>
 </section>
@@ -314,6 +313,10 @@
 <li>2860-3940: light activity</li>
 <li><span class="math inline">\(\geq\)</span> 3941: moderate to vigorous physical activity (MVPA)</li>
 </ul>
+</section>
+
+<section id="mvpa-definition-1" class="title-slide slide level1 center">
+<h1>MVPA definition</h1>
 <p>From <span class="citation" data-cites="sasaki2011validation">(<a href="#/references" role="doc-biblioref" onclick="">Sasaki et al. 2011</a>)</span>:</p>
 <ul>
 <li>&lt; 2690: light</li>
@@ -322,6 +325,12 @@
 <li><blockquote>
 <p>9642: very vigorous</p>
 </blockquote></li>
+</ul>
+</section>
+
+<section id="mvpa-definition-2" class="title-slide slide level1 center">
+<h1>MVPA definition</h1>
+<ul>
 <li><code>actinet</code>: deep learning <span class="citation" data-cites="acquah_2026">(<a href="#/references" role="doc-biblioref" onclick="">Acquah et al. 2026</a>)</span></li>
 </ul>
 </section>
@@ -337,40 +346,34 @@
 <h1>Step Counts using <code>stepcount</code></h1>
 <p>SSL model + fine tuning with capture 24 data set.</p>
 <p><span class="citation" data-cites="stepcount">(<a href="#/references" role="doc-biblioref" onclick=""><span class="nocase">Small et al.</span> 2023</a>)</span> python module ported using <code>reticulate</code>.</p>
-<div class="cell">
+
+<img data-src="../assets/stepcount.png" width="1288" class="r-stretch"><div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>steps_gt3x <span class="ot">=</span> actimetrics<span class="sc">::</span><span class="fu">py_acti_calculate_stepcount</span>(data_gt3x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 
 <section id="step-counts" class="title-slide slide level1 center">
 <h1>Step Counts</h1>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="03-signal-metrics_files/figure-revealjs/steps_over_time-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="03-signal-metrics_files/figure-revealjs/plot_steps-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
 
-<section>
+<img data-src="03-signal-metrics_files/figure-revealjs/steps_over_time-1.png" width="960" class="r-stretch"></section>
+
+<section id="step-counts-1" class="title-slide slide level1 center">
+<h1>Step Counts</h1>
+
+<img data-src="03-signal-metrics_files/figure-revealjs/plot_steps-1.png" width="960" class="r-stretch"></section>
+
 <section id="stepcount-works-pretty-well" class="title-slide slide level1 center">
 <h1>Stepcount works pretty well</h1>
 <p><span class="citation" data-cites="koffman2024evaluating">Koffman and Muschelli (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></p>
 <blockquote>
 <p>stepcount algorithm exhibited the highest F1 score (0.89 ± 0.11) and lowest MAPE (8.6 ± 9%) across all data sets and had the best, or comparable, F1 scores and MAPE in each individual data set.</p>
 </blockquote>
+</section>
+
+<section>
+<section id="stepcount-works-pretty-well-1" class="title-slide slide level1 center">
+<h1>Stepcount works pretty well</h1>
+<p><span class="citation" data-cites="koffman2024evaluating">Koffman and Muschelli (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></p>
 
 <img data-src="../assets/comparison_data.png" width="1025" class="r-stretch"></section>
 <section id="steps-per-minute" class="slide level2">
@@ -409,6 +412,11 @@
 
 <img data-src="03-signal-metrics_files/figure-revealjs/plot_asleep-1.png" style="width:100.0%" class="r-stretch"></section>
 
+<section id="disclaimer" class="title-slide slide level1 center">
+<h1>Disclaimer</h1>
+<p>I haven’t used <code>asleep</code> in publications yet and haven’t delved into those that have</p>
+</section>
+
 <section id="actinet" class="title-slide slide level1 center">
 <h1>Actinet</h1>
 <p><span class="citation" data-cites="acquah_2026">(<a href="#/references" role="doc-biblioref" onclick="">Acquah et al. 2026</a>)</span> - identifies “how much time is spent in sleep, sedentary behaviour, or doing physical activity.”</p>
@@ -428,8 +436,14 @@
 <span id="cb3-8"><a></a>  <span class="fu">guides</span>(<span class="at">colour =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">"MVPA"</span>)) <span class="sc">+</span> </span>
 <span id="cb3-9"><a></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> date, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p>https://link.springer.com/article/10.1186/s12889-026-27719-0</p>
 
 <img data-src="03-signal-metrics_files/figure-revealjs/plot_actinet-1.png" style="width:100.0%" class="r-stretch"></section>
+
+<section id="disclaimer-1" class="title-slide slide level1 center">
+<h1>Disclaimer</h1>
+<p>I haven’t used <code>asleep</code> in publications yet, but <strong>have</strong> seen people use it.</p>
+</section>
 
 <section id="skdh-module" class="title-slide slide level1 center">
 <h1><code>skdh</code> module</h1>
