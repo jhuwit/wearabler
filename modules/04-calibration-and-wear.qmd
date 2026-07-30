@@ -23,30 +23,22 @@ knitr::opts_chunk$set(echo = FALSE)
 tar_load(data_gt3x)
 ```
 
-# Calculate Them All
 
-* The `acti_calculate_measures` will run AC, AI, MIMS, and MAD
 ```{r}
-#| eval: false
-#| cache: true
-measures = acti_calculate_measures(data_gt3x)
+tar_load(measures)
 ```
 
 
+# Fragmentation
 
+# Weekend Warrior
 
+MVPA >= 150 minutes, but > 50% in 1-2 days
 
-# Overall premise (is all activity created equal)
-## Fragmentation metrics
-- arc tools
+# Mean analysis 
 
-## Weekend warrior
-### first defined
-### WHy - all created equal
+* 
 
-### Fragmentation pattern/cronotype/etc
-
-# Mean analysis (discuss survey weights and sample weights (non-wear))
 # FPCA (discuss survey weights)
 - Recommend the book
 
@@ -61,27 +53,6 @@ measures = acti_calculate_measures(data_gt3x)
 
 # Lasagna plot of NHANES
 
-
-## Other Walking Measures
-
-
-
-# Step Count Plot
-
-
-
-
-
-
-```{r}
-#| eval: false
-raw |>
-  dplyr::summarise(
-    duplicate_times = sum(duplicated(time)),
-    smallest_interval_s = min(diff(as.numeric(time))),
-    largest_interval_s = max(diff(as.numeric(time)))
-  )
-```
 
 
 

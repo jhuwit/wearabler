@@ -382,7 +382,7 @@
     "href": "modules/02-reading-and-processing-data.html#core-representation",
     "title": "Module 2: Reading and Processing Data",
     "section": "Core Representation",
-    "text": "Core Representation\nRaw accelerometry is, at its core, a time series with four essential columns:\n\n\n\n\n\n\n\nColumn\nMeaning\n\n\n\n\ntime\nA datetime timestamp identifying when the sample was recorded\n\n\nX\nAcceleration along the device x axis\n\n\ny\nAcceleration along the device y axis\n\n\nz\nAcceleration along the device z axis"
+    "text": "Core Representation\nCore raw accelerometry is time series 3 axes:\n\n\n\n\n\n\n\nColumn\nMeaning\n\n\n\n\ntime\nA datetime timestamp identifying when the sample was recorded\n\n\nX\nAcceleration along the device x axis\n\n\ny\nAcceleration along the device y axis\n\n\nz\nAcceleration along the device z axis"
   },
   {
     "objectID": "modules/02-reading-and-processing-data.html#data-attributes",
@@ -410,14 +410,14 @@
     "href": "modules/02-reading-and-processing-data.html#timestamps-need-their-own-qc",
     "title": "Module 2: Reading and Processing Data",
     "section": "Timestamps Need Their Own QC",
-    "text": "Timestamps Need Their Own QC\nThe timestamp is not merely a row number.\n\nIts timezone, precision, regularity, and gaps determine day boundaries, sleep windows, wear-time intervals, and the validity of all downstream summaries.\nSub-second algorithms depend on fractional seconds. Display enough precision to see them (for example, options(digits.secs = 3)) and check observed intervals rather than assuming that every nominal 80 Hz file is exactly 80 Hz at every timestamp.\nRounding milliseconds during a CSV export can corrupt joins, inferred sampling rates, resampling, and step algorithms."
+    "text": "Timestamps Need Their Own QC\n\nTimestamp: use its timezone, precision, regularity, and gaps determine day boundaries, sleep windows, wear-time intervals, and the validity of all downstream summaries.\nSub-second algorithms depend on fractional seconds. Display enough precision to see them (for example, options(digits.secs = 3)) and check observed intervals rather than assuming that every nominal 80 Hz file is exactly 80 Hz at every timestamp.\nRounding milliseconds during a CSV export can corrupt joins, inferred sampling rates, resampling, and step algorithms."
   },
   {
     "objectID": "modules/02-reading-and-processing-data.html#timestamps-need-their-own-qc-1",
     "href": "modules/02-reading-and-processing-data.html#timestamps-need-their-own-qc-1",
     "title": "Module 2: Reading and Processing Data",
     "section": "Timestamps Need Their Own QC",
-    "text": "Timestamps Need Their Own QC\n\nUse an explicit timezone.\nUTC avoids daylight-saving discontinuities during processing\nLocal time is often needed for sleep windows, diary linkage, and calendar-day summaries.\nRecord the original timezone, the analysis timezone, and every conversion between them.\nBefore proceeding, verify the timezone, sampling frequency, acceleration units, start and end times, duplicate timestamps, and gaps. Preserve the original file and keep import metadata with the derived table.\n\n\nanyDuplicated(data_gt3x$time)\n\n[1] 0\n\nanyDuplicated(data_cwa$time)\n\n[1] 0"
+    "text": "Timestamps Need Their Own QC\n\nUse an explicit timezone.\nUTC avoids daylight-saving discontinuities during processing\nLocal time is often needed for sleep windows, diary linkage, and calendar-day summaries.\nRecord the original timezone, the analysis timezone, and every conversion between them.\nVerify the timezone, sampling frequency, acceleration units, start and end times, duplicate timestamps, and gaps. Preserve the original file and keep import metadata with the derived table.\n\n\nanyDuplicated(data_gt3x$time)\n\n[1] 0\n\nanyDuplicated(data_cwa$time)\n\n[1] 0"
   },
   {
     "objectID": "modules/03-signal-metrics.html#step-counts-using-stepcount",

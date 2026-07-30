@@ -312,3 +312,5 @@ knitr::include_graphics(here::here("assets/wristpy.png"))
 - package/module A needs numpy <= 2.11 and package B needs numpy > 2.30
 - "Switching" conda environments **within** a script/session is a hassle
 
+
+# References
