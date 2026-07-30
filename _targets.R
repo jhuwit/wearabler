@@ -46,8 +46,12 @@ tar_option_set(
   # Set other options as needed.
 )
 
-# Run the R scripts in the R/ folder with your custom functions:
-tar_source()
+# Run custom helper scripts when the optional R/ directory is present.
+# The directory is intentionally absent from a clean checkout when no helpers
+# are needed, so do not require it for tar_make().
+if (dir.exists("R")) {
+  tar_source("R")
+}
 # tar_source("other_functions.R") # Source other scripts as needed.
 
 # Replace the target list below with your own:
