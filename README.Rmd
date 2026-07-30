@@ -22,27 +22,42 @@ profile-based analyses, using R and the `activerse` ecosystem.
 
 ## What the course covers
 
-The nine modules cover:
+The current modules cover:
 
-1. **Devices and signals** — what accelerometers measure, how common devices
-   differ, and how data are collected in large studies.
-2. **Import and structure** — reading raw files and placing timestamps and
-   three-axis acceleration in a common representation.
-3. **Calibration** — assessing and documenting the decisions needed to make
-   raw acceleration usable and comparable.
-4. **Signal metrics** — deriving and comparing ENMO, MAD, MIMS, and activity
-   counts from standardized raw data.
-5. **Wear and visualization** — inferring wear time and visualizing a
-   participant's complete seven-day record.
-6. **Valid days** — defining eligible participant-days and reporting data
-   attrition.
-7. **Daily and participant summaries** — aggregating minute-level data into
-   daily measures and one value per participant.
-8. **Downstream and functional analysis** — modeling participant summaries and
-   24-hour activity profiles.
-9. **Reproducibility, quality control, and other methods** — building an
-   auditable pipeline and incorporating specialized methods, including Python
-   tools through `reticulate`.
+1. **Module 1: Accelerometer Devices and Studies** — what accelerometers measure, how
+   common devices differ, and how data are collected in large studies.
+2. **Module 2: Reading and Processing Data** — reading raw files, inspecting signal
+   quality, gravity calibration, activity counts, and non-wear processing.
+3. **Module 3: Activity Metrics** — deriving and comparing ENMO, MAD, MIMS, activity
+   counts, steps, and other minute-level movement measures.
+4. **Module 4: Analysis and Summaries** — visualizing population activity profiles,
+   creating summaries, and modeling functional activity data.
+99. **Module 99: Reproducibility, QC, and Other Methods** — building an auditable pipeline
+   and incorporating specialized methods, including Python tools through
+   `reticulate`.
 
 Each module pairs a focused question with an example dataset, moving from a
 short raw segment to a full example project.
+
+
+# Materials
+
+Materials are at: https://github.com/jhuwit/wearabler
+
+Can use `git clone` or download via: https://github.com/jhuwit/wearabler/archive/refs/heads/main.zip
+
+# Loading `targets` and environment
+
+Using [`renv`](https://rstudio.github.io/renv/articles/renv.html) allows us to specify the packages used to build this pipeline:
+
+```{r}
+#| eval: false
+renv::restore()
+```
+
+The [`targets`](https://books.ropensci.org/targets/) pipeline located [in the GitHub repo](https://github.com/jhuwit/wearabler/blob/main/_targets.R) will do the processing (and allows us to cache the pipeline).
+
+```{r}
+#| eval: false
+targets::tar_make()
+```

@@ -439,6 +439,23 @@
       "RemoteSha": "9ca675557b805550ddfe1f5947aca779360654eb",
       "Hash": "85881705ea5fa92aa76db897489b84d4"
     },
+    "arctools": {
+      "Package": "arctools",
+      "Version": "1.1.6",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "arctools",
+      "RemoteUsername": "etzkorn",
+      "RemotePkgRef": "https://github.com/etzkorn/arctools",
+      "RemoteSha": "75ba3baff0fb0cdbf10e7b848469ab996e86305f",
+      "Requirements": [
+        "R",
+        "lubridate",
+        "runstats"
+      ],
+      "Hash": "cde04d561e7c32d1b17ac581e79d25a2"
+    },
     "arrow": {
       "Package": "arrow",
       "Version": "25.0.0",
@@ -957,6 +974,16 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "aa5e1cd11c2d15497494c5292d7ffcc8"
+    },
+    "fftwtools": {
+      "Package": "fftwtools",
+      "Version": "0.9-11",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "272f106d02a91c8319a39dfa0045916b"
     },
     "fontawesome": {
       "Package": "fontawesome",
@@ -2003,6 +2030,21 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "db86914207e4e0f112b60ebbc3e1793c"
+    },
+    "runstats": {
+      "Package": "runstats",
+      "Version": "1.1.0",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "runstats",
+      "RemoteUsername": "martakarass",
+      "RemotePkgRef": "martakarass/runstats",
+      "RemoteSha": "bfa19e439c84a6dfec6d1570c648cfea14548b34",
+      "Requirements": [
+        "fftwtools"
+      ],
+      "Hash": "4286a7852127d048fa8e414bf857a876"
     },
     "rvest": {
       "Package": "rvest",

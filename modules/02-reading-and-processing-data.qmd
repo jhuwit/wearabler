@@ -277,7 +277,7 @@ long |>
 
 # If you plot less with more data, something is going in the wrong direction <br>- Karl Broman
 
-# Plotting raw data -big
+# Plotting raw data - big
 
 But the if the data is > 7 days with 80Hz,
 
@@ -341,6 +341,56 @@ In a nutshell:
   * GGIR creates a "buffet" of activity measures
 * A lot of python modules have made considerable contributions
 * Used in underlying functions, but not main GGIR runner
+
+# Gravity Correction/Calibration 
+
+Gravity correction [@gravity] or gravity calibration: try to correct data that is miscalibrated
+- estimates scale and shift parameters fitting to unit sphere
+
+**Note: Not all pipelines employ this, including a number of pipelines for ActiGraph data.**
+
+# Gravity Calibration: Steps
+
+1. Read the original tri-axial `X`, `Y`, and `Z` acceleration; do not use imputed zeroes.
+2. Find short stationary windows (for example, 10 seconds with low SD on all three axes).
+3. Use the stationary vectors to estimate each axis's offset and scale so their vector magnitude lies on the unit sphere.
+4. Apply the estimated offset and scale to every raw sample, then calculate metrics such as ENMO or activity counts from the corrected signal.
+5. Record the calibration parameters and inspect the before/after gravity error; flag a file when there are too few eligible stationary windows.
+
+# Gravity Calibration: Steps
+
+- `GGIR::g.calibrate()`
+- `agcounts::agcalibrate`
+- `acti_calibrate` - uses `agcounts::agcalibrate`
+
+
+```{r g_calibrate}
+targets::tar_load(data)
+```
+
+```{r calibrate_cal_estimates}
+#| echo: true
+#| results: hide
+#| cache: true
+data_calibrated = acti_calibrate(data)
+```
+
+
+# Gravity Calibration
+
+```{r calibrate_cal_estimates}
+calibration = attr(data_calibrated, "calibration")
+calibration$scale
+calibration$offset
+head(data)
+head(data_calibrated)
+```
+
+# No calibration done
+
+- Likely should be used in analysis
+- Most ActiGraph pipelines do not use it
+- Can be sensitivity analysis
 
 # Activity Counts
 

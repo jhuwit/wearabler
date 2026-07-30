@@ -4,18 +4,14 @@ title: "Modules"
 
 # Course Structure
 
-This course follows a nine-module processing pipeline for wrist-worn accelerometry. It moves from a documented measurement protocol and raw time/x/y/z data through raw-signal QC, calibration, metric derivation, wear inference, valid-day rules, summary construction, and analysis. Throughout, the course distinguishes observed data from inserted, filtered, resampled, or inferred values.
+This course covers the path from raw wrist-worn accelerometry to reproducible analysis: device and study design, reading and processing raw signals, activity metrics, analysis and summaries, and quality control. Throughout, it distinguishes observed data from inserted, filtered, resampled, or inferred values.
 
 ## Slide Decks
 
 | Module | Main question | Teaching dataset |
 |---|---|---|
-| [1. Devices and signals](01-devices-and-signals.qmd) | What does an accelerometer measure? | 5-minute raw segment |
-| [2. Import and structure](02-import-and-structure.qmd) | How are time and axes represented? | Raw segment |
-| [3. Calibration](03-signal-metrics.qmd) | How do we establish usable, comparable raw acceleration? | Raw segment |
-| [4. Signal metrics](04-calibration-and-wear.qmd) | How do ENMO, MAD, MIMS, and counts differ? | Raw segment |
-| [5. Wear and visualization](05-epochs-and-behavior.qmd) | When was the device worn, and what does a complete week look like? | 10,080 minute profile |
-| [6. Valid days](06-sleep-and-physical-activity.qmd) | Which participant-days are eligible? | Seven-day data |
-| [7. Daily and participant summaries](07-valid-days-and-participants.qmd) | How does raw data become one value per person? | Multi-participant data |
-| [8. Downstream and functional analysis](08-downstream-analysis.qmd) | How are summaries and profiles modeled? | Participant summaries and profiles |
-| [9. Reproducibility, QC, and other methods](09-reproducibility-and-qc.qmd) | How do we audit and extend the pipeline? | Full example project |
+| [1. Accelerometer Devices and Studies](01-accelerometer-devices-and-studies.qmd) | What do accelerometers measure, and how are wearable studies designed? | Raw device data and study examples |
+| [2. Reading and Processing Data](02-reading-and-processing-data.qmd) | How do we read, inspect, calibrate, and process raw acceleration? | Raw time/x/y/z data |
+| [3. Activity Metrics](03-activity-metrics.qmd) | How do ENMO, MAD, MIMS, counts, and steps summarize movement? | Raw acceleration segment |
+| [4. Analysis and Summaries](04-analysis-and-summaries.qmd) | How do we visualize, summarize, and model minute-level activity? | NHANES minute-level data |
+| [99. Reproducibility, QC, and Other Methods](99-reproducibility-and-qc.qmd) | How do we audit the pipeline and extend it to specialized methods? | Full example project |
