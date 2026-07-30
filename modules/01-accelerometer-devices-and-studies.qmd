@@ -41,10 +41,9 @@ Can use `git clone` or download via: https://github.com/jhuwit/wearabler/archive
 
 ![](../assets/gt3x_file.png){.r-stretch}
 
-```{r ac_with_counts}
-#| echo: false
-knitr::include_graphics("assets/ac_with_counts.png")
-```
+## Example accelerometer output
+
+![](../assets/ac_with_counts.png){.r-stretch}
 
 
 # Main Question
