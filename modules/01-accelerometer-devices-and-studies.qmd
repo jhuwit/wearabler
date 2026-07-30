@@ -6,9 +6,9 @@ format:
     transition: fade
     slide-number: true
     footer: "Wearable-R: https://github.com/jhuwit/wearabler"
-    logo: assets/jhu.png
-    css: assets/logo.css
-bibliography: assets/references.bib    
+    logo: ../assets/jhu.png
+    css: ../assets/logo.css
+bibliography: ../assets/references.bib    
 slide-level: 2
 ---
 
@@ -103,13 +103,13 @@ This is a research-grade, tri-axial accelerometer—not a consumer step counter.
 :::
 
 ::: {.column width="22.5%"}
-![](assets/actigraph-wgt3x-bt.png){fig-alt="ActiGraph wGT3X-BT research accelerometer on a wrist strap" width="85%"}
+![](../assets/actigraph-wgt3x-bt.png){fig-alt="ActiGraph wGT3X-BT research accelerometer on a wrist strap" width="85%"}
 
 <small>ActiGraph wGT3X-BT. Image: [Ametris](https://ametris.com/actigraph-wgt3x-bt).</small>
 :::
 
 ::: {.column width="22.5%"}
-![](assets/ax3_band.jpeg){fig-alt="Axivity AX3 research accelerometer with a wrist band" width="100%"}
+![](../assets/ax3_band.jpeg){fig-alt="Axivity AX3 research accelerometer with a wrist band" width="100%"}
 
 <small>Axivity AX3. Image: [Axivity](https://axivity.com/product/ax3).</small>
 :::
