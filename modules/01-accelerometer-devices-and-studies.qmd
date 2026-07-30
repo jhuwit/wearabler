@@ -45,7 +45,7 @@ Can use `git clone` or download via: https://github.com/jhuwit/wearabler/archive
 :::
 
 ::: {.column width="50%"}
-![](../assets/ac_with_counts.png){.r-stretch}
+![](../assets/ac_with_counts.png){height="85%"}
 :::
 
 :::
