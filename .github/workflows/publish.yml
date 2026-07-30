@@ -37,6 +37,9 @@ jobs:
           # while restoring those pinned dependencies.
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Build targets pipeline
+        run: Rscript -e 'targets::tar_make()'
+
       - name: Render and publish
         uses: quarto-dev/quarto-actions/publish@v2
         with:
