@@ -38,10 +38,17 @@ Can use `git clone` or download via: https://github.com/jhuwit/wearabler/archive
 
 # Goals
 
+::: {.columns}
 
+::: {.column width="50%"}
 ![](../assets/gt3x_file.png){.r-stretch}
-to
-![](../assets/ac_with_counts.png)
+:::
+
+::: {.column width="50%"}
+![](../assets/ac_with_counts.png){.r-stretch}
+:::
+
+:::
 
 
 # Main Question
