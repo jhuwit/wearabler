@@ -505,6 +505,8 @@ minute |>
 #| eval: true
 #| echo: false
 #| cache: true
+#| fig-height: 10
+#| fig-width: 7
 tar_load(data_proc)
 data_proc |> 
   mutate(date = lubridate::as_date(time),
@@ -514,6 +516,9 @@ data_proc |>
     aes(x = hourtime, xend = hourtime,
         y = -Inf, yend = Inf, color = wear), alpha = 0.25) +
   geom_step() +
+  ylab("AC") + 
+  ylab("Time of Day") + 
+  theme(legend.position = "bottom") + 
   facet_wrap(~ date, ncol = 1)
 ```
 
