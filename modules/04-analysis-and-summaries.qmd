@@ -119,6 +119,7 @@ df |>
 ```{r lasagna_show}
 #| echo: true
 #| eval: false
+#| cache: true
 res = ggplot2::resolution(df$minute)
 df |> 
   ggplot(aes(x = minute)) + 
