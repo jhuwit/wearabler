@@ -21,12 +21,13 @@ library(activerse)
 library(arctools)
 library(runstats)
 options(digits.secs = 3)
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 tar_load(data_gt3x)
 ```
 
 
 ```{r}
+#| echo: false
 tar_load(measures)
 tar_load(data_proc)
 ```
@@ -49,7 +50,6 @@ Weekend warriors: accrued ≥ 50% of their weekly MVPA on only one or two days, 
 Subset of 100 people, multiple days from [NHANES AC data](https://physionet.org/content/minute-level-step-count-nhanes/1.0.1/csv)
 
 ```{r}
-#| echo: true
 wide = readr::read_rds(here::here("data/ac_subset_wide.rds"))
 head(wide)
 ```
@@ -63,7 +63,6 @@ We reshaped it so each time is a minute and then thresholded average minute (not
 
 ::: {.column width="50%"}
 ```{r}
-#| echo: true
 #| eval: false
 df = wide |>
   pivot_longer(starts_with("min_"), names_prefix = "min_", names_to = "minute")
@@ -80,7 +79,6 @@ df = df |>
 :::
 ::: {.column width="50%"}
 ```{r}
-#| echo: true
 #| eval: false
 df = df |>
   select(SEQN, time, value)
@@ -113,7 +111,6 @@ df = df |>
 Plotting one row per person (100 people):
 
 ```{r}
-#| echo: true
 df |> 
   mutate(SEQN = as.numeric(factor(SEQN))) |> 
   ggplot(aes(x = minute, y = SEQN)) + 
@@ -128,7 +125,6 @@ df |>
 @swihart2009lasagna stacks the data into layers
 
 ```{r lasagna_show}
-#| echo: true
 #| eval: false
 #| cache: true
 res = ggplot2::resolution(df$minute)
@@ -150,7 +146,6 @@ df |>
 # General Lasagna Function
 
 ```{r}
-#| echo: true
 #| eval: false
 geom_lasagna = function(data, x, ..., position = "stack") {
   xvar = rlang::enquo(x)
@@ -202,9 +197,11 @@ acti_map_nhanes(example_data)
 2. apply a smoother along the functional domain
 3. obtain joint confidence bands (usually bootstrap)
 
+# FUI Analysis
+
 ```{r}
-#| echo: true
 #| eval: false
+library(fastFMM)
 wide = readr::read_rds(here::here("data/ac_subset_wide.rds"))
 head(wide)
 wide = wide[rowSums(is.na(wide |> select(starts_with("min")))) == 0,]
@@ -230,7 +227,6 @@ Large generalized additive model (`mgcv`)
 - functional effect for minute, by age, sex
 
 ```{r}
-#| echo: false
 #| eval: false
 fit <- bam(
   y ~
@@ -256,7 +252,7 @@ fit <- bam(
 
 # FDA Book
 
-https://www.routledge.com/Functional-Data-Analysis-with-R/Crainiceanu-Goldsmith-Leroux-Cui/p/book/9781032244716
+[Functional Data Analysis with R](https://www.routledge.com/Functional-Data-Analysis-with-R/Crainiceanu-Goldsmith-Leroux-Cui/p/book/9781032244716)
 
 
 ![](../assets/fda.jpg){.r-stretch}

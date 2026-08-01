@@ -223,7 +223,7 @@
 </section>
 <section id="weekend-warrior" class="title-slide slide level1 center">
 <h1>Weekend Warrior</h1>
-<p>From <span class="citation" data-cites="shiroma2019physical">Shiroma et al. (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span></p>
+<p>From <span class="citation" data-cites="shiroma2019physical">Shiroma et al. (<a href="" role="doc-biblioref" onclick="return false;">2019</a>)</span></p>
 <p>Within each MVPA category</p>
 <ul>
 <li>inactive: &lt;37.5 minutes</li>
@@ -260,9 +260,13 @@
 </div>
 </section>
 
+<section>
 <section id="average-day-per-person" class="title-slide slide level1 center">
 <h1>Average Day per Person</h1>
 <p>We reshaped it so each time is a minute and then thresholded average minute (not really “correct”):</p>
+</section>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>df <span class="ot">=</span> wide <span class="sc">|&gt;</span></span>
 <span id="cb3-2"><a></a>  <span class="fu">pivot_longer</span>(<span class="fu">starts_with</span>(<span class="st">"min_"</span>), <span class="at">names_prefix =</span> <span class="st">"min_"</span>, <span class="at">names_to =</span> <span class="st">"minute"</span>)</span>
@@ -273,19 +277,21 @@
 <span id="cb3-7"><a></a>  <span class="fu">mutate</span>(<span class="at">minute =</span> <span class="fu">as.numeric</span>(minute) <span class="sc">-</span> <span class="dv">1</span>,</span>
 <span id="cb3-8"><a></a>         <span class="at">minute =</span> hms<span class="sc">::</span><span class="fu">hms</span>(<span class="at">minutes =</span> minute),</span>
 <span id="cb3-9"><a></a>         <span class="at">time =</span> <span class="fu">ymd_hms</span>(<span class="fu">paste0</span>(<span class="st">"2000-01-01"</span>, <span class="st">" "</span>, <span class="fu">as.character</span>(minute)),</span>
-<span id="cb3-10"><a></a>                        <span class="at">tz =</span> <span class="st">"UTC"</span>))</span>
-<span id="cb3-11"><a></a></span>
-<span id="cb3-12"><a></a>df <span class="ot">=</span> df <span class="sc">|&gt;</span></span>
-<span id="cb3-13"><a></a>  <span class="fu">select</span>(SEQN, time, value)</span>
-<span id="cb3-14"><a></a>df <span class="ot">=</span> df <span class="sc">|&gt;</span></span>
-<span id="cb3-15"><a></a>  <span class="fu">arrange</span>(SEQN, time)</span>
-<span id="cb3-16"><a></a>df <span class="ot">=</span> df <span class="sc">|&gt;</span> </span>
-<span id="cb3-17"><a></a>  <span class="fu">mutate</span>(<span class="at">mvpa =</span> <span class="fu">cut</span>(value, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">2860</span>, <span class="dv">3940</span>, <span class="cn">Inf</span>),</span>
-<span id="cb3-18"><a></a>                    <span class="at">include.lowest =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb3-19"><a></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"sedentary"</span>, <span class="st">"light"</span>, <span class="st">"mvpa"</span>)))</span>
-<span id="cb3-20"><a></a><span class="fu">head</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-10"><a></a>                        <span class="at">tz =</span> <span class="st">"UTC"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</div><div class="column" style="width:50%;">
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>df <span class="ot">=</span> df <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a></a>  <span class="fu">select</span>(SEQN, time, value)</span>
+<span id="cb4-3"><a></a>df <span class="ot">=</span> df <span class="sc">|&gt;</span></span>
+<span id="cb4-4"><a></a>  <span class="fu">arrange</span>(SEQN, time)</span>
+<span id="cb4-5"><a></a>df <span class="ot">=</span> df <span class="sc">|&gt;</span> </span>
+<span id="cb4-6"><a></a>  <span class="fu">mutate</span>(<span class="at">mvpa =</span> <span class="fu">cut</span>(value, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">2860</span>, <span class="dv">3940</span>, <span class="cn">Inf</span>),</span>
+<span id="cb4-7"><a></a>                    <span class="at">include.lowest =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb4-8"><a></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"sedentary"</span>, <span class="st">"light"</span>, <span class="st">"mvpa"</span>)))</span>
+<span id="cb4-9"><a></a><span class="fu">head</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div><div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 4
    SEQN minute time                    value
@@ -297,59 +303,52 @@
 5 73557 04'00" 2000-01-01 00:04:00.000   NaN
 6 73557 05'00" 2000-01-01 00:05:00.000   NaN</code></pre>
 </div>
-</div>
-</section>
-
-<section id="plotting-population" class="title-slide slide level1 center">
+</div><section id="plotting-population" class="title-slide slide level1 center">
 <h1>Plotting Population</h1>
 <p>Plotting one row per person (100 people):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>df <span class="sc">|&gt;</span> </span>
-<span id="cb5-2"><a></a>  <span class="fu">mutate</span>(<span class="at">SEQN =</span> <span class="fu">as.numeric</span>(<span class="fu">factor</span>(SEQN))) <span class="sc">|&gt;</span> </span>
-<span id="cb5-3"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> minute, <span class="at">y =</span> SEQN)) <span class="sc">+</span> </span>
-<span id="cb5-4"><a></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill =</span> mvpa)) <span class="sc">+</span> </span>
-<span id="cb5-5"><a></a>  <span class="fu">ylab</span>(<span class="cn">NULL</span>) <span class="sc">+</span> </span>
-<span id="cb5-6"><a></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb5-7"><a></a>        <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a></a>  <span class="fu">mutate</span>(<span class="at">SEQN =</span> <span class="fu">as.numeric</span>(<span class="fu">factor</span>(SEQN))) <span class="sc">|&gt;</span> </span>
+<span id="cb6-3"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> minute, <span class="at">y =</span> SEQN)) <span class="sc">+</span> </span>
+<span id="cb6-4"><a></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill =</span> mvpa)) <span class="sc">+</span> </span>
+<span id="cb6-5"><a></a>  <span class="fu">ylab</span>(<span class="cn">NULL</span>) <span class="sc">+</span> </span>
+<span id="cb6-6"><a></a>  <span class="fu">theme</span>(<span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb6-7"><a></a>        <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
-<img data-src="04-analysis-and-summaries_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
-
+<img data-src="04-analysis-and-summaries_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
 <section id="lasagna-plot" class="title-slide slide level1 center">
 <h1>Lasagna Plot</h1>
-<p><span class="citation" data-cites="swihart2009lasagna">Swihart et al. (<a href="#/references" role="doc-biblioref" onclick="">2009</a>)</span> stacks the data into layers</p>
+<p><span class="citation" data-cites="swihart2009lasagna">Swihart et al. (<a href="" role="doc-biblioref" onclick="return false;">2009</a>)</span> stacks the data into layers</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a>res <span class="ot">=</span> ggplot2<span class="sc">::</span><span class="fu">resolution</span>(df<span class="sc">$</span>minute)</span>
-<span id="cb6-2"><a></a>df <span class="sc">|&gt;</span> </span>
-<span id="cb6-3"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> minute)) <span class="sc">+</span> </span>
-<span id="cb6-4"><a></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">fill =</span> mvpa), <span class="at">position =</span> <span class="st">"stack"</span>, <span class="at">width =</span> res) <span class="sc">+</span> </span>
-<span id="cb6-5"><a></a>  <span class="fu">guides</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>res <span class="ot">=</span> ggplot2<span class="sc">::</span><span class="fu">resolution</span>(df<span class="sc">$</span>minute)</span>
+<span id="cb7-2"><a></a>df <span class="sc">|&gt;</span> </span>
+<span id="cb7-3"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> minute)) <span class="sc">+</span> </span>
+<span id="cb7-4"><a></a>  <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">fill =</span> mvpa), <span class="at">position =</span> <span class="st">"stack"</span>, <span class="at">width =</span> res) <span class="sc">+</span> </span>
+<span id="cb7-5"><a></a>  <span class="fu">guides</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-
 <section id="lasagna-plot-1" class="title-slide slide level1 center">
 <h1>Lasagna Plot</h1>
 
 <img data-src="04-analysis-and-summaries_files/figure-revealjs/lasagna_run-1.png" style="width:100.0%" class="r-stretch"></section>
-
 <section id="general-lasagna-function" class="title-slide slide level1 center">
 <h1>General Lasagna Function</h1>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>geom_lasagna <span class="ot">=</span> <span class="cf">function</span>(data, x, ..., <span class="at">position =</span> <span class="st">"stack"</span>) {</span>
-<span id="cb7-2"><a></a>  xvar <span class="ot">=</span> rlang<span class="sc">::</span><span class="fu">enquo</span>(x)</span>
-<span id="cb7-3"><a></a>  x_string <span class="ot">=</span> rlang<span class="sc">::</span><span class="fu">as_label</span>(xvar)</span>
-<span id="cb7-4"><a></a>  xvalues <span class="ot">=</span> data[[x_string]]</span>
-<span id="cb7-5"><a></a>  <span class="cf">if</span> (hms<span class="sc">::</span><span class="fu">is_hms</span>(xvalues)) {</span>
-<span id="cb7-6"><a></a>    xvalues <span class="ot">=</span> <span class="fu">as.numeric</span>(xvalues)</span>
-<span id="cb7-7"><a></a>  }</span>
-<span id="cb7-8"><a></a>  res <span class="ot">=</span> ggplot2<span class="sc">::</span><span class="fu">resolution</span>(xvalues)</span>
-<span id="cb7-9"><a></a>  data <span class="sc">%&gt;%</span></span>
-<span id="cb7-10"><a></a>    ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(..., <span class="at">x =</span> <span class="sc">!!</span>xvar)) <span class="sc">+</span></span>
-<span id="cb7-11"><a></a>    ggplot2<span class="sc">::</span><span class="fu">geom_bar</span>(<span class="at">position =</span> position, <span class="at">width =</span> res)</span>
-<span id="cb7-12"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a>geom_lasagna <span class="ot">=</span> <span class="cf">function</span>(data, x, ..., <span class="at">position =</span> <span class="st">"stack"</span>) {</span>
+<span id="cb8-2"><a></a>  xvar <span class="ot">=</span> rlang<span class="sc">::</span><span class="fu">enquo</span>(x)</span>
+<span id="cb8-3"><a></a>  x_string <span class="ot">=</span> rlang<span class="sc">::</span><span class="fu">as_label</span>(xvar)</span>
+<span id="cb8-4"><a></a>  xvalues <span class="ot">=</span> data[[x_string]]</span>
+<span id="cb8-5"><a></a>  <span class="cf">if</span> (hms<span class="sc">::</span><span class="fu">is_hms</span>(xvalues)) {</span>
+<span id="cb8-6"><a></a>    xvalues <span class="ot">=</span> <span class="fu">as.numeric</span>(xvalues)</span>
+<span id="cb8-7"><a></a>  }</span>
+<span id="cb8-8"><a></a>  res <span class="ot">=</span> ggplot2<span class="sc">::</span><span class="fu">resolution</span>(xvalues)</span>
+<span id="cb8-9"><a></a>  data <span class="sc">%&gt;%</span></span>
+<span id="cb8-10"><a></a>    ggplot2<span class="sc">::</span><span class="fu">ggplot</span>(<span class="fu">aes</span>(..., <span class="at">x =</span> <span class="sc">!!</span>xvar)) <span class="sc">+</span></span>
+<span id="cb8-11"><a></a>    ggplot2<span class="sc">::</span><span class="fu">geom_bar</span>(<span class="at">position =</span> position, <span class="at">width =</span> res)</span>
+<span id="cb8-12"><a></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-
 <section id="quantile-mapping" class="title-slide slide level1 center">
 <h1>Quantile Mapping</h1>
 <ul>
@@ -357,6 +356,16 @@
 <li>Map your data into NHANES quantiles (and by age/sex)</li>
 </ul>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="fu">library</span>(actiquantiles)</span>
+<span id="cb9-2"><a></a>example_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb9-3"><a></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,</span>
+<span id="cb9-4"><a></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">62</span>),</span>
+<span id="cb9-5"><a></a>  <span class="at">sex =</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>),</span>
+<span id="cb9-6"><a></a>  <span class="at">measure =</span> <span class="fu">c</span>(<span class="st">"mims"</span>, <span class="st">"ssl_steps"</span>),</span>
+<span id="cb9-7"><a></a>  <span class="at">value =</span> <span class="fu">c</span>(<span class="dv">15000</span>, <span class="dv">7500</span>)</span>
+<span id="cb9-8"><a></a>)</span>
+<span id="cb9-9"><a></a></span>
+<span id="cb9-10"><a></a><span class="fu">acti_map_nhanes</span>(example_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  id age    sex   measure value acti_pa_quantile
 1  1  25 Female      mims 15000        0.5349443
@@ -364,12 +373,10 @@
 </div>
 </div>
 </section>
-
 <section id="analysis" class="title-slide slide level1 center">
 <h1>Analysis</h1>
 
 </section>
-
 <section id="mean-analysis" class="title-slide slide level1 center">
 <h1>Mean Analysis</h1>
 <ul>
@@ -379,11 +386,10 @@
 <li>Standard statistical framework</li>
 </ul>
 </section>
-
 <section id="fui-analysis" class="title-slide slide level1 center">
 <h1>FUI Analysis</h1>
 <ul>
-<li>FUI - Fast univariate inference for longitudinal functional models <span class="citation" data-cites="cui2022fast">Cui et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span></li>
+<li>FUI - Fast univariate inference for longitudinal functional models <span class="citation" data-cites="cui2022fast">Cui et al. (<a href="" role="doc-biblioref" onclick="return false;">2022</a>)</span></li>
 <li><code>fastFMM</code> package</li>
 </ul>
 <ol type="1">
@@ -391,19 +397,22 @@
 <li>apply a smoother along the functional domain</li>
 <li>obtain joint confidence bands (usually bootstrap)</li>
 </ol>
+</section>
+<section id="fui-analysis-1" class="title-slide slide level1 center">
+<h1>FUI Analysis</h1>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a>wide <span class="ot">=</span> readr<span class="sc">::</span><span class="fu">read_rds</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/ac_subset_wide.rds"</span>))</span>
-<span id="cb9-2"><a></a><span class="fu">head</span>(wide)</span>
-<span id="cb9-3"><a></a>wide <span class="ot">=</span> wide[<span class="fu">rowSums</span>(<span class="fu">is.na</span>(wide <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"min"</span>)))) <span class="sc">==</span> <span class="dv">0</span>,]</span>
-<span id="cb9-4"><a></a><span class="co"># does not like tibbles</span></span>
-<span id="cb9-5"><a></a>wide <span class="ot">=</span> <span class="fu">as.data.frame</span>(wide)</span>
-<span id="cb9-6"><a></a>fit_data <span class="ot">&lt;-</span> fastFMM<span class="sc">::</span><span class="fu">fui</span>(</span>
-<span id="cb9-7"><a></a>  min <span class="sc">~</span> PAXDAYWM <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> SEQN),</span>
-<span id="cb9-8"><a></a>  <span class="at">data =</span> wide</span>
-<span id="cb9-9"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a></a><span class="fu">library</span>(fastFMM)</span>
+<span id="cb11-2"><a></a>wide <span class="ot">=</span> readr<span class="sc">::</span><span class="fu">read_rds</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/ac_subset_wide.rds"</span>))</span>
+<span id="cb11-3"><a></a><span class="fu">head</span>(wide)</span>
+<span id="cb11-4"><a></a>wide <span class="ot">=</span> wide[<span class="fu">rowSums</span>(<span class="fu">is.na</span>(wide <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="fu">starts_with</span>(<span class="st">"min"</span>)))) <span class="sc">==</span> <span class="dv">0</span>,]</span>
+<span id="cb11-5"><a></a><span class="co"># does not like tibbles</span></span>
+<span id="cb11-6"><a></a>wide <span class="ot">=</span> <span class="fu">as.data.frame</span>(wide)</span>
+<span id="cb11-7"><a></a>fit_data <span class="ot">&lt;-</span> fastFMM<span class="sc">::</span><span class="fu">fui</span>(</span>
+<span id="cb11-8"><a></a>  min <span class="sc">~</span> PAXDAYWM <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> SEQN),</span>
+<span id="cb11-9"><a></a>  <span class="at">data =</span> wide</span>
+<span id="cb11-10"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-
 <section id="fda-packages" class="title-slide slide level1 center">
 <h1>FDA Packages</h1>
 <ul>
@@ -412,7 +421,6 @@
 <li><a href="https://cran.r-project.org/web/packages/fda/index.html"><code>fda</code></a></li>
 </ul>
 </section>
-
 <section id="function-on-scalar-regression" class="title-slide slide level1 center">
 <h1>Function on Scalar Regression</h1>
 <p>Large generalized additive model (<code>mgcv</code>)</p>
@@ -420,34 +428,46 @@
 <li>y - scalar outcome</li>
 <li>functional effect for minute, by age, sex</li>
 </ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>fit <span class="ot">&lt;-</span> <span class="fu">bam</span>(</span>
+<span id="cb12-2"><a></a>  y <span class="sc">~</span></span>
+<span id="cb12-3"><a></a>    <span class="fu">s</span>(minute, <span class="at">bs =</span> <span class="st">"cc"</span>, <span class="at">k =</span> <span class="dv">24</span>) <span class="sc">+</span>             <span class="co"># population mean 24-hour curve</span></span>
+<span id="cb12-4"><a></a>    <span class="fu">s</span>(minute, <span class="at">by =</span> age_category, <span class="at">bs =</span> <span class="st">"cc"</span>, <span class="at">k =</span> <span class="dv">24</span>) <span class="sc">+</span> <span class="co"># age effect varies over day</span></span>
+<span id="cb12-5"><a></a>    <span class="fu">s</span>(minute, <span class="at">by =</span> sex, <span class="at">bs =</span> <span class="st">"cc"</span>, <span class="at">k =</span> <span class="dv">24</span>) <span class="sc">+</span><span class="co"># female–male difference over day</span></span>
+<span id="cb12-6"><a></a>    <span class="fu">s</span>(SEQN, <span class="at">bs =</span> <span class="st">"re"</span>),                        <span class="co"># participant random intercept</span></span>
+<span id="cb12-7"><a></a>  <span class="at">data =</span> minute_data,</span>
+<span id="cb12-8"><a></a>  <span class="at">method =</span> <span class="st">"fREML"</span>,</span>
+<span id="cb12-9"><a></a>  <span class="at">discrete =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb12-10"><a></a>  <span class="at">knots =</span> <span class="fu">list</span>(<span class="at">minute =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1440.5</span>))</span>
+<span id="cb12-11"><a></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </section>
-
 <section id="survey-weighting" class="title-slide slide level1 center">
 <h1>Survey Weighting</h1>
 <ul>
-<li><span class="citation" data-cites="smirnova2024scalar">Smirnova et al. (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span> <a href="https://github.com/andrew-leroux/surveySoFR"><code>surveySoFR</code></a> - scalar on function</li>
-<li><span class="citation" data-cites="koffman2025function">Koffman et al. (<a href="#/references" role="doc-biblioref" onclick="">2025</a>)</span> <a href="https://github.com/jhuwit/svyfosr"><code>svyfosr</code></a> - function on scalar
+<li><span class="citation" data-cites="smirnova2024scalar">Smirnova et al. (<a href="" role="doc-biblioref" onclick="return false;">2024</a>)</span> <a href="https://github.com/andrew-leroux/surveySoFR"><code>surveySoFR</code></a> - scalar on function</li>
+<li><span class="citation" data-cites="koffman2025function">Koffman et al. (<a href="" role="doc-biblioref" onclick="return false;">2025</a>)</span> <a href="https://github.com/jhuwit/svyfosr"><code>svyfosr</code></a> - function on scalar
 <ul>
 <li>FUI with <code>survey</code> package</li>
 </ul></li>
 </ul>
 </section>
-
 <section id="fda-book" class="title-slide slide level1 center">
 <h1>FDA Book</h1>
-<p>https://www.routledge.com/Functional-Data-Analysis-with-R/Crainiceanu-Goldsmith-Leroux-Cui/p/book/9781032244716</p>
+<p><a href="https://www.routledge.com/Functional-Data-Analysis-with-R/Crainiceanu-Goldsmith-Leroux-Cui/p/book/9781032244716">Functional Data Analysis with R</a></p>
 <img data-src="../assets/fda.jpg" class="r-stretch">
 </section>
-
 <section id="modules" class="title-slide slide level1 center">
 <h1>Modules</h1>
 <p><a href="https://jhuwit.github.io/wearabler/modules">https://jhuwit.github.io/wearabler/modules</a></p>
 </section>
-
-<section id="references" class="title-slide slide level1 smaller scrollable">
+<section id="references" class="title-slide slide level1 center">
 <h1>References</h1>
 
 
+</section>
+
+</div>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
 <div id="ref-cui2022fast" class="csl-entry" role="listitem">
 Cui, Erjia, Andrew Leroux, Ekaterina Smirnova, and Ciprian M Crainiceanu. 2022. <span>“Fast Univariate Inference for Longitudinal Functional Models.”</span> <em>Journal of Computational and Graphical Statistics</em> 31 (1): 219–30.
@@ -464,8 +484,7 @@ Smirnova, Ekaterina, Erjia Cui, Lucia Tabacu, and Andrew Leroux. 2024. <span>“
 <div id="ref-swihart2009lasagna" class="csl-entry" role="listitem">
 Swihart, Bruce, Brian Caffo, Bryan D James, Matthew Strand, Brian S Schwartz, and Naresh M Punjabi. 2009. <em>Lasagna Plots: A Saucy Alternative to Spaghetti Plots</em>.
 </div>
-</div>
-</section>
+</div></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <p><img src="../assets/jhu.png" class="slide-logo"></p>
