@@ -24,6 +24,8 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # Materials
 
+![](../assets/wearabler_qrcode.png){.r-stretch}
+
 Materials are at: https://github.com/jhuwit/wearabler
 
 Can use `git clone` or download via: https://github.com/jhuwit/wearabler/archive/refs/heads/main.zip
@@ -41,10 +43,12 @@ Can use `git clone` or download via: https://github.com/jhuwit/wearabler/archive
 ::: {.columns}
 
 ::: {.column width="50%"}
+From this
 ![](../assets/gt3x_file.png){.r-stretch}
 :::
 
 ::: {.column width="50%"}
+to this
 ![](../assets/ac_with_counts.png){height="85%"}
 :::
 
