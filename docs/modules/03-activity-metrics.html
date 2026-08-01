@@ -234,7 +234,7 @@
 
 <section id="activity-index-ai" class="title-slide slide level1 center">
 <h1>Activity Index: AI</h1>
-<p><span class="citation" data-cites="bai2016activity">Bai et al. (<a href="#/modules" role="doc-biblioref" onclick="">2016</a>)</span> introduced the Activity Index (AI)</p>
+<p><span class="citation" data-cites="bai2016activity">Bai et al. (<a href="#/references" role="doc-biblioref" onclick="">2016</a>)</span> introduced the Activity Index (AI)</p>
 <p>For a given window <span class="math inline">\(H\)</span>, AI is calculated for a given participant is calculated using <span class="math inline">\(AI_{0}\)</span> (no baseline variance estimated as in paper):</p>
 <p><span class="math display">\[
 \text{AI}(t; H)_0 = \sqrt{ \frac{1}{3} \sum\limits_{m=1}^3 \sigma_{m}^2(t; H)  }
@@ -244,8 +244,8 @@
 
 <section id="activity-index-ai-1" class="title-slide slide level1 center">
 <h1>Activity Index: AI</h1>
-<p><span class="citation" data-cites="bai2016activity">Bai et al. (<a href="#/modules" role="doc-biblioref" onclick="">2016</a>)</span> indicated AI is more sensitive ROC curves for moderate and vigorous physical activities compared to AC and was shown to be more sensitive to sedentary and light activities than ENMO.</p>
-<p><span class="citation" data-cites="bai2016activity">Bai et al. (<a href="#/modules" role="doc-biblioref" onclick="">2016</a>)</span> indicated that the window to calculate AI was 1 second and “any aggregated AI was obtained by summing up all the adjacent 1-second AIs within that period”. Thus, to calculate AI at a minute level, we would calculate it at a second level and then add the 60 <span class="math inline">\(\text{AI}_0\)</span> values together.</p>
+<p><span class="citation" data-cites="bai2016activity">Bai et al. (<a href="#/references" role="doc-biblioref" onclick="">2016</a>)</span> indicated AI is more sensitive ROC curves for moderate and vigorous physical activities compared to AC and was shown to be more sensitive to sedentary and light activities than ENMO.</p>
+<p><span class="citation" data-cites="bai2016activity">Bai et al. (<a href="#/references" role="doc-biblioref" onclick="">2016</a>)</span> indicated that the window to calculate AI was 1 second and “any aggregated AI was obtained by summing up all the adjacent 1-second AIs within that period”. Thus, to calculate AI at a minute level, we would calculate it at a second level and then add the 60 <span class="math inline">\(\text{AI}_0\)</span> values together.</p>
 </section>
 
 <section id="activity-index-ai-2" class="title-slide slide level1 center">
@@ -255,7 +255,7 @@
 
 <section id="mad" class="title-slide slide level1 small center">
 <h1>MAD</h1>
-<p><span class="citation" data-cites="mad">Vähä-Ypyä et al. (<a href="#/modules" role="doc-biblioref" onclick="">2015</a>)</span> recommended the Mean Amplitude Deviation (MAD): for=r a given epoch of length <span class="math inline">\(m\)</span> (5sec), and where <span class="math inline">\(\text{VM}\)</span> represents the vector magnitude of the signal, the calculation of MAD is: <span class="math display">\[
+<p><span class="citation" data-cites="mad">Vähä-Ypyä et al. (<a href="#/references" role="doc-biblioref" onclick="">2015</a>)</span> recommended the Mean Amplitude Deviation (MAD): for=r a given epoch of length <span class="math inline">\(m\)</span> (5sec), and where <span class="math inline">\(\text{VM}\)</span> represents the vector magnitude of the signal, the calculation of MAD is: <span class="math display">\[
 \text{MAD} = \frac{1}{m} \sum_{i=1}^{m} \left|\text{VM}_i- \overline{\text{VM}}_m \right|
 \]</span> They recommended taking the mean value of MAD for summarization and recommended 5-second epochs.</p>
 </section>
@@ -267,7 +267,7 @@
 
 <section id="mims" class="title-slide slide level1 smaller center">
 <h1>MIMS</h1>
-<p>Monitor-Independent Movement Summary, an “open-source, universal acceleration summary metric that accounts for discrepancies in raw data among research and consumer devices” <span class="citation" data-cites="mims">John et al. (<a href="#/modules" role="doc-biblioref" onclick="">2019</a>)</span>.</p>
+<p>Monitor-Independent Movement Summary, an “open-source, universal acceleration summary metric that accounts for discrepancies in raw data among research and consumer devices” <span class="citation" data-cites="mims">John et al. (<a href="#/references" role="doc-biblioref" onclick="">2019</a>)</span>.</p>
 <ul>
 <li>raw data interpolated of the signal to 100Hz</li>
 <li>extrapolates signal for regions that have hit the maximum/minimum acceleration units</li>
@@ -279,7 +279,7 @@
 
 <section id="mims-1" class="title-slide slide level1 center">
 <h1>MIMS</h1>
-<p><span class="citation" data-cites="karas2022comparison">Karas et al. (<a href="#/modules" role="doc-biblioref" onclick="">2022</a>)</span> found a correlation of <span class="math inline">\(\geq 0.97\)</span> between AC and MIMS units.</p>
+<p><span class="citation" data-cites="karas2022comparison">Karas et al. (<a href="#/references" role="doc-biblioref" onclick="">2022</a>)</span> found a correlation of <span class="math inline">\(\geq 0.97\)</span> between AC and MIMS units.</p>
 
 <img data-src="03-activity-metrics_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
 
@@ -322,7 +322,7 @@
 
 <section id="mvpa-definition" class="title-slide slide level1 center">
 <h1>MVPA definition</h1>
-<p>Counts per minute <span class="citation" data-cites="montoye2020development">(<a href="#/modules" role="doc-biblioref" onclick="">Montoye et al. 2020</a>)</span>:</p>
+<p>Counts per minute <span class="citation" data-cites="montoye2020development">(<a href="#/references" role="doc-biblioref" onclick="">Montoye et al. 2020</a>)</span>:</p>
 <ul>
 <li>&lt; 2860: sedentary,</li>
 <li>2860-3940: light activity</li>
@@ -332,7 +332,7 @@
 
 <section id="mvpa-definition-1" class="title-slide slide level1 center">
 <h1>MVPA definition</h1>
-<p>From <span class="citation" data-cites="sasaki2011validation">(<a href="#/modules" role="doc-biblioref" onclick="">Sasaki et al. 2011</a>)</span>:</p>
+<p>From <span class="citation" data-cites="sasaki2011validation">(<a href="#/references" role="doc-biblioref" onclick="">Sasaki et al. 2011</a>)</span>:</p>
 <ul>
 <li><span class="math inline">\(&lt;\)</span> 2690: light</li>
 <li>2690-6166 moderate</li>
@@ -344,21 +344,21 @@
 <section id="mvpa-definition-2" class="title-slide slide level1 center">
 <h1>MVPA definition</h1>
 <ul>
-<li><code>actinet</code>: deep learning <span class="citation" data-cites="acquah_2026">(<a href="#/modules" role="doc-biblioref" onclick="">Acquah et al. 2026</a>)</span></li>
+<li><code>actinet</code>: deep learning <span class="citation" data-cites="acquah_2026">(<a href="#/references" role="doc-biblioref" onclick="">Acquah et al. 2026</a>)</span></li>
 </ul>
 </section>
 
 <section id="oxwearables" class="title-slide slide level1 center">
 <h1>Oxwearables</h1>
 <p>https://github.com/OxWearables</p>
-<p>Self-supervised learner 700,000 accelerometer data from UKBB: <span class="citation" data-cites="yuan2024self">(<a href="#/modules" role="doc-biblioref" onclick="">Yuan et al. 2024</a>)</span></p>
+<p>Self-supervised learner 700,000 accelerometer data from UKBB: <span class="citation" data-cites="yuan2024self">(<a href="#/references" role="doc-biblioref" onclick="">Yuan et al. 2024</a>)</span></p>
 <img data-src="../assets/oxwearables.png" class="r-stretch">
 </section>
 
 <section id="step-counts-using-stepcount" class="title-slide slide level1 smaller center">
 <h1>Step Counts using <code>stepcount</code></h1>
 <p>SSL model + fine tuning with capture 24 data set.</p>
-<p><span class="citation" data-cites="stepcount">(<a href="#/modules" role="doc-biblioref" onclick=""><span class="nocase">Small et al.</span> 2023</a>)</span> python module ported using <code>reticulate</code>. <img data-src="../assets/stepcount.png"></p>
+<p><span class="citation" data-cites="stepcount">(<a href="#/references" role="doc-biblioref" onclick=""><span class="nocase">Small et al.</span> 2023</a>)</span> python module ported using <code>reticulate</code>. <img data-src="../assets/stepcount.png"></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>steps_gt3x <span class="ot">=</span> actimetrics<span class="sc">::</span><span class="fu">py_acti_calculate_stepcount</span>(data_gt3x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -376,7 +376,7 @@
 
 <section id="stepcount-works-pretty-well" class="title-slide slide level1 center">
 <h1>Stepcount works pretty well</h1>
-<p><span class="citation" data-cites="koffman2024evaluating">Koffman and Muschelli (<a href="#/modules" role="doc-biblioref" onclick="">2024</a>)</span></p>
+<p><span class="citation" data-cites="koffman2024evaluating">Koffman and Muschelli (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></p>
 <blockquote>
 <p>stepcount algorithm exhibited the highest F1 score (0.89 ± 0.11) and lowest MAPE (8.6 ± 9%) across all data sets and had the best, or comparable, F1 scores and MAPE in each individual data set.</p>
 </blockquote>
@@ -384,7 +384,7 @@
 
 <section id="stepcount-works-pretty-well-1" class="title-slide slide level1 center">
 <h1>Stepcount works pretty well</h1>
-<p><span class="citation" data-cites="koffman2024evaluating">Koffman and Muschelli (<a href="#/modules" role="doc-biblioref" onclick="">2024</a>)</span></p>
+<p><span class="citation" data-cites="koffman2024evaluating">Koffman and Muschelli (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span></p>
 
 <img data-src="../assets/comparison_data.png" class="r-stretch"></section>
 
@@ -395,7 +395,7 @@
 
 <section id="asleep" class="title-slide slide level1 center">
 <h1>Asleep</h1>
-<p>asleep - a sleep classifier for wearable sensor data using machine learning <span class="citation" data-cites="yuan2024self">(<a href="#/modules" role="doc-biblioref" onclick="">Yuan et al. 2024</a>)</span></p>
+<p>asleep - a sleep classifier for wearable sensor data using machine learning <span class="citation" data-cites="yuan2024self">(<a href="#/references" role="doc-biblioref" onclick="">Yuan et al. 2024</a>)</span></p>
 <p>https://github.com/OxWearables/asleep</p>
 </section>
 
@@ -432,7 +432,7 @@
 
 <section id="actinet" class="title-slide slide level1 center">
 <h1>Actinet</h1>
-<p><span class="citation" data-cites="acquah_2026">(<a href="#/modules" role="doc-biblioref" onclick="">Acquah et al. 2026</a>)</span> - identifies “how much time is spent in sleep, sedentary behaviour, or doing physical activity.”</p>
+<p><span class="citation" data-cites="acquah_2026">(<a href="#/references" role="doc-biblioref" onclick="">Acquah et al. 2026</a>)</span> - identifies “how much time is spent in sleep, sedentary behaviour, or doing physical activity.”</p>
 <p>https://github.com/OxWearables/actinet</p>
 </section>
 
@@ -495,9 +495,13 @@
 </ul>
 </section>
 
-<section id="modules" class="title-slide slide level1 smaller scrollable">
+<section id="modules" class="title-slide slide level1 center">
 <h1>Modules</h1>
-<p><a href="https://jhuwit.github.io/wearabler/modules">https://jhuwit.github.io/wearabler/modules</a> # References</p>
+<p><a href="https://jhuwit.github.io/wearabler/modules">https://jhuwit.github.io/wearabler/modules</a></p>
+</section>
+
+<section id="references" class="title-slide slide level1 smaller scrollable">
+<h1>References</h1>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">

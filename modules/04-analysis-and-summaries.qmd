@@ -59,6 +59,9 @@ head(wide)
 
 We reshaped it so each time is a minute and then thresholded average minute (not really "correct"):
 
+:::: {.columns}
+
+::: {.column width="50%"}
 ```{r}
 #| echo: true
 #| eval: false
@@ -72,7 +75,13 @@ df = df |>
          minute = hms::hms(minutes = minute),
          time = ymd_hms(paste0("2000-01-01", " ", as.character(minute)),
                         tz = "UTC"))
+```
 
+:::
+::: {.column width="50%"}
+```{r}
+#| echo: true
+#| eval: false
 df = df |>
   select(SEQN, time, value)
 df = df |>
@@ -83,6 +92,8 @@ df = df |>
                     labels = c("sedentary", "light", "mvpa")))
 head(df)
 ```
+
+::::
 
 ```{r long_ac}
 #| echo: false
