@@ -125,9 +125,17 @@ measures |>
 * The `acti_calculate_measures` will run AC, AI, MIMS, and MAD
 ```{r}
 #| eval: false
+#| echo: true
 #| cache: true
 measures = acti_calculate_measures(data_gt3x)
+head(measures, n = 3)
 ```
+```{r}
+#| eval: true
+#| echo: false
+head(measures, n = 3)
+```
+
 
 # Other Minute-Level Metrics
 
@@ -143,10 +151,10 @@ Counts per minute [@montoye2020development]:
 
 From [@sasaki2011validation]:
 
-- < 2690: light
+- $<$ 2690: light
 - 2690-6166 moderate
 - 6167–9642: vigorous
-- >9642: very vigorous
+- $>$ 9642: very vigorous
 
 # MVPA definition
 
@@ -157,19 +165,14 @@ https://github.com/OxWearables
 
 Self-supervised learner 700,000 accelerometer data from UKBB: [@yuan2024self]
 
-```{r}
-#| echo: false
-knitr::include_graphics("assets/oxwearables.png")
-```
+![](../assets/oxwearables.png){.r-stretch}
 
 # Step Counts using `stepcount` {.smaller}
 
 SSL model + fine tuning with capture 24 data set.
 
 [@stepcount] python module ported using `reticulate`. 
-```{r}
-knitr::include_graphics("assets/stepcount.png")
-```
+![](../assets/stepcount.png){.r-stretch}
 
 ```{r code_stepcount}
 #| eval: false
@@ -336,19 +339,15 @@ I haven't used `asleep` in publications yet, but **have** seen people use it.
 From Pfizer group: 
 https://scikit-digital-health.readthedocs.io/en/latest/
 
-```{r}
-#| echo: false
-knitr::include_graphics("assets/skdh.png")
-```
+![](../assets/skdh.png){.r-stretch}
+
 
 
 # `wristpy` Module
 [`wristpy`](https://github.com/childmindresearch/wristpy) - python package for wrist-worn accelerometer data processing from Child Mind Institute
 
-```{r}
-#| echo: false
-knitr::include_graphics("assets/wristpy.png")
-```
+
+![](../assets/wristpy.png){.r-stretch}
 
 
 

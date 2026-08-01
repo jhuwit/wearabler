@@ -19,6 +19,8 @@ library(knitr)
 library(hms)
 library(lubridate)
 library(dplyr)
+library(here)
+library(activerse)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
@@ -44,7 +46,19 @@ Can use `git clone` or download via: https://github.com/jhuwit/wearabler/archive
 
 ::: {.column width="50%"}
 ![](../assets/gt3x_file.png){.r-stretch}
+```{r}
+#| eval: false
+data = acti_read_gt3x(here("data/TAS1H30182791 (2026-04-29).gt3x"))
+minute = acti_process(data)
+minute |> 
+  ggplot(aes(x = time, y = counts)) + 
+  geom_segment(
+    aes(x = time, xend = time,
+        y = -Inf, yend = Inf, color = wear), alpha = 0.25) +
+  geom_step() 
+```
 :::
+
 
 ::: {.column width="50%"}
 ![](../assets/ac_with_counts.png){width="70%"}

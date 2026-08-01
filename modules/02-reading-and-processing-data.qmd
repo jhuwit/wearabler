@@ -141,27 +141,45 @@ Statistics!
 
 # Reading in the Data
 
-```{r}
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r read_in_gt3x_false}
 #| eval: false
 library(actiread)
 file_gt3x = here::here("data/TAS1H30182791 (2026-04-29).gt3x")
-file_cwa = here::here("data/114890_0000000000.cwa")
 
 data_gt3x = actiread::acti_read_gt3x(file_gt3x)
-data_cwa = actiread::acti_read_cwa(file_cwa)
 head(data_gt3x, n = 3)
-head(data_cwa, n = 3)
 ```
 
-
-```{r load_raw_data}
+```{r load_raw_gt3x}
 #| echo: false
-tar_load(data_cwa)
 tar_load(data_gt3x)
 head(data_gt3x, n = 3)
-head(data_cwa, n = 3)
 ```
 
+:::
+
+::: {.column width="50%"}
+
+```{r read_in_cwa_false}
+#| eval: false
+file_cwa = here::here("data/114890_0000000000.cwa")
+data_cwa = actiread::acti_read_cwa(file_cwa)
+head(data_cwa |> select(time, x, y, z), n = 3)
+```
+
+
+```{r load_raw_cwa}
+#| echo: false
+tar_load(data_cwa)
+head(data_cwa |> select(time, x, y, z), n = 3)
+```
+
+:::
+::::
 
 # Reading CWA files
 
@@ -169,20 +187,37 @@ Different implementations of reading in the data
 * we recommend `acti_py_read_cwa` (closer to OMGUI)
 
 
+```{r load_raw_data_py}
+#| echo: false
+tar_load(data_cwa_py)
+```
+
 ```{r}
 #| eval: false
 # uses actipy implementation not `GGIR:readAxivity`
 data_cwa_py = actiread::acti_py_read_cwa(file_cwa)
-head(data_cwa, n = 3)
-head(data_cwa_py, n = 3)
 ```
 
-```{r load_raw_data_py}
-#| echo: false
-tar_load(data_cwa_py)
-head(data_cwa, n = 3)
-head(data_cwa_py, n = 3)
+:::: {.columns}
+
+::: {.column width="50%"}
+
+
+```{r show_raw_data_nonpy}
+head(data_cwa |> select(time, x, y, z), n = 3)
 ```
+:::
+
+
+::: {.column width="50%"}
+
+
+```{r show_raw_data_py}
+head(data_cwa_py |> select(time, x, y, z), n = 3)
+```
+:::
+
+::::
 
 # Summary
 
@@ -280,6 +315,7 @@ anyDuplicated(data_cwa$time)
 - `acti_tidy_axes` will reshape the time/XYZ data to a long format for plotting
 
 ```{r tidy_axes}
+#| cache: true
 long = data_gt3x |> acti_tidy_axes()
 head(long, n = 3)
 long |> count(axis)
@@ -288,6 +324,8 @@ long |> count(axis)
 # Plot raw data
 
 ```{r tidy_axes_plot}
+#| cache: true
+#| dependson: tidy_axes
 long |> 
   ggplot(aes(x = time, y = value, colour = axis)) + geom_step()
 ```
@@ -417,6 +455,8 @@ calibration$offset
 head(data)
 ```
 
+:::
+::: {.column width="50%"}
 
 ```{r calibrated_cal_estimates}
 head(data_calibrated)
@@ -438,6 +478,7 @@ head(data_calibrated)
 * [`agcounts`](https://github.com/bhelsel/agcounts) R package
 
 ```{r ac_calculation}
+#| cache: true
 counts_gt3x = acti_calculate_counts(data_gt3x, verbose = FALSE)
 counts_cwa = acti_calculate_counts(data_cwa)
 ```
@@ -530,7 +571,7 @@ minute = acti_process(data)
 
 ```{r load_minute}
 #| echo: false
-minute = tar_read(data_gt3x_proc)
+minute = tar_read(data_proc)
 ```
 
 # Plotting Full Data
@@ -548,11 +589,14 @@ minute |>
 # Plotting Day-level
 
 
+:::: {.columns}
+
+::: {.column width="40%"}
+
 ```{r plot_full_data_show}
-#| eval: true
-#| echo: false
-#| fig-height: 10
-#| fig-width: 7
+#| eval: false
+#| echo: true
+#| cache: true
 tar_load(data_proc)
 data_proc |> 
   mutate(date = lubridate::as_date(time),
@@ -568,6 +612,21 @@ data_proc |>
   facet_wrap(~ date, ncol = 1)
 ```
 
+:::
+
+::: {.column width="60%"}
+
+```{r plot_full_data}
+#| dependson: plot_full_data_show
+#| echo: false
+#| out-width: "100%"
+#| fig-height: 10
+#| fig-width: 7
+<<plot_full_data_show>>
+```
+
+:::
+:::: 
 # Day Level Inclusion
 
 Usually determined by number of minutes wear time

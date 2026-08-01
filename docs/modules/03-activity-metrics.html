@@ -298,6 +298,21 @@
 <ul>
 <li>The <code>acti_calculate_measures</code> will run AC, AI, MIMS, and MAD</li>
 </ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>measures <span class="ot">=</span> <span class="fu">acti_calculate_measures</span>(data_gt3x)</span>
+<span id="cb1-2"><a></a><span class="fu">head</span>(measures, <span class="at">n =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 11
+  time                       AI     SD   SD_t AI_DEFINED    MAD   MEDAD mean_r
+  &lt;dttm&gt;                  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+1 2026-04-29 11:38:00.000 0     0      0           0     0      0        0    
+2 2026-04-29 11:39:00.000 0.281 0.387  0.0342      0.224 0.287  0.172    0.172
+3 2026-04-29 11:40:00.000 1.01  0.0356 0.0292      0.124 0.0117 0.00517  1.05 
+# ℹ 3 more variables: ENMO_t &lt;dbl&gt;, AC &lt;dbl&gt;, MIMS_UNIT &lt;dbl&gt;</code></pre>
+</div>
+</div>
 </section>
 
 <section id="other-minute-level-metrics" class="title-slide slide level1 center">
@@ -319,12 +334,10 @@
 <h1>MVPA definition</h1>
 <p>From <span class="citation" data-cites="sasaki2011validation">(<a href="#/references" role="doc-biblioref" onclick="">Sasaki et al. 2011</a>)</span>:</p>
 <ul>
-<li>&lt; 2690: light</li>
+<li><span class="math inline">\(&lt;\)</span> 2690: light</li>
 <li>2690-6166 moderate</li>
 <li>6167–9642: vigorous</li>
-<li><blockquote>
-<p>9642: very vigorous</p>
-</blockquote></li>
+<li><span class="math inline">\(&gt;\)</span> 9642: very vigorous</li>
 </ul>
 </section>
 
@@ -339,16 +352,15 @@
 <h1>Oxwearables</h1>
 <p>https://github.com/OxWearables</p>
 <p>Self-supervised learner 700,000 accelerometer data from UKBB: <span class="citation" data-cites="yuan2024self">(<a href="#/references" role="doc-biblioref" onclick="">Yuan et al. 2024</a>)</span></p>
-
-<img data-src="assets/oxwearables.png" class="r-stretch"></section>
+<img data-src="../assets/oxwearables.png" class="r-stretch">
+</section>
 
 <section id="step-counts-using-stepcount" class="title-slide slide level1 smaller center">
 <h1>Step Counts using <code>stepcount</code></h1>
 <p>SSL model + fine tuning with capture 24 data set.</p>
-<p><span class="citation" data-cites="stepcount">(<a href="#/references" role="doc-biblioref" onclick=""><span class="nocase">Small et al.</span> 2023</a>)</span> python module ported using <code>reticulate</code>.</p>
-
-<img data-src="assets/stepcount.png" class="r-stretch"><div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a>steps_gt3x <span class="ot">=</span> actimetrics<span class="sc">::</span><span class="fu">py_acti_calculate_stepcount</span>(data_gt3x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><span class="citation" data-cites="stepcount">(<a href="#/references" role="doc-biblioref" onclick=""><span class="nocase">Small et al.</span> 2023</a>)</span> python module ported using <code>reticulate</code>. <img data-src="../assets/stepcount.png" class="r-stretch"></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>steps_gt3x <span class="ot">=</span> actimetrics<span class="sc">::</span><span class="fu">py_acti_calculate_stepcount</span>(data_gt3x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 
@@ -390,21 +402,21 @@
 <section id="asleep-plot" class="title-slide slide level1 center">
 <h1>Asleep Plot</h1>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a>pred <span class="ot">=</span> asleep<span class="sc">$</span>predictions <span class="sc">|&gt;</span> </span>
-<span id="cb2-2"><a></a>  <span class="fu">mutate</span>(<span class="at">time =</span> <span class="fu">ymd_hms</span>(time, <span class="at">tz =</span> <span class="st">"GMT"</span>),</span>
-<span id="cb2-3"><a></a>         <span class="at">date =</span> lubridate<span class="sc">::</span><span class="fu">as_date</span>(time),</span>
-<span id="cb2-4"><a></a>         <span class="at">hourtime =</span> hms<span class="sc">::</span><span class="fu">as_hms</span>(time))</span>
-<span id="cb2-5"><a></a>data_proc <span class="ot">=</span> data_proc <span class="sc">|&gt;</span> </span>
-<span id="cb2-6"><a></a>  <span class="fu">mutate</span>(<span class="at">date =</span> lubridate<span class="sc">::</span><span class="fu">as_date</span>(time),</span>
-<span id="cb2-7"><a></a>         <span class="at">hourtime =</span> hms<span class="sc">::</span><span class="fu">as_hms</span>(time))</span>
-<span id="cb2-8"><a></a>data_proc <span class="sc">|&gt;</span> </span>
-<span id="cb2-9"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hourtime, <span class="at">y =</span> counts)) <span class="sc">+</span> </span>
-<span id="cb2-10"><a></a>  <span class="fu">geom_segment</span>(</span>
-<span id="cb2-11"><a></a>    <span class="at">data =</span> pred,</span>
-<span id="cb2-12"><a></a>    <span class="fu">aes</span>(<span class="at">x =</span> hourtime, <span class="at">xend =</span> hourtime,</span>
-<span id="cb2-13"><a></a>        <span class="at">y =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">yend =</span> <span class="cn">Inf</span>, <span class="at">color =</span> sleep_stage), <span class="at">alpha =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
-<span id="cb2-14"><a></a>  <span class="fu">geom_step</span>() <span class="sc">+</span></span>
-<span id="cb2-15"><a></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> date, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>pred <span class="ot">=</span> asleep<span class="sc">$</span>predictions <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a></a>  <span class="fu">mutate</span>(<span class="at">time =</span> <span class="fu">ymd_hms</span>(time, <span class="at">tz =</span> <span class="st">"GMT"</span>),</span>
+<span id="cb4-3"><a></a>         <span class="at">date =</span> lubridate<span class="sc">::</span><span class="fu">as_date</span>(time),</span>
+<span id="cb4-4"><a></a>         <span class="at">hourtime =</span> hms<span class="sc">::</span><span class="fu">as_hms</span>(time))</span>
+<span id="cb4-5"><a></a>data_proc <span class="ot">=</span> data_proc <span class="sc">|&gt;</span> </span>
+<span id="cb4-6"><a></a>  <span class="fu">mutate</span>(<span class="at">date =</span> lubridate<span class="sc">::</span><span class="fu">as_date</span>(time),</span>
+<span id="cb4-7"><a></a>         <span class="at">hourtime =</span> hms<span class="sc">::</span><span class="fu">as_hms</span>(time))</span>
+<span id="cb4-8"><a></a>data_proc <span class="sc">|&gt;</span> </span>
+<span id="cb4-9"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hourtime, <span class="at">y =</span> counts)) <span class="sc">+</span> </span>
+<span id="cb4-10"><a></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb4-11"><a></a>    <span class="at">data =</span> pred,</span>
+<span id="cb4-12"><a></a>    <span class="fu">aes</span>(<span class="at">x =</span> hourtime, <span class="at">xend =</span> hourtime,</span>
+<span id="cb4-13"><a></a>        <span class="at">y =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">yend =</span> <span class="cn">Inf</span>, <span class="at">color =</span> sleep_stage), <span class="at">alpha =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb4-14"><a></a>  <span class="fu">geom_step</span>() <span class="sc">+</span></span>
+<span id="cb4-15"><a></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> date, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 
@@ -427,15 +439,15 @@
 <section id="actinet-plot" class="title-slide slide level1 center">
 <h1>Actinet Plot</h1>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a>data_proc <span class="sc">|&gt;</span> </span>
-<span id="cb3-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hourtime, <span class="at">y =</span> counts)) <span class="sc">+</span> </span>
-<span id="cb3-3"><a></a>  <span class="fu">geom_segment</span>(</span>
-<span id="cb3-4"><a></a>    <span class="at">data =</span> actinet,</span>
-<span id="cb3-5"><a></a>    <span class="fu">aes</span>(<span class="at">x =</span> hourtime, <span class="at">xend =</span> hourtime,</span>
-<span id="cb3-6"><a></a>        <span class="at">y =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">yend =</span> <span class="cn">Inf</span>, <span class="at">color =</span> moderate_vigorous <span class="sc">==</span> <span class="dv">1</span>), <span class="at">alpha =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
-<span id="cb3-7"><a></a>  <span class="fu">geom_step</span>() <span class="sc">+</span></span>
-<span id="cb3-8"><a></a>  <span class="fu">guides</span>(<span class="at">colour =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">"MVPA"</span>)) <span class="sc">+</span> </span>
-<span id="cb3-9"><a></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> date, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>data_proc <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hourtime, <span class="at">y =</span> counts)) <span class="sc">+</span> </span>
+<span id="cb5-3"><a></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb5-4"><a></a>    <span class="at">data =</span> actinet,</span>
+<span id="cb5-5"><a></a>    <span class="fu">aes</span>(<span class="at">x =</span> hourtime, <span class="at">xend =</span> hourtime,</span>
+<span id="cb5-6"><a></a>        <span class="at">y =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">yend =</span> <span class="cn">Inf</span>, <span class="at">color =</span> moderate_vigorous <span class="sc">==</span> <span class="dv">1</span>), <span class="at">alpha =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb5-7"><a></a>  <span class="fu">geom_step</span>() <span class="sc">+</span></span>
+<span id="cb5-8"><a></a>  <span class="fu">guides</span>(<span class="at">colour =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">"MVPA"</span>)) <span class="sc">+</span> </span>
+<span id="cb5-9"><a></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> date, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>https://link.springer.com/article/10.1186/s12889-026-27719-0</p>
 </section>
@@ -453,14 +465,14 @@
 <section id="skdh-module" class="title-slide slide level1 center">
 <h1><code>skdh</code> module</h1>
 <p>From Pfizer group: https://scikit-digital-health.readthedocs.io/en/latest/</p>
-
-<img data-src="assets/skdh.png" class="r-stretch"></section>
+<img data-src="../assets/skdh.png" class="r-stretch">
+</section>
 
 <section id="wristpy-module" class="title-slide slide level1 center">
 <h1><code>wristpy</code> Module</h1>
 <p><a href="https://github.com/childmindresearch/wristpy"><code>wristpy</code></a> - python package for wrist-worn accelerometer data processing from Child Mind Institute</p>
-
-<img data-src="assets/wristpy.png" class="r-stretch"></section>
+<img data-src="../assets/wristpy.png" class="r-stretch">
+</section>
 
 <section id="technical-stuff-condaenvironments" class="title-slide slide level1 center">
 <h1>Technical Stuff: Conda/Environments</h1>
