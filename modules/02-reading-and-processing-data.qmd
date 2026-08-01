@@ -149,7 +149,6 @@ Statistics!
 #| eval: false
 library(actiread)
 file_gt3x = here::here("data/TAS1H30182791 (2026-04-29).gt3x")
-
 data_gt3x = actiread::acti_read_gt3x(file_gt3x)
 head(data_gt3x, n = 3)
 ```
@@ -667,7 +666,6 @@ minute |>
 - Day level inclusion usually based on wear
 
 # Modules
-[https://jhuwit.github.io/wearabler/](https://jhuwit.github.io/wearabler/)
-
+[https://jhuwit.github.io/wearabler/modules](https://jhuwit.github.io/wearabler/modules)
 
 # References

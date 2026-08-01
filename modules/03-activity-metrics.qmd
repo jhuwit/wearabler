@@ -172,7 +172,7 @@ Self-supervised learner 700,000 accelerometer data from UKBB: [@yuan2024self]
 SSL model + fine tuning with capture 24 data set.
 
 [@stepcount] python module ported using `reticulate`. 
-![](../assets/stepcount.png){.r-stretch}
+![](../assets/stepcount.png)
 
 ```{r code_stepcount}
 #| eval: false
@@ -208,10 +208,7 @@ steps_gt3x |>
 
 @koffman2024evaluating
 
-```{r}
-knitr::include_graphics("assets/comparison_data.png")
-```
-
+![](../assets/comparison_data.png)
 
 # Steps Per Minute
 
@@ -331,7 +328,7 @@ https://link.springer.com/article/10.1186/s12889-026-27719-0
 
 # Disclaimer
 
-I haven't used `asleep` in publications yet, but **have** seen people use it.
+I haven't used `actinet` in publications yet, but **have** seen people use it.
 
 
 # `skdh` module
@@ -358,7 +355,7 @@ https://scikit-digital-health.readthedocs.io/en/latest/
 - If using R, Python link using `reticulate` package
 - Multiple `conda` environments may be needed
 - package/module A needs numpy <= 2.11 and package B needs numpy > 2.30
-- "Switching" conda environments **within** a script/session is a hassle
+- "Switching" conda `env` **within** a script/session - No.
 
 
 # Summary
@@ -368,6 +365,5 @@ https://scikit-digital-health.readthedocs.io/en/latest/
 - Deep learning is moving forward with this
 
 # Modules
-[https://jhuwit.github.io/wearabler/](https://jhuwit.github.io/wearabler/)
-
+[https://jhuwit.github.io/wearabler/modules](https://jhuwit.github.io/wearabler/modules)
 # References
