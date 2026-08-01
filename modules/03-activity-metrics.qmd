@@ -5,7 +5,7 @@ format:
     theme: simple
     transition: fade
     slide-number: true
-    footer: "Wearable-R: https://github.com/jhuwit/wearabler"
+    footer: "Wearable-R: https://jhuwit.github.io/wearabler/"
     logo: ../assets/jhu.png
     css: ../assets/logo.css
 bibliography: ../assets/references.bib    
@@ -366,5 +366,8 @@ https://scikit-digital-health.readthedocs.io/en/latest/
 - Many ways to characterize activity
 - Many ways to characterize behavior
 - Deep learning is moving forward with this
+
+# Modules
+[https://jhuwit.github.io/wearabler/](https://jhuwit.github.io/wearabler/)
 
 # References

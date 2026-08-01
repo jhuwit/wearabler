@@ -5,7 +5,7 @@ format:
     theme: simple
     transition: fade
     slide-number: true
-    footer: "Wearable-R: https://github.com/jhuwit/wearabler"
+    footer: "Wearable-R: https://jhuwit.github.io/wearabler/"
     logo: ../assets/jhu.png
     css: ../assets/logo.css
 bibliography: ../assets/references.bib    
@@ -665,6 +665,9 @@ minute |>
 - `acti_process` can do that and merge the data
 - Plotting the data typically using `geom_step` and color by `geom_segment`
 - Day level inclusion usually based on wear
+
+# Modules
+[https://jhuwit.github.io/wearabler/](https://jhuwit.github.io/wearabler/)
 
 
 # References

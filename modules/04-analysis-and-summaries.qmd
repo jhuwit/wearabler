@@ -5,7 +5,7 @@ format:
     theme: simple
     transition: fade
     slide-number: true
-    footer: "Wearable-R: https://github.com/jhuwit/wearabler"
+    footer: "Wearable-R: https://jhuwit.github.io/wearabler/"
     logo: ../assets/jhu.png
     css: ../assets/logo.css
 bibliography: ../assets/references.bib    
@@ -247,9 +247,11 @@ fit <- bam(
 
 https://www.routledge.com/Functional-Data-Analysis-with-R/Crainiceanu-Goldsmith-Leroux-Cui/p/book/9781032244716
 
-```{r}
-#| echo: false
-knitr::include_graphics("assets/fda.jpg")
-```
+
+![](../assets/fda.jpg){.r-stretch}
+
+
+# Modules
+[https://jhuwit.github.io/wearabler/](https://jhuwit.github.io/wearabler/)
 
 # References

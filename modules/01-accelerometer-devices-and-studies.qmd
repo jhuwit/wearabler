@@ -5,7 +5,7 @@ format:
     theme: simple
     transition: fade
     slide-number: true
-    footer: "Wearable-R: https://github.com/jhuwit/wearabler"
+    footer: "Wearable-R: https://jhuwit.github.io/wearabler/"
     logo: ../assets/jhu.png
     css: ../assets/logo.css
 bibliography: ../assets/references.bib    
@@ -28,7 +28,10 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ![](../assets/wearabler_qrcode.png){.r-stretch}
 
+Site is rendered at [https://jhuwit.github.io/wearabler/](https://jhuwit.github.io/wearabler/)
+
 Materials are at: [https://github.com/jhuwit/wearabler](https://github.com/jhuwit/wearabler)
+
 
 Can use `git clone` or download via: https://github.com/jhuwit/wearabler/archive/refs/heads/main.zip
 
@@ -194,5 +197,9 @@ If you can't find a package, try `pak::pkg_install("jhuwit/PACKAGE")`, such as
 - `pak::pkg_install("jhuwit/asleep")`
 - `pak::pkg_install("jhuwit/activerse")`
 
+
+
+# Modules
+[https://jhuwit.github.io/wearabler/](https://jhuwit.github.io/wearabler/)
 
 # References
