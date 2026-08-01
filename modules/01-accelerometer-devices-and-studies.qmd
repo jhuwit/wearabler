@@ -26,7 +26,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ![](../assets/wearabler_qrcode.png){.r-stretch}
 
-Materials are at: https://github.com/jhuwit/wearabler
+Materials are at: [https://github.com/jhuwit/wearabler](https://github.com/jhuwit/wearabler)
 
 Can use `git clone` or download via: https://github.com/jhuwit/wearabler/archive/refs/heads/main.zip
 
@@ -36,20 +36,18 @@ Can use `git clone` or download via: https://github.com/jhuwit/wearabler/archive
 
 - Objective assessment in free-living settings - more accurate than self-report [@Prince2008].  
 
-- Shown as strongest predictor of mortality [@tabacu2020quantifying] 
+- Shown as strongest predictor of mortality [@tabacu2020quantifying; @leroux2024nhanes] 
 
 # Goals
 
 ::: {.columns}
 
 ::: {.column width="50%"}
-From this
 ![](../assets/gt3x_file.png){.r-stretch}
 :::
 
 ::: {.column width="50%"}
-to this
-![](../assets/ac_with_counts.png){height="85%"}
+![](../assets/ac_with_counts.png){width="70%"}
 :::
 
 :::
@@ -71,7 +69,7 @@ What does an accelerometer measure?
 **Commercial** wearables (watches and fitness trackers) - designed for consumer experience. 
 
   - Proprietary step, sleep, or activity scores
-  - Raw signal and processing rules may be unavailable or change over time.
+  - Raw signal may be unavailable and processing rules may change over time.
 
 **Research grade** - for studies
 
@@ -142,6 +140,11 @@ Timestamp                  X        Y        Z
 
 # Data Resolution
 
+
+:::: {.columns}
+
+::: {.column width="70%"}
+
 - **Raw Accelerometer Data** (high-resolution time-series)
   - 20-100+ samples/second (Hz)
 - **Wear Time Detection** (non-wear vs. wear periods)
@@ -150,8 +153,14 @@ Timestamp                  X        Y        Z
   - **Steps** (estimation of a "step")
 - Sleep estimation
 
-![](../assets/silly_walks.gif){.r-stretch}
+:::
 
+::: {.column width="30%"}
+
+
+![](../assets/silly_walks.gif){.r-stretch}
+:::
+::::
 
 # Course Learning Goals
 
@@ -164,7 +173,7 @@ Timestamp                  X        Y        Z
 
 # Packages
 
-This work is based off the [`activerse`](https://github.com/jhuwit/activerse), which is maintained by Johns Hopkins Wearable and Implantable Technology (WIT) group, with code at https://github.com/jhuwit.
+This work is based off the [`activerse`](https://github.com/jhuwit/activerse), which is maintained by Johns Hopkins Wearable and Implantable Technology (WIT) group, with code at [https://github.com/jhuwit](https://github.com/jhuwit).
 
 If you can't find a package, try `pak::pkg_install("jhuwit/PACKAGE")`, such as
 

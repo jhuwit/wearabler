@@ -1,7 +1,20 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+<div style="font-size: 30px;">
+
+[Rendered Page at
+https://jhuwit.github.io/wearabler/](https://jhuwit.github.io/wearabler/)
+
+</div>
+
 # Wearable-R!
+
+<div style="text-align: center;">
+
+<img src="assets/wearabler_qrcode.png" width="200" />
+
+</div>
 
 <!-- badges: start -->
 

@@ -19,12 +19,14 @@ library(tidyverse)
 library(targets)
 library(activerse)
 options(digits.secs = 3)
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Materials
 
-Materials are at: https://github.com/jhuwit/wearabler
+![](../assets/wearabler_qrcode.png){.r-stretch}
+
+Materials are at: [https://github.com/jhuwit/wearabler](https://github.com/jhuwit/wearabler)
 
 Can use `git clone` or download via: https://github.com/jhuwit/wearabler/archive/refs/heads/main.zip
 
@@ -44,11 +46,14 @@ The [`targets`](https://books.ropensci.org/targets/) pipeline located [in the Gi
 targets::tar_make()
 ```
 
-# Data: Personal Recording (from John)
+# Data: 
 
-- `TAS1H30182791 (2026-04-29).gt3x` - wore GT9X device
-- `114890_0000000000.cwa` - wore AX3 device
-- `AI15_MOS2D09170398_2017-10-30.gt3x` - 7 days of data from  [[@chadwell2019upper]](https://springernature.figshare.com/articles/dataset/Unprocessed_raw_30Hz_acceleration_data_stored_as_gt3x/7946189)
+- Personal Recording (from John)
+  - `TAS1H30182791 (2026-04-29).gt3x` - wore GT9X device
+  - `114890_0000000000.cwa` - wore AX3 device
+
+- [[@chadwell2019upper]](https://springernature.figshare.com/articles/dataset/Unprocessed_raw_30Hz_acceleration_data_stored_as_gt3x/7946189)
+  - `AI15_MOS2D09170398_2017-10-30.gt3x` - 7 days of data from  
 
 # Pipeline Overview
 
@@ -87,7 +92,6 @@ daily |>
 Read in Data (also `acti_read_cwa`):
 ```{r}
 #| eval: false
-#| echo: true
 data_gt3x = acti_read_gt3x(file_gt3x)
 ```
 
@@ -95,7 +99,6 @@ Create minute level summaries, including wear inclusion criteria
 
 ```{r}
 #| eval: false
-#| echo: true
 counts_and_wear = acti_process(data_gt3x, method = "choi")
 counts_and_wear = add_day_inclusion(counts_and_wear, min_required = 1368L)
 ```
@@ -105,7 +108,6 @@ counts_and_wear = add_day_inclusion(counts_and_wear, min_required = 1368L)
 Keep days with minimum wear time, calculate day-level summaries
 ```{r}
 #| eval: false
-#| echo: true
 daily = counts_and_wear |> 
   filter(is_included) |> 
   group_by(date) |> 
@@ -121,7 +123,6 @@ daily = counts_and_wear |>
 Keep participants with minimum number of days observed, create "average" day activity:
 ```{r}
 #| eval: false
-#| echo: true
 # all_daily = dplyr::bind_rows(daily_1, daily_2, ...)
 daily |> 
   # usually group_by(id)
@@ -142,7 +143,6 @@ Statistics!
 
 ```{r}
 #| eval: false
-#| echo: true
 library(actiread)
 file_gt3x = here::here("data/TAS1H30182791 (2026-04-29).gt3x")
 file_cwa = here::here("data/114890_0000000000.cwa")
@@ -171,7 +171,6 @@ Different implementations of reading in the data
 
 ```{r}
 #| eval: false
-#| echo: true
 # uses actipy implementation not `GGIR:readAxivity`
 data_cwa_py = actiread::acti_py_read_cwa(file_cwa)
 head(data_cwa, n = 3)
@@ -199,63 +198,77 @@ Core raw accelerometry is time series 3 axes:
 | Column | Meaning |
 |---|---|
 | `time` | A datetime timestamp identifying when the sample was recorded |
-| `x`,`X` | Acceleration along the device x axis |
-| `y`,`Y` | Acceleration along the device y axis |
-| `z`,`Z` | Acceleration along the device z axis |
+| `x`,`X` | Acceleration along x axis |
+| `y`,`Y` | Acceleration along y axis |
+| `z`,`Z` | Acceleration along z axis |
 
 
 
 # Data Attributes {.small}
 
-- Sample rate - sampling frequency in Hz: `get_sample_rate`
-- Dynamic accelerometry range in `g`: `get_dynamic_range`
 
-```{r attrs}
-#| echo: true
+:::: {.columns}
+
+::: {.column width="50%"}
+
+- Sample rate - sampling frequency in Hz: `get_sample_rate`
+
+```{r get_sample_rate}
 get_sample_rate(data_gt3x)
 attr(data_gt3x, "sample_rate")
 get_sample_rate(data_cwa)
+```
 
+:::
+::: {.column width="50%"}
+
+- Dynamic accelerometry range in `g`: `get_dynamic_range`
+
+```{r get_dynamic_range}
 get_dynamic_range(data_gt3x)
 get_dynamic_range(data_cwa)
+```
 
+:::
+::::
+
+```{r attrs_all}
 names(attributes(data_gt3x))
 ```
 
-# Data Header from GT9X Device
+# Data Header from GT9X
 
 ```{r}
-#| echo: true
 attr(data_gt3x, "header")
 ```
-# Data Header from AX3 Device
+# Data Header from AX3
 
 ```{r attr_header}
-#| echo: true
 attr(data_cwa, "header")
 ```
 
 
 
-# Timestamps Need Their Own QC {.small}
+# Timestamps Need QC {.small}
 
-* Timestamp: use its timezone, precision, regularity, and gaps determine day boundaries, sleep windows, wear-time intervals, and the validity of all downstream summaries. 
+* Timestamp: use its timezone, precision, regularity, and gaps determine day boundaries, sleep windows, wear-time intervals, and the validity of all summaries. 
 
 * Sub-second algorithms depend on fractional seconds. Display enough precision to see them (for example, `options(digits.secs = 3)`) and check observed intervals rather than assuming that every nominal 80 Hz file is exactly 80 Hz at every timestamp. 
 
 * Rounding milliseconds during a CSV export can corrupt joins, inferred sampling rates, resampling, and step algorithms.
 
-# Timestamps Need Their Own QC {.small}
+# Timestamps Need QC {.small}
 
 * Use an explicit timezone. 
 * UTC avoids daylight-saving discontinuities during processing
 * Local time is often needed for sleep windows, diary linkage, and calendar-day summaries. 
 * Record the original timezone, the analysis timezone, and every conversion between them.
 
+# Timestamps Need QC {.small}
+
 * Verify the timezone, sampling frequency, acceleration units, start and end times, duplicate timestamps, and gaps. Preserve the original file and keep import metadata with the derived table.
 
 ```{r any_dup}
-#| echo: true
 anyDuplicated(data_gt3x$time)
 anyDuplicated(data_cwa$time)
 ```
@@ -267,7 +280,6 @@ anyDuplicated(data_cwa$time)
 - `acti_tidy_axes` will reshape the time/XYZ data to a long format for plotting
 
 ```{r tidy_axes}
-#| echo: true
 long = data_gt3x |> acti_tidy_axes()
 head(long, n = 3)
 long |> count(axis)
@@ -276,7 +288,6 @@ long |> count(axis)
 # Plot raw data
 
 ```{r tidy_axes_plot}
-#| echo: true
 long |> 
   ggplot(aes(x = time, y = value, colour = axis)) + geom_step()
 ```
@@ -306,7 +317,7 @@ QC: Check for odd things
 - Really high values
 
 
-# Idle sleep mode - 0s/missing
+# Idle sleep mode
 
 * Idle sleep mode - battery saving option when enabling and setting up ActiGraph devices.  
 * Stops recording after no movement after while
@@ -332,10 +343,18 @@ In a nutshell:
 
 # Non-wear Estimation
 
-- [@van2011estimation]: Non-wear is a 30-min non-overlapping raw-acceleration window with SD <3 mg or range <50 mg in at least 2 of 3 axes.
-- [@van2013separating]: now 60-min rolling window w/15-min steps, 00:00–01:00, then 00:15–01:15
-- **[@CHOI2011]**: Classifies ≥90 minutes of zero activity counts, allowing brief interruptions, as non-wear. 
-- [@troiano2008physical]: Defines non-wear as ≥60 consecutive zero-count minutes, permitting short low-count interruptions.
+- [@van2011estimation]: Non-wear is a **30-min non-overlapping** raw-acceleration window with SD <3 mg or range <50 mg in at least 2 of 3 axes.
+- [@van2013separating]: now **60-min rolling window w/15-min** steps, 00:00–01:00, then 00:15–01:15
+- **[@CHOI2011]**: Classifies **≥90 minutes** of zero activity counts, allowing brief interruptions, as non-wear. 
+- [@troiano2008physical]: Defines non-wear as **≥60 consecutive** zero-count minutes, permitting short low-count interruptions.
+
+# Non-wear Estimation
+
+```{r}
+#| eval: false
+acti_process(raw_data, method = "choi")
+acti_process(raw_data, method = "troiano")
+```
 
 
 # What about GGIR
@@ -375,7 +394,6 @@ targets::tar_load(data)
 ```
 
 ```{r calibrate_cal_estimates_load}
-#| echo: true
 #| results: hide
 #| cache: true
 data_calibrated = acti_calibrate(data)
@@ -388,9 +406,23 @@ data_calibrated = acti_calibrate(data)
 calibration = attr(data_calibrated, "calibration")
 calibration$scale
 calibration$offset
+```
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r cal_estimates}
 head(data)
+```
+
+
+```{r calibrated_cal_estimates}
 head(data_calibrated)
 ```
+:::
+::::
 
 # No calibration done
 
@@ -406,7 +438,6 @@ head(data_calibrated)
 * [`agcounts`](https://github.com/bhelsel/agcounts) R package
 
 ```{r ac_calculation}
-#| echo: true
 counts_gt3x = acti_calculate_counts(data_gt3x, verbose = FALSE)
 counts_cwa = acti_calculate_counts(data_cwa)
 ```
@@ -414,30 +445,49 @@ counts_cwa = acti_calculate_counts(data_cwa)
 
 # Activity Counts
 
+:::: {.columns}
+
+::: {.column width="50%"}
 ```{r ac_plot}
-#| echo: true
 counts_gt3x |> 
   ggplot(aes(x = time, y = counts)) + geom_step()
+```
+
+:::
+::: {.column width="50%"}
+```{r ac_plot_cwa}
 counts_cwa |> 
   ggplot(aes(x = time, y = counts)) + geom_step()
 ```
+
+:::
+:::: 
 
 # Estimate Non-wear
 
 * Calculate wear using `acti_calculate_wear`, uses Choi by default
 
-```{r}
-#| echo: true
+:::: {.columns}
+
+::: {.column width="50%"}
+```{r wear_gt3x}
 wear_gt3x = acti_calculate_wear(counts_gt3x)
 head(wear_gt3x, n = 3)
+```
+
+:::
+::: {.column width="50%"}
+```{r wear_cwa}
 wear_cwa = acti_calculate_wear(counts_cwa)
 head(wear_cwa, n = 3)
 ```
 
+:::
+:::: 
+
 # Just use `acti_process`
 
 ```{r show_load_minute_gt3x}
-#| echo: true
 #| eval: false
 minute_gt3x = acti_process(data_gt3x, verbose = FALSE)
 minute_cwa = acti_process(data_cwa, verbose = FALSE)
@@ -458,7 +508,6 @@ minute_cwa = tar_read(data_cwa_proc)
 <!-- data_gt3x |> filter(time < ymd_hms("2026-04-29 11:39:00.000")) |> select(X, Y, Z) |> as.matrix() |> matrixStats::colVars() -->
 
 ```{r running_minute}
-#| echo: true
 minute_gt3x |> 
   ggplot(aes(x = time, y = counts)) + 
   geom_segment(
@@ -475,7 +524,6 @@ We can read in the data from [@chadwell2019upper] and run the minute level data 
 
 ```{r load_minute_show}
 #| eval: false
-#| echo: true
 data = acti_read_gt3x(here::here("data/AI15_MOS2D09170398_2017-10-30.gt3x"))
 minute = acti_process(data)
 ```
@@ -489,7 +537,6 @@ minute = tar_read(data_gt3x_proc)
 
 ```{r full_minute_plot}
 #| cache: true
-#| echo: true
 minute |> 
   ggplot(aes(x = time, y = counts)) + 
   geom_segment(
@@ -536,7 +583,6 @@ Usually determined by number of minutes wear time
 * `create_day_inclusion` - creates a table for inclusion
 
 ```{r create_day_inclusion}
-#| echo: true
 minute |> 
   actibase::create_day_inclusion(min_required = 1296L) |> knitr::kable()
 ```
@@ -546,7 +592,6 @@ minute |>
 * `add_day_inclusion` - creates and joins with time-series
 
 ```{r day_inclusion}
-#| echo: true
 minute |> 
   actibase::add_day_inclusion(min_required = 1296L) |> 
   select(time, counts, wear, n_minutes_wear, is_included) |> knitr::kable()
