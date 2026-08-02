@@ -14,4 +14,5 @@ This course covers the path from raw wrist-worn accelerometry to reproducible an
 | [2. Reading and Processing Data](02-reading-and-processing-data.qmd) | How do we read, inspect, calibrate, and process raw acceleration? | Raw time/x/y/z data |
 | [3. Activity Metrics](03-activity-metrics.qmd) | How do ENMO, MAD, MIMS, counts, and steps summarize movement? | Raw acceleration segment |
 | [4. Analysis and Summaries](04-analysis-and-summaries.qmd) | How do we visualize, summarize, and model minute-level activity? | NHANES minute-level data |
+| [5. Future Directions](05-future-directions.qmd) |  Future directions for actigraphy and the field |  |
 | [99. Reproducibility, QC, and Other Methods](99-reproducibility-and-qc.qmd) | How do we audit the pipeline and extend it to specialized methods? | Full example project |

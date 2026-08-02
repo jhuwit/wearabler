@@ -1,17 +1,52 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "This tutorial covers wrist-worn accelerometers and was created by the John Muschelli with support from the Johns Hopkins Wearable and Implantable Technology Group (WIT). The code is located at https://github.com/jhuwit/wearabler."
+    "objectID": "modules/05-future-directions.html#inertia-1",
+    "href": "modules/05-future-directions.html#inertia-1",
+    "title": "Module 5: Future Directions",
+    "section": "Inertia-1",
+    "text": "Inertia-1\n\nInertia-1 - foundation model from NHANES+UKBB raw data\nhttps://yang-ai-lab.github.io/Inertia-1/\nhttps://arxiv.org/abs/2607.06617\nhttps://github.com/yang-ai-lab/Inertia-1#pretraining-data-nhanes"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "wearabler",
+    "objectID": "modules/05-future-directions.html#sensorfm",
+    "href": "modules/05-future-directions.html#sensorfm",
+    "title": "Module 5: Future Directions",
+    "section": "SensorFM",
+    "text": "SensorFM\nGoogle using FitBit/Pixel Watch: - https://research.google/blog/sensorfm-towards-a-general-intelligence-and-interface-for-wearable-health-data/"
+  },
+  {
+    "objectID": "modules/05-future-directions.html#stepfm",
+    "href": "modules/05-future-directions.html#stepfm",
+    "title": "Module 5: Future Directions",
+    "section": "StepFM",
+    "text": "StepFM\n\nStep Foundation Model\nhttps://arxiv.org/pdf/2607.06954"
+  },
+  {
+    "objectID": "modules/05-future-directions.html#pat",
+    "href": "modules/05-future-directions.html#pat",
+    "title": "Module 5: Future Directions",
+    "section": "PAT",
+    "text": "PAT\n\nPretrained Actigraphy Transformer\n\npatch embeddings and masked reconstruction pretraining on large-scale NHANES actigraphy data,\nevaluated on mental-health-related tasks such as depression, sleep disorders, and medication usage.\n\nBased on full 7 days (10080 vector)"
+  },
+  {
+    "objectID": "modules/05-future-directions.html#landscape",
+    "href": "modules/05-future-directions.html#landscape",
+    "title": "Module 5: Future Directions",
+    "section": "Landscape",
+    "text": "Landscape\nFrom the StepFM model paper:"
+  },
+  {
+    "objectID": "modules/index.html",
+    "href": "modules/index.html",
+    "title": "Modules",
     "section": "",
-    "text": "Wearabler Course Outline\nThis site is set up as a Quarto-based short course on accelerometry and wearable data analysis.\nThe module structure follows the shared course-planning chat and is organized around the activerse packages:\n\nactibase\nactiread\nactimetrics\nasleep\nwalking\nstepcount\n\nStart with the module index."
+    "text": "This course covers the path from raw wrist-worn accelerometry to reproducible analysis: device and study design, reading and processing raw signals, activity metrics, analysis and summaries, and quality control. Throughout, it distinguishes observed data from inserted, filtered, resampled, or inferred values.\n\n\n\n\n\nModule\nMain question\nTeaching dataset\n\n\n\n\n1. Accelerometer Devices and Studies\nWhat do accelerometers measure, and how are wearable studies designed?\nRaw device data and study examples\n\n\n2. Reading and Processing Data\nHow do we read, inspect, calibrate, and process raw acceleration?\nRaw time/x/y/z data\n\n\n3. Activity Metrics\nHow do ENMO, MAD, MIMS, counts, and steps summarize movement?\nRaw acceleration segment\n\n\n4. Analysis and Summaries\nHow do we visualize, summarize, and model minute-level activity?\nNHANES minute-level data\n\n\n5. Future Directions\nFuture directions for actigraphy and the field\n\n\n\n99. Reproducibility, QC, and Other Methods\nHow do we audit the pipeline and extend it to specialized methods?\nFull example project"
+  },
+  {
+    "objectID": "modules/index.html#slide-decks",
+    "href": "modules/index.html#slide-decks",
+    "title": "Modules",
+    "section": "",
+    "text": "Module\nMain question\nTeaching dataset\n\n\n\n\n1. Accelerometer Devices and Studies\nWhat do accelerometers measure, and how are wearable studies designed?\nRaw device data and study examples\n\n\n2. Reading and Processing Data\nHow do we read, inspect, calibrate, and process raw acceleration?\nRaw time/x/y/z data\n\n\n3. Activity Metrics\nHow do ENMO, MAD, MIMS, counts, and steps summarize movement?\nRaw acceleration segment\n\n\n4. Analysis and Summaries\nHow do we visualize, summarize, and model minute-level activity?\nNHANES minute-level data\n\n\n5. Future Directions\nFuture directions for actigraphy and the field\n\n\n\n99. Reproducibility, QC, and Other Methods\nHow do we audit the pipeline and extend it to specialized methods?\nFull example project"
   },
   {
     "objectID": "modules/99-reproducibility-and-qc.html#a-pipeline-that-can-be-audited",
@@ -42,17 +77,17 @@
     "text": "Other Methods Through reticulate\nSome specialized accelerometry methods are implemented in Python. reticulate allows an R/Quarto course project to call them while preserving a single documented workflow.\n\n\n\n\n\n\n\nPackage\nTypical role\n\n\n\n\nstepcount\nStep detection and step-based summaries from raw acceleration\n\n\nactinet\nActivity-pattern or behavior-oriented processing workflows\n\n\nasleep\nSleep inference and sleep-related outputs\n\n\n\nThe R/Python boundary is itself a QC boundary. Record package versions, the interpreter selected by reticulate, input units, sampling frequency, and the exact conversion from R data frames to Python objects. Specialized outputs should enter the same wear, valid-day, and participant-summary framework used for the core acceleration metrics."
   },
   {
-    "objectID": "modules/index.html",
-    "href": "modules/index.html",
-    "title": "Modules",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "wearabler",
     "section": "",
-    "text": "This course covers the path from raw wrist-worn accelerometry to reproducible analysis: device and study design, reading and processing raw signals, activity metrics, analysis and summaries, and quality control. Throughout, it distinguishes observed data from inserted, filtered, resampled, or inferred values.\n\n\n\n\n\nModule\nMain question\nTeaching dataset\n\n\n\n\n1. Accelerometer Devices and Studies\nWhat do accelerometers measure, and how are wearable studies designed?\nRaw device data and study examples\n\n\n2. Reading and Processing Data\nHow do we read, inspect, calibrate, and process raw acceleration?\nRaw time/x/y/z data\n\n\n3. Activity Metrics\nHow do ENMO, MAD, MIMS, counts, and steps summarize movement?\nRaw acceleration segment\n\n\n4. Analysis and Summaries\nHow do we visualize, summarize, and model minute-level activity?\nNHANES minute-level data\n\n\n99. Reproducibility, QC, and Other Methods\nHow do we audit the pipeline and extend it to specialized methods?\nFull example project"
+    "text": "Wearabler Course Outline\nThis site is set up as a Quarto-based short course on accelerometry and wearable data analysis.\nThe module structure follows the shared course-planning chat and is organized around the activerse packages:\n\nactibase\nactiread\nactimetrics\nasleep\nwalking\nstepcount\n\nStart with the module index."
   },
   {
-    "objectID": "modules/index.html#slide-decks",
-    "href": "modules/index.html#slide-decks",
-    "title": "Modules",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
     "section": "",
-    "text": "Module\nMain question\nTeaching dataset\n\n\n\n\n1. Accelerometer Devices and Studies\nWhat do accelerometers measure, and how are wearable studies designed?\nRaw device data and study examples\n\n\n2. Reading and Processing Data\nHow do we read, inspect, calibrate, and process raw acceleration?\nRaw time/x/y/z data\n\n\n3. Activity Metrics\nHow do ENMO, MAD, MIMS, counts, and steps summarize movement?\nRaw acceleration segment\n\n\n4. Analysis and Summaries\nHow do we visualize, summarize, and model minute-level activity?\nNHANES minute-level data\n\n\n99. Reproducibility, QC, and Other Methods\nHow do we audit the pipeline and extend it to specialized methods?\nFull example project"
+    "text": "This tutorial covers wrist-worn accelerometers and was created by the John Muschelli with support from the Johns Hopkins Wearable and Implantable Technology Group (WIT). The code is located at https://github.com/jhuwit/wearabler."
   }
 ]
